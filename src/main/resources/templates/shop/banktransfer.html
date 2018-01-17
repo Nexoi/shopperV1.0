@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bank Transfer Helper</title>
+    <meta name="keywords" content="android tv box, tv box, kodi box, mxq, mxq tv box, smart tv box, kodi android box">
+    <meta name="description" content="Shop the best Android TV boxes at lowest price at Leelbox. Android 6.0, Kodi 17.3, Support 3D 4K output, huge memory. You will get a wonderful experience with our tv box.">
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/payment.css"/>
+    <!-- Facebook Pixel Code -->
+    <script th:inline="javascript">
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+//        fbq('track', 'Purchase', {value: [[${price}]], currency: [[${coin}]]});
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent');
+
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+
+ </head>
+<body class="background-col">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+<div class="paying-header">
+    <div class="container od-header-container">
+        <hr class="od-header-hr"/>
+        <div class="fin-header-cart">Cart</div>
+        <div class="fin-header-Finished">Finished</div>
+        <div class="fin-header-PS">Payment & Shipping</div>
+    </div>
+</div>
+<input th:each="pro:${products}" type="hidden" name="product_pid" th:value="${pro.pid}">
+<input type="hidden" id="price_" th:value="${price}"/>
+<input type="hidden" id="coin_" th:value="${unit}"/>
+<div class="container bt-container">
+    <div class="bt-header">Bank Transfer</div>
+    <div class="bt-wrapper">
+        <img src="/image/banktransfer_1.png" class="bt-pic" />
+        <div class="bt-thank">Thank you for shopping with us! Your order has been received!</div>
+        <table class="bt-table-1">
+            <tr>
+                <td class="bt-table-1-1">Payment Total:</td>
+                <td class="bt-table-1-2" th:text="${unit + ' ' + price}">XXX</td>
+            </tr>
+            <tr>
+                <td class="bt-table-1-1">Order Number:</td>
+                <td class="bt-table-1-2" th:text="${oid}">XXX</td>
+            </tr>
+            <tr>
+                <td class="bt-table-1-1">Payment Method:</td>
+                <td class="bt-table-1-2">Bank Transfer</td>
+            </tr>
+            <tr>
+                <td class="bt-table-1-1">Order Status:</td>
+                <td class="bt-table-1-2">Unpaid</td>
+            </tr>
+        </table>
+
+        <div class="bt-wrapper-1">
+            <div class="bt-nextstep">
+                Your next step is to complete your Bank Transfer payment and submit your payment details.The information
+                below will be needed to complete your payment at Bank Transfer. This information can also be found in
+                your email notification.
+            </div>
+            <hr class="bt-hr"/>
+
+            <table class="bt-table-2">
+                <tr>
+                    <td class="bt-table-2-1">Beneficiary Name:</td>
+                    <td class="bt-table-2-2">HK FOCUS FIRST TECHNOLOGY CO.,LTD</td>
+                </tr>
+                <tr>
+                    <td class="bt-table-2-1">Beneficiary Bank:</td>
+                    <td class="bt-table-2-2">Hang Seng Bank Limited</td>
+                </tr>
+                <tr>
+                    <td class="bt-table-2-1">Bank Address:</td>
+                    <td class="bt-table-2-2">83 Des Voeux Road Central,HK</td>
+                </tr>
+                <tr>
+                    <td class="bt-table-2-1">Bank Code:</td>
+                    <td class="bt-table-2-2">024</td>
+                </tr>
+                <tr>
+                    <td class="bt-table-2-1">Beneficiary Account Number:</td>
+                    <td class="bt-table-2-2">364359497883</td>
+                </tr>
+                <tr>
+                    <td class="bt-table-2-1">Swift Code:</td>
+                    <td class="bt-table-2-2">HASEHKHH</td>
+                </tr>
+            </table>
+
+            <div class="bt-note">
+                Note: Please email your order number, amount, sender's first and last name, sender's country, sender's
+                phone number and transaction ID to
+                <a href="mailto:support@leelbox-tech.com" class="bt-url">support@leelbox-tech.com </a>
+                after you send payment through bank transfer(T/T).
+            </div>
+
+            <div class="bt-word">
+                <a href="/" class="bt-continue">Continue Shopping</a>
+                <a href="/mycenter/order" class="bt-od">Order Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash; Google Code for test Conversion Page &ndash;&gt;-->
+<!--<script type="text/javascript" th:inline="javascript">-->
+    <!--/* <![CDATA[ */-->
+    <!--var google_conversion_id = 851443824;-->
+    <!--var google_conversion_language = "en";-->
+    <!--var google_conversion_format = "3";-->
+    <!--var google_conversion_color = "ffffff";-->
+    <!--var google_conversion_label = "_89DCOWgw3UQ8ICAlgM";-->
+    <!--var google_conversion_value = [[price]];-->
+    <!--var google_conversion_currency = [[coin]];-->
+    <!--var google_remarketing_only = false;-->
+    <!--/* ]]> */-->
+<!--</script>-->
+<!--<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">-->
+<!--</script>-->
+<!--<noscript>-->
+    <!--<div style="display:inline;">-->
+        <!--<img height="1" width="1" style="border-style:none;" alt=""-->
+             <!--th:src="'//www.googleadservices.com/pagead/conversion/851443824/?value=' + ${price} + '&currency_code=' + ${coin} + '&label=_89DCOWgw3UQ8ICAlgM&guid=ON&script=0'"/>-->
+    <!--</div>-->
+<!--</noscript>-->
+<!-- 联盟代码 -->
+<img th:src="'https://www.shareasale.com/sale.cfm?tracking=' + ${oid} + '&amount=' + ${price} + '&merchantID=72028&transtype=sale'" width=”1” height=”1”>
+<!-- 联盟代码 End -->
+<footer th:include="shop/frag/footer :: footer"></footer>
+<script>
+    function getIds() {
+        var ids = []
+        $("input[name=product_pid]").each(function (i) {
+            ids.push('\'' + $(this).val() + '\'')
+        })
+        return ids;
+    }
+    fbq('track', 'Purchase', {
+        content_type: 'product', //  固定值：pruduct
+        content_ids: getIds(),  // 购买产品的 id或者Sku
+        value: $("#price_").val(),     //购买产品的总价值
+        currency: $("#coin_").val() //货币类型
+    });
+</script>
+</body>
+</html>

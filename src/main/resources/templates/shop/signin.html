@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/bootstrap.css"/><!--header有了-->
+    <link rel="stylesheet" href="/css/signin.css"/>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+<div class="container" style="margin-top: 10px;margin-bottom: 80px">
+    <div class="maindiv row">
+        <form action="/login" method="post" class="indiv col-xs-6">
+            <span class="header">Sign In</span>
+            <p class="mt43 p1">Email:</p>
+            <input name="email" class="input_s" type="email" placeholder="Email Address"/>
+            <p class="p1 mt27">Password:</p>
+            <input name="password" class="input_s" type="password" placeholder="Password"/>
+            <a class="p2 mt15" onclick="forgetPass()">Forgot Password?</a>
+            <input class="btn_sign mybtn mt61" type="submit" value="Sign In"/>
+            <script>
+                function forgetPass() {
+                    alert("Please contact the administrator by email support@leelbox-tech.com ");
+                }
+            </script>
+        </form>
+        <form action="/regist" method="post" id="regist" class="updiv col-xs-6">
+            <span class="header">Sign Up</span>
+            <p class="mt43 p1">Your Name:</p>
+            <input name="name" class="input_s" type="text" placeholder="Your Name"/>
+            <p class="mt27 p1">Email:</p>
+            <input name="email" class="input_s" type="email" placeholder="Email Address"/>
+            <p class="mt27 p1">Password:</p>
+            <input name="password" id="passwd" class="input_s" type="password" placeholder="Password"/>
+            <div id="oSpan"></div>
+            <p class="mt27 p1">Confirm Password:</p>
+            <input id="passwd2" class="input_s" type="password" placeholder="Confirm Password"/>
+            <div id="oSpan2" style="color:red;visibility: hidden">The two inputs must be consistent</div>
+            <!--<input class="input_s1 mt27" type="text"/>-->
+            <!--<img src="image/验证码001.png" class="yzm"/>-->
+            <div class="mt27">
+                <label class="input_c">
+                    <input class="" name="subscribe" value="true" type="checkbox"/>
+                    <span class="">Email me the latest products and discounts</span>
+                </label></div>
+            <input class="btn_sign mybtn mt27" type="button" value="Sign Up" onclick="registMe();"/>
+            <!--<input type="submit" value="" id="regist" style="height:0;width:0;visibility: hidden"/>-->
+        </form>
+
+        <script>
+            function registMe() {
+                var pass = $("#passwd").val();
+                var pass2 = $("#passwd2").val();
+                if (pass.length < 6) {
+                    alert("The password length must be greater than 6");
+                    return;
+                }
+                if (pass != pass2) {
+                    alert("The two inputs must be consistent");
+                    return;
+                }
+                // 开始注册
+                $("#regist").submit();
+            }
+        </script>
+
+        <script>
+
+            // 密码长度校验
+            var input = document.getElementById('passwd');
+            var span = document.getElementById('oSpan');
+            input.onkeyup = function () {
+                var self = this;
+                showStrength(self, span);
+            }
+            // 密码是否相等校验
+            var input2 = document.getElementById("passwd2");
+            input2.onkeyup = function () {
+                samePass(input, input2);
+            }
+
+            // 密码强度校验
+            function showStrength(_this, showWrap) {
+//            showWrap.style.fontFamily = 'Microsoft Yahei';
+                var oValue = _this.value, len = oValue.length, strengthAll = 0;
+                var color = ['red', 'orange', 'green'], strStrength = ['password length must be greater than 6', 'password strength is too weak', 'password strength qualified', 'password strength is great'];
+                var strength = function (str) {
+                    var code = str.charCodeAt(0);
+                    if (code >= 48 && code <= 57) {
+                        return 1;
+                    } else if (code >= 97 && code <= 122) {
+                        return 2;
+                    } else {
+                        return 3;
+                    }
+                }
+                if (len < 6) {
+                    showWrap.innerHTML = strStrength[0];
+                    showWrap.style.color = color[0];
+                } else {
+                    for (var i = 0; i < len; ++i) {
+                        strengthAll += strength(oValue[i]);
+                    }
+                    if (strengthAll < 10) {
+                        showWrap.innerHTML = strStrength[1];
+                        showWrap.style.color = color[0];
+                    } else if (strengthAll >= 10 && strengthAll < 16) {
+                        showWrap.innerHTML = strStrength[2];
+                        showWrap.style.color = color[1];
+                    } else {
+                        showWrap.innerHTML = strStrength[3];
+                        showWrap.style.color = color[2];
+                    }
+                }
+            }
+
+            function samePass(input1, input2) {
+                if (input1.value == input2.value) {
+                    // 去掉红色边框
+                    input2.style.border = "1px solid #979797";
+                    $("#oSpan2").css("visibility", "hidden");
+                } else {
+                    // 设为红色边框
+                    input2.style.border = "1px solid #de4d4d";
+                    $("#oSpan2").css("visibility", "visible");
+                }
+            }
+        </script>
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+</body>
+<script>
+    // 动画
+    $(document).ready(function () {
+        $(".mybtn").mouseover(function () {
+            if ($(this).is(":animated")) {
+                $(this).stop(true, false).fadeTo("fast", "0.6");
+            } else {
+                $(this).fadeTo("fast", "0.6");
+            }
+        }).mouseleave(function () {
+            $(this).fadeTo("fast", "1");
+        });
+    });
+
+</script>
+
+</html>

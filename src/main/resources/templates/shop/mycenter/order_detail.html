@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/ct/nav_new.css"/>
+    <link rel="stylesheet" href="/css/ct/order_detail.css"/>
+    <link rel="stylesheet" href="/css/ct/message_new.css"/>
+</head>
+
+<body>
+<header th:include="shop/frag/header :: header"></header>
+<div class="container" style="width: 1200px;margin-top: 30px;margin-bottom: 80px">
+    <div th:include="shop/frag/mycenternav :: div" class="nav-left-wrapper"></div>
+
+    <div class="content-wrapper">
+        <div class="title-well">
+            <p class="order-title">Order > My Order > Detail</p>
+        </div>
+        <div class="content-well" style="padding: 0 14px 14px 14px;">
+            <p class="order-review">Order Review</p>
+            <!--第一个well开始-->
+            <div class="order-first-well">
+                <div class="order-well-head">
+                    <span class="order-head-text">Order Number:</span>
+                    <span class="order-head-text" th:text="${'#' + oid}">#oid</span>
+                </div>
+                <div class="row">
+                    <div class="order-info-left-wrapper">
+                        <p class="order-info-title">Order Information</p>
+                        <p class="order-info-text order-first-text">Shipping address:
+                            <br/>
+                            <span class="order-info-text order-first-text" style="display:inline-block;"
+                                  th:text="${rc.detail + ', ' + rc.city + ', ' +rc.country + ' ' + rc.postcode}">1208 Hyland Street Lansing New York United States 48915 6263396261</span>
+                            <br/>
+                            <span class="order-info-text order-first-text"
+                                  th:text="${rc.name + ', ' + rc.phone + ', ' +rc.note}">Name Phone Note</span>
+                        </p>
+                        <p class="order-info-text order-sub-text">Order Status:
+                            <br/>
+                            <span class="order-info-text order-first-text" th:text="${status}"> Unpaid </span>
+                            <a class="order-info-text" style="color:blue" th:unless="${hasPaid}"
+                               th:href="${'/pay/' + oid}"> [ GoPay ] </a>
+                            <a class="order-info-text" style="color:blue;cursor: pointer" th:if="${receivedBtn}"
+                               th:onclick="${'received(''' + oid + ''')'}"> [ I have received the goods ] </a>
+                        </p>
+                        <p class="order-info-text order-sub-text">Order time:
+                            <br/>
+                            <span class="order-info-text order-first-text" text="${order.createTime}">2017/09/03</span>
+                        </p>
+                    </div>
+                    <div class="order-info-right-wrapper">
+                        <p class="order-info-title">Payment Information</p>
+                        <p class="order-info-text order-first-text">Payment method:
+                            <br/>
+                            <span class="order-info-text order-first-text" th:if="${order.payMethod==1}">PayPal</span>
+                            <span class="order-info-text order-first-text" th:unless="${order.payMethod==1}">Bank Transfer</span>
+                        </p>
+                        <p class="order-info-text order-sub-text">Shipping method:
+                            <br/>
+                            <span class="order-info-text order-first-text"
+                                  th:text="${ship.name + '(' + ship.note + ')'}">Expedited Shipping(4 - 7 business days)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--第一个well结束-->
+            <!--
+                作者：992252973@qq.com
+                时间：2017-09-05
+                描述：第二个well开始
+            -->
+            <div class="order-second-well">
+                <div class="order-well-head">
+                    <span class="order-head-text">Products</span>
+                </div>
+                <style>
+                    .start_zyz {
+                        cursor: pointer;
+                        color: orange;
+                    }
+                </style>
+                <div class="content-well" style="padding: 14px 14px 0 14px;width:100%;border:none">
+                    <div class="panel-group" style="margin-top: 10px;" id="accordion" role="tablist"
+                         aria-multiselectable="true">
+                        <div th:each="pro:${products}" class="panel panel-default">
+                            <div class="panel-heading" role="tab" th:id="${'headingTwo'+pro.id}">
+                                <h4 class="panel-title">
+                                    <a class="collapsed item-title" role="button" data-toggle="collapse"
+                                       data-parent="#accordion" th:href="${'#collapseTwo'+pro.id}"
+                                       aria-expanded="false"
+                                       style="max-width: 700px;overflow: hidden"
+                                       th:attr="aria-controls='collapseTwo'+${pro.id}"
+                                       th:text="${pro.norms + ' ' + pro.name}">
+                                        H96 PRO Plus KODI 17.3 Android 7.1 Amlogic S912 TV BOX 4K 3GB/32GB 802.11AC WIFI
+                                        100······
+                                    </a>
+                                </h4>
+                            </div>
+                            <div th:id="${'collapseTwo'+pro.id}" class="panel-collapse collapse" role="tabpanel"
+                                 th:attr="aria-labelledby='headingTwo'+${pro.id}">
+                                <div class="panel-body panel-main">
+                                    <div class="img-modify">
+                                        <!--<img class="message-img" th:src="${pro.img}"/>-->
+                                    </div>
+                                    <div class="message-detail">
+                                        <p class="star">Star :
+                                            <span onclick='clickStart(1)' id='start1' seeu="1"
+                                                  class='start_zyz'>★</span>
+                                            <span onclick='clickStart(2)' id='start2' seeu="1"
+                                                  class='start_zyz'>★</span>
+                                            <span onclick='clickStart(3)' id='start3' seeu="1"
+                                                  class='start_zyz'>★</span>
+                                            <span onclick='clickStart(4)' id='start4' seeu="1"
+                                                  class='start_zyz'>★</span>
+                                            <span onclick='clickStart(5)' id='start5' seeu="1"
+                                                  class='start_zyz'>★</span>
+                                        </p>
+                                        <p class="review">Comment : </p>
+                                        <textarea id="comment" class="comment-text"
+                                                  style="min-width: 400px;border:#eee 1px solid"></textarea>
+                                        <div class="btn btn-default" th:onclick="${'saveComment(' + pro.pid + ')'}"
+                                             style="display: inherit;width: 160px">
+                                            save comment
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // 打星脚本
+                function clickStart(index) {
+                    //★
+                    clearStart();
+                    // hide = index
+                    for (var i = 1; i <= index; i++) {
+                        $("#start" + i).html('★')
+                        $("#start" + i).attr('seeu', 1);
+                    }
+                }
+                function clearStart() {
+                    //★
+                    // hide = index
+                    for (var i = 1; i <= 5; i++) {
+                        $("#start" + i).html('☆')
+                        $("#start" + i).attr('seeu', 0);
+                    }
+                }
+                function getStarNum() {
+                    var count = 0;
+                    for (var i = 1; i <= 5; i++) {
+                        if ($("#start" + i).attr('seeu') == 1) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }
+                function saveComment(pid) {
+                    var comment = $("#comment").val();
+                    var star = getStarNum();
+
+                    if (comment.length > 450) {
+                        alert("Comment Length is too long.[ The length of the text should be less than 400 ]");
+                        return;
+                    }
+                    $.ajax({
+                        url: "/api/shop/v1/ct/order/comment/" + pid,
+                        type: "POST",
+                        data: {
+                            comment: comment,
+                            star: star
+                        },
+                        success: function (res) {
+                            if (res.code == 200) {
+                                alert("Comment success!");
+                                window.location.reload();
+                            } else {
+                                alert("[ " + res.code + " ] " + res.message);
+                            }
+                        }
+                    });
+                }
+                function received(oid) {
+                    $.ajax({
+                        url: "/api/shop/v1/ct/order/" + oid,
+                        type: "PUT",
+                        success: function (res) {
+                            if (res.code == 200) {
+                                alert("Order update success! Thanks for your shopping!")
+                                window.location.reload();
+                            } else {
+                                alert("[" + res.code + "]," + res.message)
+                            }
+                        }
+                    })
+                }
+            </script>
+            <!--
+                作者：992252973@qq.com
+                时间：2017-09-05
+                描述：第二个well结束
+            -->
+        </div>
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+</body>
+
+</html>

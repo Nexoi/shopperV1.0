@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Address</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/ct/nav_new.css"/>
+    <link rel="stylesheet" href="/css/ct/address_setting_new.css"/>
+</head>
+
+<body>
+<header th:include="shop/frag/header :: header"></header>
+<div class="container" style="width: 1200px;margin-top: 30px;margin-bottom: 80px">
+
+    <div th:include="shop/frag/mycenternav :: div" class="nav-left-wrapper"></div>
+    <div class="content-wrapper">
+        <div class="title-well">
+            <p class="address-setting-title">Setting > Address Settings</p>
+        </div>
+        <div class="content-well" style="padding: 14px 14px 14px 14px;">
+            <div class="row">
+                <p class="address-content-title">Delivery Address</p>
+                <!--
+                <a class="address-edit" onclick="editAddress()">Edit</a>-->
+            </div>
+            <div class="all-add">
+                <div th:each="adrs:${adrsList}" class="whole-address">
+                    <!--<a class="address-default" onclick="setDefault(this)">Default</a>-->
+                    <div class="address-wraper">
+                        <a href="#" class="address-edit" th:onclick="${'deleteAddress(' + adrs.id + ')'}"
+                           style="margin-left: 10px">Delete</a>
+                        <a href="#" class="address-edit" th:onclick="${'editAddress(this,' + adrs.id + ')'}">Edit</a>
+                        <span th:text="${adrs.name}" class="address-name">Name</span>
+                        <!--<span class="address-last-name">dames</span>-->
+                        <span th:text="${adrs.postcode}" class="address-text">CODE</span>
+                        <span th:text="${adrs.phone}" class="address-text">PHONE</span>
+                        <span th:text="${adrs.email}" class="address-text">Email</span>
+                        <span th:text="${adrs.detail}" class="address-text">1208 Hyland Street1208</span>
+                        <!--<span class="address-text-inline"></span>-->
+                        <span th:text="${adrs.city}" class="address-text-inline">New York</span>
+                        <span class="address-text-inline">,</span>
+                        <span th:text="${adrs.country}" class="address-text-inline">United States</span>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+            <!--<div id="addressWrapper">
+                <div class="row addrEdit">
+                    <input type="text" class="account-input account-input-before addr" value="Bat	dames,48915,6263396261,1208 Hyland Street ,Landsinq. New York, United States" readonly="readonly" />
+                </div>
+                <div class="row addrEdit">
+                    <input type="text" class="account-input account-input-before addr" value="Bat	dames,48915,6263396261,1208 Hyland Street ,Landsinq. New York, United States" readonly="readonly" />
+                </div>
+            </div>-->
+            <span class="add-new-addr">Add New Address</span>
+            <div>
+                <span class="address-first-name-text"><span style="color: #FC0016;">*</span>Name</span>
+                <span class="add-phone-text"><span style="color: #FC0016;">*</span>Phone number</span>
+            </div>
+            <input id="name_0" type="text" class="add-first-name-input"/>
+            <input id="phone_0" type="text" class="add-last-name-input"/>
+            <div>
+                <span class="add-address"><span style="color: #FC0016;">*</span>Email</span>
+            </div>
+            <input id="email_0" type="text" class="add-address-input"/>
+            <div>
+                <span class="add-address"><span style="color: #FC0016;">*</span>Address</span>
+            </div>
+            <input id="detail_0" type="text" class="add-address-input"/>
+            <div>
+                <span class="add-city-text"><span style="color: #FC0016;">*</span>Street, City, State</span>
+            </div>
+            <input id="city_0" type="text" class="add-city-input"/>
+            <div>
+                <span class="address-first-name-text"><span style="color: #FC0016;">*</span>Country</span>
+                <span class="add-state-text"><span style="color: #FC0016;">*</span>Zip/Postal Code</span>
+            </div>
+            <input id="contry_0" type="text" class="add-first-name-input"/>
+            <input id="zip_0" type="text" class="add-last-name-input"/>
+            <div>
+                <button type="button" class="ok-btn" onclick="addNew()">save</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+<script>
+    function editAddress(txt, id) {
+        var parent = $(txt).parent()
+        var name = $(txt).next().text();
+        var zip = $(txt).next().next().text();
+        var tel = $(txt).next().next().next().text();
+        var email = $(txt).next().next().next().next().text();
+        var addr = $(txt).next().next().next().next().next().text();
+        var city = $(txt).next().next().next().next().next().next().text();
+        var country = $(txt).next().next().next().next().next().next().next().next().text();
+        $(txt).parent().empty();
+        parent.append("<div>" +
+                "<span class='address-first-name-text'><span style='color: #FC0016;'>*</span>Name</span>" +
+                "<span class='address-last-name-text'><span style='color: #FC0016;'>*</span>Phone</span>" +
+                "</div>" +
+                "<input id='name_" + id + "' type='text' value='" + name + "' class='add-first-name-input' />" +
+                "<input id='phone_" + id + "'  type='text' value='" + tel + "' class='add-last-name-input' />" +
+                "<div>" +
+                "<span class='add-address'><span style='color:#FC0016;'>*</span>Email</span>" +
+                "</div>" +
+                "<input id='email_" + id + "'  type='text' value='" + email + "' class='add-address-input' />" +
+                "<div>" +
+                "<span class='add-address'><span style='color:#FC0016;'>*</span>Address</span>" +
+                "</div>" +
+                "<input id='detail_" + id + "'  type='text' value='" + addr + "' class='add-address-input' />" +
+                "<div>" +
+                "<span class='add-city-text'>*</span>Street, City, State</span>" +
+                "</div>" +
+                "<input id='city_" + id + "'  type='text' value='" + city + "' class='add-city-input' />" +
+                "<div>" +
+                "<span class='address-first-name-text'><span style='color: #FC0016;'>*</span>Country</span>" +
+                "<span class='address-last-name-text'><span style='color: #FC0016;'>*</span>Zip/Postal Code</span>" +
+                "</div>" +
+                "<input id='contry_" + id + "'  type='text' value='" + country + "' class='add-first-name-input' />" +
+                "<input id='zip_" + id + "'  type='number' value='" + zip + "' class='add-last-name-input' />" +
+                "<div>" +
+                "<button type='button' class='ok-btn' style='margin-left: 0;' onclick='saveEdit(" + id + ")'>Add</button>" +
+                "</div><hr/>");
+    }
+
+    function saveEdit(id) {
+        var name_ = $("#name_" + id).val();
+        var phone_ = $("#phone_" + id).val();
+        var email_ = $("#email_" + id).val();
+        var detail_ = $("#detail_" + id).val();
+        var city_ = $("#city_" + id).val();
+        var contry_ = $("#contry_" + id).val();
+        var zip_ = $("#zip_" + id).val();
+
+        if (name_.length == 0 || phone_.length == 0 || email_.length == 0 || detail_.length == 0 || city_.length == 0 || contry_.length == 0 || zip_.length == 0) {
+            alert("Please fill the whole form !");
+            return;
+        }
+
+        //ajax
+        $.ajax({
+            url: "/api/shop/v1/ct/address/" + id,
+            type: "put",
+            data: {
+                name: name_,
+                phone: phone_,
+                email: email_,
+                detail: detail_,
+                city: city_,
+                country: contry_,
+                zip: zip_
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("save success!");
+                    window.location.reload();
+                } else {
+                    alert("save operate did not work, please check your inputs and try again.");
+                }
+            },
+            error: function (res) {
+                // do nothing
+                alert("Please check your network and try again.");
+            }
+        });
+    }
+    function addNew() {
+        var id = 0;
+        var name_ = $("#name_" + id).val();
+        var phone_ = $("#phone_" + id).val();
+        var email_ = $("#email_" + id).val();
+        var detail_ = $("#detail_" + id).val();
+        var city_ = $("#city_" + id).val();
+        var contry_ = $("#contry_" + id).val();
+        var zip_ = $("#zip_" + id).val();
+        if (name_.length == 0 || phone_.length == 0 || email_.length == 0 || detail_.length == 0 || city_.length == 0 || contry_.length == 0 || zip_.length == 0) {
+            alert("Please fill the whole form !");
+            return;
+        }
+
+        //ajax
+        $.ajax({
+            url: "/api/shop/v1/ct/address",
+            type: "post",
+            data: {
+                name: name_,
+                phone: phone_,
+                email: email_,
+                detail: detail_,
+                city: city_,
+                country: contry_,
+                zip: zip_
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("add success!");
+                    window.location.reload();
+                } else {
+                    alert("add operate did not work, please check your inputs and try again.");
+                }
+            },
+            error: function (res) {
+                // do nothing
+                alert("Please check your network and try again.");
+            }
+        });
+    }
+    
+    function deleteAddress(id) {
+        $.ajax({
+            url: "/api/shop/v1/ct/address/"+id,
+            type: "delete",
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("delete success!");
+                    window.location.reload();
+                } else {
+                    alert("delete operate did not work, please try again later.");
+                }
+            },
+            error: function (res) {
+                // do nothing
+                alert("Please check your network and try again.");
+            }
+        });
+    }
+    
+    function undefaultAll() {
+        $(".whole-address").each(function () {
+            $(this).children("a:first-child").attr("class", "address-undefault");
+            $(this).children("a:first-child").text("Set Default");
+        });
+    }
+    function setDefault(txt) {
+        if ($(txt).attr("class") == "address-default") return alert("Already default address!");
+        undefaultAll();
+        $(txt).attr("class", "address-default");
+        $(txt).text("Default");
+    }
+</script>
+</body>
+
+</html>

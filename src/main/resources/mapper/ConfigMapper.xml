@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.config.dao.ConfigMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.config.model.Config">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="attribute_name" jdbcType="VARCHAR" property="attributeName" />
+    <result column="attribute_value" jdbcType="VARCHAR" property="attributeValue" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+</mapper>

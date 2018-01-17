@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Product-Category</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet"/>
+    <link href="assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+
+</head>
+
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="#"><i class="icon fa fa-home"></i>商品</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>商品分类</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>商品分类</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="bk-margin-top-15 bk-margin-bottom-15">
+                        <button class="btn btn-success" onclick="addNewCate();">添加新分类</button>
+                    </div>
+                    <style>
+                        .op_pointer {
+                            cursor: pointer;
+                        }
+
+                        .op_pointer:hover {
+                            color: #5bc0de;
+                        }
+                    </style>
+                    <div class="table-responsive">
+                        <table class="table table-bordered bootstrap-datatable datatable">
+                            <thead>
+                            <tr>
+                                <th>分类名字</th>
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="cate_container">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Main Page -->
+
+<!-- Modal Dialog -->
+<div class="modal fade" id="addNewCate">
+    <div class="modal-dialog" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">添加分类信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal ">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="cateAdd">父类</label>
+                        <div class="col-sm-6">
+                            <select id="cateAdd" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="addmodal_name">当前分类名字</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="addmodal_name" name="input-small" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="addmodal_note">备注</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="addmodal_note" name="input-small" class="form-control input-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="addNewCateBtn()">添加分类</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Modal Dialog -->
+
+<div class="modal fade" id="showDetail">
+    <div class="modal-dialog" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">修改分类信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal ">
+                    <input type="hidden" id="cateID">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="cateDetail">父类</label>
+                        <div class="col-sm-6">
+                            <select id="cateDetail" class="form-control">
+                                <!--<option selected="selected">机顶盒</option>-->
+                                <!--<option>手机</option>-->
+                                <!--<option>电脑</option>-->
+                                <!--<option>移动电源</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="modal_name">当前分类名字</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="modal_name" name="input-small" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="modal_note">备注</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="modal_note" name="input-small" class="form-control input-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updateCateBtn()">保存修改</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Modal Dialog -->
+<!-- JS for modal -->
+<script>
+    var CATEGORY_DATA; // 全局变量，存储分类item
+    // 按钮 1 - Add
+    function addNewCate() {
+        $('#cateAdd').html("");
+        $('#cateAdd').append("<option value='-1'>根类</option>");
+        formAddModal(0, CATEGORY_DATA);// 更新分类栏
+        // 开启modal
+        $('#addNewCate').modal('show')
+    }
+    function addNewCateBtn() {
+        $.ajax({
+            url: "/api/admin/v1/category",
+            method: "POST",
+            data: {
+                fatherId: $("#cateAdd").val(),
+                name: $("#addmodal_name").val(),
+                detail: $("#addmodal_note").val()
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    swal("添加成功", "", "success");
+                    reformList();
+                    $('#addNewCate').modal('hide')
+                } else {
+                    swal("异常：" + data.code, data.message, "warning");
+                }
+            },
+            error: function (data) {
+                swal("网络异常", "", "warning");
+            }
+        });
+    }
+
+    // 按钮 2 - Show
+    function showDetail(id) {
+        // 开启modal
+        $('#showDetail').modal('show');
+        $("#cateID").val(id);
+        // Ajax 加载数据
+        $.ajax({
+            url: "/api/admin/v1/category/" + id,
+            method: "GET",
+            success: function (data) {
+                if (data.code == 200) {
+                    bindModalDetail(data.data);
+                } else {
+                    swal("异常：" + data.code, data.message, "warning");
+                }
+            },
+            error: function (data) {
+                swal("网络异常", "", "warning");
+            }
+        });
+    }
+    function bindModalDetail(data) {
+        $('#cateDetail').html("");
+        $('#cateDetail').append("<option value='-1'>根类</option>");
+        formModal(0, CATEGORY_DATA, data.fatherId);// 更新分类栏
+//        $("#cateDetail").val(data.fatherId)
+        $("#modal_name").val(data.name)
+        $("#modal_note").val(data.detail)
+    }
+    function updateCateBtn() {
+        $.ajax({
+            url: "/api/admin/v1/category",
+            method: "PUT",
+            data: {
+                fatherId: $("#cateDetail").val(),
+                name: $("#modal_name").val(),
+                detail: $("#modal_note").val(),
+                id: $("#cateID").val()
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    swal("修改成功", "", "success");
+                    reformList();
+                    $('#showDetail').modal('hide')
+                } else {
+                    swal("异常：" + data.code, data.message, "warning");
+                }
+            },
+            error: function (data) {
+                swal("网络异常", "", "warning");
+            }
+        });
+    }
+
+    // 按钮 3 - Delete
+    function deleteCate(categoryID) {
+        swal({
+            title: "确定删除吗？",
+            text: "删除后将不可恢复，且该分类下所有子类都会一并删除",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "删除",
+            closeOnConfirm: false
+        }, function () {
+            // 删除
+            $.ajax({
+                url: "/api/admin/v1/category/"+categoryID,
+                method: "DELETE",
+                success: function (data) {
+                    if (data.code == 200) {
+                        swal("删除成功", "", "success");
+                        // 重载页面
+                        reformList();
+                    } else {
+                        swal("异常：" + data.code, data.message, "warning");
+                    }
+                },
+                error: function (data) {
+                    swal("网络异常", "", "warning");
+                }
+            });
+        });
+    }
+    /**
+     * 填充页面分类代码
+     *
+     */
+    function reformList() {
+
+        $.ajax({
+            url: "/api/admin/v1/category",
+            method: "GET",
+            success: function (data) {
+                if (data.code == 200) {
+                    CATEGORY_DATA = data.data;
+                    // 先清空数据
+                    $('#cate_container').html("");
+                    form(0, CATEGORY_DATA);
+                } else {
+                    swal("异常：" + data.code, data.message, "warning");
+                }
+            }
+        });
+    }
+    function form(index, list) {
+        if (list.length == 0) {
+            return;
+        }
+        for (var i = 0; i < list.length; i++) {
+            var data = list[i].data;
+            var child = list[i].child;
+            addLineTd(index * 20, data);// 调用即可添加一行数据，传入缩进值和数据
+            form(index + 1, child);
+        }
+    }
+    function addLineTd(marginLift, data) {
+        var cateID = data.id;
+        var cateName = data.name;
+        var cateDetail = data.detail;
+        var content = "<tr>";
+        content += "<td><span style='margin-left: " + marginLift + "px'>" + cateName + "</span></td>"
+        content += "<td>" + cateDetail + "</td>"
+        content += "<td><span class='op_pointer' onclick='showDetail(" + cateID + ");'> [修改]</span><span class='op_pointer' onclick='deleteCate(" + cateID + ");'> [删除] </span> </td>"
+        content += "</tr>"
+        $('#cate_container').append(content);
+    }
+
+    /**
+     * 以下是填充 modal Add 分类信息的代码
+     * @param index
+     * @param list
+     * @param selectedID
+     */
+
+    function formAddModal(index, list) {
+        if (list.length == 0) {
+            return;
+        }
+        for (var i = 0; i < list.length; i++) {
+            var data = list[i].data;
+            var child = list[i].child;
+            addAddModal(index * 20, data);// Modal 数据填充
+            formAddModal(index + 1, child);
+        }
+    }
+    function addAddModal(marginLift, data) {
+        var cateID = data.id;
+        var cateName = data.name;
+        var content = "<option value='" + cateID + "' ><span style='margin-left: " + marginLift + "px'>" + cateName + "</span></option>"
+        $('#cateAdd').append(content);
+    }
+
+    /**
+     * 以下是填充 modal Detail 分类信息的代码
+     * @param index
+     * @param list
+     * @param selectedID
+     */
+
+    function formModal(index, list, selectedID) {
+        if (list.length == 0) {
+            return;
+        }
+        for (var i = 0; i < list.length; i++) {
+            var data = list[i].data;
+            var child = list[i].child;
+            addItemModal(index * 20, data, selectedID);// Modal 数据填充
+            formModal(index + 1, child, selectedID);
+        }
+    }
+    function addItemModal(marginLift, data, selectedID) {
+        var cateID = data.id;
+        var cateName = data.name;
+        var selected = "";
+        if (data.id == selectedID) {
+            selected = "selected='selected'";
+        }else{
+            selected = "";
+        }
+        var content = "<option " + selected + " value='" + cateID + "' ><span style='margin-left: " + marginLift + "px'>" + cateName + "</span></option>"
+        // 两个 modal 都要添加
+        $('#cateDetail').append(content);
+    }
+</script>
+
+
+<div class="clearfix"></div>
+
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+
+<!-- end: JavaScript-->
+<script>
+    $(document).ready(function () {
+        reformList();
+    });
+</script>
+</body>
+
+</html>

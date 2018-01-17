@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.product.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.product.model.Product">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="subname" jdbcType="VARCHAR" property="subname" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="origin_price" jdbcType="DECIMAL" property="originPrice" />
+    <result column="current_price" jdbcType="DECIMAL" property="currentPrice" />
+    <result column="is_deal" jdbcType="BIT" property="isDeal" />
+    <result column="deal_discount" jdbcType="DECIMAL" property="dealDiscount" />
+    <result column="deal_start" jdbcType="TIMESTAMP" property="dealStart" />
+    <result column="deal_ddl" jdbcType="TIMESTAMP" property="dealDdl" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="banner_type" jdbcType="INTEGER" property="bannerType" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="click_times" jdbcType="INTEGER" property="clickTimes" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="updatedate" jdbcType="TIMESTAMP" property="updatedate" />
+    <result column="star1_num" jdbcType="INTEGER" property="star1Num" />
+    <result column="star2_num" jdbcType="INTEGER" property="star2Num" />
+    <result column="star3_num" jdbcType="INTEGER" property="star3Num" />
+    <result column="star4_num" jdbcType="INTEGER" property="star4Num" />
+    <result column="star5_num" jdbcType="INTEGER" property="star5Num" />
+    <result column="stars_num" jdbcType="INTEGER" property="starsNum" />
+    <result column="stars" jdbcType="DECIMAL" property="stars" />
+  </resultMap>
+</mapper>

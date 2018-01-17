@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>PageConfig</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Import google fonts -->
+    <!--  <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- end: CSS file-->
+</head>
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="index.html"><i class="icon fa fa-home"></i>页面配置</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>商品分类配置信息</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>商品分类配置信息</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div style="height: 30px;"></div>
+                <div class="tab-pane col-xs-12 col-xs-offset-1">
+                    <div class="col-sm-2">
+                        <button class="btn btn-primary" onclick="saveCates()">保存修改</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-success" onclick="addCateItem();">添加新分类</button>
+                    </div>
+                </div>
+                <div class="tab-pane col-xs-12 col-xs-offset-1">
+                    <div style="line-height: 40px;margin-left: 15px">* 清空内容再保存修改将会删除该条目，请谨慎操作</div>
+                </div>
+                <div style="height: 30px;"></div>
+                <div class="panel-body col-xs-offset-1">
+
+                    <style>
+                        .cate-box {
+                            border: 1px #eee solid;
+                            padding: 10px 0;
+                            margin: 10px;
+                        }
+                    </style>
+                    <div id="cate-container">
+                        <div th:each="cat,idx:${cates}" class="tab-pane col-sm-5 cate-box">
+                            <div class="h4 bk-margin-left-15" th:text="'商品分类信息 '+${idx.count}">商品分类信息</div>
+                            <div class="h6 bk-margin-left-15">该导航信息会展示在 All categories 一栏里</div>
+                            <hr/>
+                            <div class="form-horizontal bk-margin-top-15">
+
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div>分类名字</div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div>广告图片URL( *宽高 500*360px)</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-6">
+                                        <input type="text" th:value="${cat.name}"
+                                               class="cate-name form-control input-sm pull-right"
+                                               placeholder="名字">
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input type="text" th:value="${cat.imgURL}"
+                                               class="cate-imgURL form-control input-sm"
+                                               placeholder="图片地址 http://xxx">
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div>子条目显示名字</div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div>跳转链接URL</div>
+                                    </div>
+                                </div>
+                                <div th:id="'cate-item' + ${idx.index}">
+                                    <div class="form-group" th:each="item:${cat.items}">
+                                        <label class="col-sm-6">
+                                            <input type="text" th:value="${item.name}"
+                                                   class="cate-item-name form-control input-sm pull-right"
+                                                   placeholder="子条目显示名字">
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${item.url}"
+                                                   class="cate-item-url form-control input-sm"
+                                                   placeholder="跳转链接地址 http://xxx">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-block">
+                                <div style="margin-left: 15px">
+                                    <button class="btn btn-success" th:onclick="'addItem(' + ${idx.index} + ')'">添加新条目
+                                    </button>
+                                    <button class="btn btn-warning" th:onclick="'delCateItem(' + ${idx.index} + ')'">
+                                        删除该分类
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script>
+    function addItem(i) {
+        var content = "<div class='form-group'> <label class='col-sm-6'> <input type='text'class='cate-item-name form-control input-sm pull-right'placeholder='子条目显示名字'> </label> <div class='col-sm-6'> <input type='text'class='cate-item-url form-control input-sm'placeholder='跳转链接地址 http://xxx'> </div> </div>";
+        $("#cate-item" + i).append(content);
+    }
+
+    function addCateItem() {
+        var index = 0;
+        $(".cate-box").each(function (i) {
+            index += 1;
+        })
+        var content = "<div class='tab-pane col-sm-5 cate-box'><div class='h4 bk-margin-left-15'>商品分类信息 " + (index + 1) + "</div><div class='h6 bk-margin-left-15'>该导航信息会展示在 All categories 一栏里</div> <hr/>" +
+                "<div class='form-horizontal bk-margin-top-15'> <div class='form-group'> <div class='col-sm-6'> <div>分类名字</div> </div> <div class='col-sm-6'> <div>广告图片URL( *宽高 500*360px)</div> </div> </div>" +
+                "<div class='form-group'> <label class='col-sm-6'> <input type='text'class='cate-name form-control input-sm pull-right'placeholder='名字'> </label>" +
+                "<div class='col-sm-6'> <input type='text'class='cate-imgURL form-control input-sm'placeholder='图片地址 http://xxx'> </div> </div> <hr/>" +
+                "<div class='form-group'> <div class='col-sm-6'> <div>子条目显示名字</div> </div>" +
+                "<div class='col-sm-6'> <div>跳转链接URL</div> </div> </div> <div id='cate-item" + index + "'> <div class='form-group'>" +
+                "<label class='col-sm-6'> <input type='text'class='cate-item-name form-control input-sm pull-right'placeholder='子条目显示名字'> </label> <div class='col-sm-6'>" +
+                "<input type='text'class='cate-item-url form-control input-sm'placeholder='跳转链接地址 http://xxx'> </div> </div> </div> </div> <div class='center-block'> <div style='margin-left: 15px'> <button class='btn btn-success' onclick='addItem(" + index + ")'>添加新条目</button>" +
+                "<button class='btn btn-warning' onclick='delCateItem(" + index + ")'>删除该分类</button>" +
+                "</div> </div> </div> ";
+        $("#cate-container").append(content);
+    }
+
+    function saveCates() {
+        var cates = [];
+        $(".cate-box").each(function (i) {
+            var cate_name = $(".cate-name").eq(i).val();
+            var cate_imgURL = $(".cate-imgURL").eq(i).val();
+            var cate_items = [];
+            $("#cate-item" + i + " .cate-item-name").each(function (j) {
+                var cate_item_name = $("#cate-item" + i + " .cate-item-name").eq(j).val();
+                var cate_item_url = $("#cate-item" + i + " .cate-item-url").eq(j).val();
+                if (cate_item_name.length > 1) {
+                    var cate_item = {
+                        name: cate_item_name,
+                        url: cate_item_url
+                    };
+                    cate_items.push(cate_item);
+                }
+            });
+            var cate = {
+                name: cate_name,
+                imgURL: cate_imgURL,
+                items: cate_items
+            };
+            cates.push(cate);
+        })
+
+        $.ajax({
+            url: "/api/admin/v1/pageconfig/cate",
+            type: "put",
+            data: {
+                value: JSON.stringify(cates)
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("更新成功");
+                    window.location.reload();
+                } else {
+                    alert('请求失败 [' + res.code + '] ' + res.message);
+                }
+            }
+        })
+//        console.log(cates);
+    }
+    function delCateItem(i) {
+        $(".cate-box").eq(i).remove();
+    }
+
+</script>
+<!-- end: JavaScript-->
+
+</body>
+</html>

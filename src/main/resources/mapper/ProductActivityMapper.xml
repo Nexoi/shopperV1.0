@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.product.dao.ProductActivityMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.product.model.ProductActivity">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="subpid" jdbcType="INTEGER" property="subpid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+    <result column="current_price" jdbcType="DECIMAL" property="currentPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+</mapper>

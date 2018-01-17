@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/ct/nav_new.css"/>
+    <link rel="stylesheet" href="/css/ct/message_new.css"/>
+</head>
+
+<body>
+<header th:include="shop/frag/header :: header"></header>
+
+<input type="hidden" id="prePage" th:value="${page.prePage}">
+<input type="hidden" id="nextPage" th:value="${page.nextPage}">
+
+<div class="container" style="width: 1200px;margin-top: 30px;margin-bottom: 80px">
+    <div th:include="shop/frag/mycenternav :: div" class="nav-left-wrapper"></div>
+    <div class="content-wrapper">
+        <div class="title-well">
+            <p class="message-title">Message > My Reviews</p>
+        </div>
+        <div class="content-well" style="padding: 14px 14px 0 14px;">
+            <div class="message-well">
+                <p class="review-title">My Reviews (
+                    <a style="color: black;" th:text="${page.total}">4</a>)</p>
+                <a onclick="jacascript:window.location.href='/mycenter/reviews?page='+$('#prePage').val()"
+                   class="message-prepage">Previous page</a>
+
+                <a onclick="jacascript:window.location.href='/mycenter/reviews?page='+$('#nextPage').val()"
+                   class="message-nextpage">Next page</a>
+            </div>
+            <div class="panel-group" style="margin-top: 10px;" id="accordion" role="tablist"
+                 aria-multiselectable="true">
+                <div th:each="com:${pagelist}" class="panel panel-default">
+                    <div class="panel-heading" role="tab" th:id="${'headingOne'+com.id}">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                               th:href="${'#collapseOne'+com.id}"
+                               aria-expanded="false" th:attr="aria-controls='collapseOne'+${com.id}" class="item-title collapsed"
+                               th:text="com.name">
+                                H96 PRO Plus KODI 17.3 Android 7.1 Amlogic S912 TV BOX 4K 3GB/32GB 802.11AC WIFI
+                                100······
+                            </a>
+                        </h4>
+                    </div>
+                    <div th:id="${'collapseOne'+com.id}" class="panel-collapse collapse in" role="tabpanel"
+                         th:attr="aria-labelledby='headingOne'+${com.id}">
+                        <div class="panel-body panel-main">
+                            <div class="img-modify">
+                                <!--<img class="message-img" src="img/{2D40D62F-B861-0703-4D1B-1E1661812340}.png"/>-->
+                            </div>
+                            <div class="message-detail">
+                                <input type="hidden" class="star_input" th:value="${com.star}">
+                                <p class="star">Star : <span style="color:orange" class="star_con"></span></p>
+                                <p class="review">Review : </p>
+                                <p class="comment-text" th:text="${com.contentHtml}">balabaladsadsadsad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <script>
+                initStar();
+                function initStar() {
+                    $(".star_input").each(function (i) {
+                        var star = $(this).val() / 20;
+                        var xingxing = "";
+                        for (var k = 0; k < star; k++) {
+                            xingxing += "★";
+                        }
+                        for (var k = star; k < 5; k++) {
+                            xingxing += "☆";
+                        }
+                        $(".star_con").eq(i).html(xingxing);
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+</body>
+
+</html>

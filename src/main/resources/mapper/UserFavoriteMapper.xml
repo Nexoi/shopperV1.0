@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.user.dao.UserFavoriteMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.user.model.UserFavorite">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="member_status" jdbcType="INTEGER" property="memberStatus" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+</mapper>

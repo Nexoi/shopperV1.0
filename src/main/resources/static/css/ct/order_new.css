@@ -1,0 +1,138 @@
+.order-title{
+	font-size: 16px!important;
+	line-height: 20px !important;
+	margin:14px 0 13px 18px;
+	padding: 0;
+	display: inline;
+	float: left;
+	font-family: ArialMT;
+}
+.order-prepage{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: 17px 0 0 550px;
+	padding: 0;
+	display: inline;
+	float: left;
+	cursor: pointer;
+}
+.order-prepage:hover{
+	text-decoration: underline;
+}
+.order-nextpage{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: 17px 0 0 14px;
+	padding: 0;
+	display: inline;
+	float: left;
+	cursor: pointer;
+}
+.order-nextpage:hover{
+	text-decoration: underline;
+}
+.order-text-nextpage{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: -17px 0 0 780px;
+	padding: 0;
+	display: inline;
+	float: left;
+	cursor: pointer;
+}
+.order-text-nextpage:hover{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: -17px 0 0 780px;
+	padding: 0;
+	display: inline;
+	float: left;
+	cursor: hand;
+	text-decoration: underline;
+}
+.order-text-prepage{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: -17px 0 0 690px;
+	padding: 0;
+	display: inline;
+	float: left;
+	cursor: pointer;
+}
+.order-text-prepage:hover{
+text-decoration: underline;
+}
+.order-table-head{
+	background: #F7F7F7;
+	font-size: 14px;
+	line-height: 24px;
+	text-align: left;
+}
+.order-table-body
+{font-family: ArialMT;
+font-size: 12px!important;
+color: #515151;
+line-height: 34px!important;
+	text-align: left;
+}
+.operator-wrapper{
+	font-size: 14px;
+	line-height: 16px;
+	text-align: left;
+}
+.operator-detail{
+text-decoration: none;
+	font-family: ArialMT;
+font-size: 12px;
+color: #3273B2;
+line-height: 34px;
+cursor: pointer;
+}
+td{
+	vertical-align: middle!important;
+	padding-top: 14px!important ;
+}
+
+.operator-pay{
+	margin-left:35px;
+	font-family: ArialMT;
+font-size: 12px;
+color: #3273B2;
+line-height: 34px;
+cursor: pointer;
+text-decoration: none;
+}
+.operator-pay:hover{
+	
+	text-decoration: underline;
+}
+.operator-cancel{
+	margin-left: 35px;
+	font-family: ArialMT;
+font-size: 12px;
+color: #3273B2;
+line-height: 34px;
+cursor: pointer;
+text-decoration: none;
+}
+.operator-cancel:hover{
+	
+	text-decoration: underline;
+}
+.select-order{
+	background: #FFFFFF;
+border: 1px solid #979797;
+width: 196px;
+height: 30px;
+font-family: ArialMT;
+font-size: 16px;
+color: #000000;
+line-height: 30px;
+padding-left: 5px;
+margin-bottom: 14px;
+}

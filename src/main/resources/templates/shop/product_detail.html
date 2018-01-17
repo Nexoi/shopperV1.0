@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/font-awesome.min.css"><!--header有了-->
+    <link rel="stylesheet" href="/css/bootstrap.css"><!--header有了-->
+    <link rel="stylesheet" href="/css/product_detail.css">
+    <!--<link rel="stylesheet" href="/css/home.css" type="text/css"/>-->
+
+    <title th:text="'Leelbox-tech '+${product.name}">Leelbox-tech </title>
+    <meta name="keywords" content="android tv box, tv box, kodi box, mxq, mxq tv box, smart tv box, kodi android box">
+    <meta name="description"
+          content="Shop the best Android TV boxes at lowest price at Leelbox. Android 6.0, Kodi 17.3, Support 3D 4K output, huge memory. You will get a wonderful experience with our tv box.">
+    <link rel="icon" th:href="${product.img}">
+
+    <!-- jssocials -->
+    <link rel="stylesheet" href="/js/plugins/jssocials/jssocials.css">
+    <link rel="stylesheet" href="/js/plugins/jssocials/jssocials-theme-flat.css">
+
+    <!--<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>-->
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body style="background-color: white">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+<div class="container mt30 mb30">
+    <input type="hidden" id="nid" th:value="${nid}">
+    <input type="hidden" id="pid" th:value="${product.pid}">
+    <input type="hidden" id="product_price" th:value="${product.currentPrice}">
+    <input type="hidden" id="canBuy" th:value="${canBuy}">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                <a href="/product" style="margin-right:3px;">
+                    <font color="#000000">Product</font>
+                </a>
+                <span style="margin-right:3px;">></span>
+                <a th:href="'/product/'+${product.pid}" style="margin-right:3px;">
+                    <font th:text="${product.name}" color="#000000">Product Name</font>
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="row partA">
+        <div class="col-xs-5">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="thumbImg" class="tb-booth tb-pic tb-s310 mt5" style="overflow: hidden">
+                        <a th:each="img,iterStat:${productImgs}" th:if="${iterStat.index==0}" th:href="${img.imgUrl}">
+                            <img th:src="${img.imgUrl}" alt="图片" th:rel="${img.imgUrl}" class="jqzoom">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt20 mb20">
+                <div class="col-xs-12 pics">
+                    <ul class="tb-thumb" id="thumblist">
+                        <li th:each="img:${productImgs}">
+                            <!--<a href="#">-->
+                            <a style="cursor: pointer">
+                                <img th:src="${img.imgUrl}" th:attr="mid=${img.imgUrl},big=${img.imgUrl}"/>
+                            </a>
+                        </li>
+                    </ul>
+                    <script>
+                        $("#thumblist li").eq(0).addClass("tb-selected");
+                        // 初始化主面板
+                        //                        var img_url = $("#thumblist>li>a>img").eq(0).attr('src');
+                        //                        var content = "<a href='" + img_url + "'><img src='" + img_url + "' rel='" + img_url + "' class='jqzoom'> </a>";
+                        //                        $("#thumbImg").append(content);
+                    </script>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xs-7">
+            <div class="row">
+                <div class="col-xs-10">
+                    <p th:text="${product.name}" style="font-size: 24px;">Example page header Example page header
+                        Example page header Example
+                        page header Example page
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <hr/>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-xs-12">
+                    <input type="hidden" id="starNum" th:value="${product.stars}">
+                    <span id="starPanel" style="margin-right:5px;color: orange;">★★★★★</span>
+                    <label><a href="#details">
+                        <span th:text="${product.starsNum}"
+                              style="margin-right:3px; color: blue;font-size: smaller;font-weight: normal;">42</span>
+                        <span style="margin-right:10px;color: gray;font-size: smaller;font-weight: normal;">comments</span>
+                    </a></label>
+                    <label><a href="">
+                        <span style="margin-right:3px; color: red; font-size: smaller">♥</span>
+                        <span style="margin-right:10px;color: gray;font-size: smaller;font-weight: normal;">collection</span>
+                    </a></label>
+
+                    <span id="share" style="font-size: smaller;color: gray;">share</span>
+                </div>
+                <script>
+                    // num between 0 - 100
+                    function formStar(num) {
+                        if (num == "") {
+                            return;
+                        }
+                        var i = num / 20;
+                        var content = "";
+                        var j = 0;
+                        for (; j < i; j++) {
+                            content += "★"; // 进一法
+                        }
+                        for (; j < 5; j++) {
+                            content += "✩"; // 补齐
+                        }
+                        $("#starPanel").html(content);
+                    }
+                    formStar($("#starNum").val())
+                </script>
+            </div>
+            <!--<div class="row mb10">-->
+            <!--<div class="col-xs-12">-->
+            <!--<span style="margin-right:5px;color: gray;">Flash sales merchandise:</span>-->
+            <!--<span style="margin-right:3px;font-size: smaller;border: solid 1px;padding:6px 8px;">Ends in xx days, xx:xx:xx</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="row mb10">
+                <div class="col-xs-12">
+                    <div class="col-xs-12" style="background: rgb(240,240,240);">
+                        <div class="row price2 mb10 mt10">
+                            <div class="col-xs-12">
+                                <p style="color: gray;">
+                                    <strong th:unless="${product.originPrice == product.currentPrice}">Reg. Price :
+                                        <span style="text-decoration:line-through;">
+                                            <span th:text="${unit + ' ' + product.originPrice}"
+                                                  class="sys_item_mktprice">299.99</span>
+                                        </span>
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row price3 mb20">
+                            <div class="col-xs-12">
+                                <p style="color: red; font-size: 30px; line-height: 5px;">
+                                    <span th:text="${unit + ' ' + product.currentPrice}"
+                                          class="sys_item_price">199.99</span>
+                                </p>
+                            </div>
+                        </div>
+                        <!--<div class="dashed_line"></div>-->
+                        <!--<div class="row mb10 sales1">-->
+                        <!--<div class="col-xs-3">-->
+                        <!--<span style="margin-right:10px;color: gray;">Collar coupons</span>-->
+
+                        <!--</div>-->
+                        <!--<div class="col-xs-9">-->
+                        <!--<span style="font-size: smaller;color: red;border: solid 1px red;padding:4px 8px; background: rgb(252,170,111);">Full $100,-$10</span>-->
+
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row sales2 mb10">-->
+                        <!--<div class="col-xs-3">-->
+                        <!--<span style="margin-right:5px;color: gray;">Sales promotion</span>-->
+
+                        <!--</div>-->
+                        <!--<div class="col-xs-9">-->
+                        <!--<span style="font-size: smaller;color: red;border: solid 1px red;padding:4px 8px;">money off</span>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row sales3 mb10">-->
+                        <!--<div class="col-xs-3"></div>-->
+                        <!--<div class="col-xs-9" style="color: gray;font-size:smaller ;">Goods are reduced by 10 yuan-->
+                        <!--per 100 yuan-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row option mb10">
+                <div class="col-xs-2 mt10" style="color: gray;">Option:</div>
+                <div class="col-xs-10">
+                    <div th:each="norm:${productNorms}" class="row mt10">
+                        <span th:if="${!norm.normColName.equalsIgnoreCase('empty')}" th:text="${norm.normColName}"
+                              th:value="${norm.normColId}" class=""
+                              style="background:rgb(240,240,240) ;padding:4px 8px; color: gray;margin-left: 15px;">Color</span>
+                        <label onclick="reloadPage(this)" th:each="normItem:${norm.normItems}"
+                               th:value="${normItem.normId}"
+                               class="state_normal myradio nid_ratio">
+                            <input class="" type="radio" th:name="${norm.normColName}" th:value="${normItem.normId}"><a
+                                th:text="${normItem.normName}">radioA</a><i></i></input>
+                        </label>
+                    </div>
+                    <!--<div class="row mt10">-->
+                    <!--<span class="" style="background:rgb(240,240,240) ;padding:4px 8px; color: gray;">Size</span>-->
+                    <!--<label class="state_active myradio"><input class="" type="radio"-->
+                    <!--name="op2"><a>radioAAA</a><i></i></input></label>-->
+                    <!--<label class="state_normal myradio"><input class="" type="radio"-->
+                    <!--name="op2"><a>radioBBB</a><i></i></input></label>-->
+                    <!--<label class="state_normal myradio"><input class="" type="radio"-->
+                    <!--name="op2"><a>radioCCC</a><i></i></input></label>-->
+                    <!--</div>-->
+                    <div th:if="${stockRest > 9}" th:text="'In Stock : '+${stockRest}" class="row colorblue mt10"
+                         style="margin-left: 0">
+                        In Stock : 0
+                    </div>
+                    <div th:if="${stockRest <= 9}" th:text="'In Stock : '+${stockRest}" class="row mt10"
+                         style="margin-left: 0;color:red">
+                        In Stock : 0
+                    </div>
+                </div>
+                <script>
+                    // 根据 nid 遍历该规格信息组，填充规格是否选中的信息
+                    stockNorm($("#nid").val())
+                    function stockNorm(nid) {
+                        //
+                        var nids = nid.split("_");
+                        $(".nid_ratio").each(function (i) {
+                            // 若为选中的，则激活
+                            var thisNID = $(this).children().eq(0).val();
+                            if (nids.indexOf(thisNID) >= 0) {
+                                $(this).removeClass("state_normal");
+                                $(this).addClass("state_active");
+                            }
+                        });
+                    }
+                    // 重载页面，根据更新的 nid 信息
+                    function reloadPage(obj) {
+                        // 干掉兄弟结点
+                        $(obj).siblings().each(function (i) {
+                            $(this).removeClass("state_active");
+                            $(this).addClass("state_normal");
+                        })
+
+                        // 激活自己
+                        $(obj).removeClass("state_normal");
+                        $(obj).addClass("state_active");
+
+                        var nidstr = "";
+                        $(".nid_ratio").each(function (i) {
+                            // 若为选中的，则激活
+                            if ($(this).hasClass("state_active")) {
+                                var thisNID = $(this).children().eq(0).val();
+                                nidstr += "" + thisNID + "_";
+                            }
+                        });
+                        if (nidstr.length != 0) {
+                            nidstr = nidstr.substr(0, nidstr.length - 1);
+                        }
+                        // 重载页面
+                        window.location.href = "/product/" + $("#pid").val() + "?nid=" + nidstr;
+                    }
+                </script>
+            </div>
+            <div class="row quantity mb10 mt15">
+                <div class="col-xs-2" style="color: gray;">Quantity:</div>
+                <div class="col-xs-10">
+                    <div class="spinner">
+
+                        <input id="qty" type="text" class="spinner_value" value="1"/>
+                        <input type="button" class="spinner_inc" id="inc" value="+"/>
+                        <input type="button" class="spinner_dec" id="dec" value="-"/>
+
+
+                    </div>
+                    <div>
+                        <button th:if="${canBuy}" id="addCartBtn" onclick="addProIntoCart();"
+                                class="mybtn btn_ATC ml35">
+                            <aa style="color:white">
+                                <span class="fa fa-shopping-cart fa-lg mr10"></span>
+                                Add to cart
+                            </aa>
+                        </button>
+                        <button th:if="${!canBuy}" id="addCartBtn" disabled="disabled" onclick="addProIntoCart();"
+                                class="mybtn btn_ATC ml35"
+                                style="background-color: lightgrey;border: solid 1px lightgrey;cursor: not-allowed">
+                            <aa style="color:white">
+                                <span class="fa fa-shopping-cart fa-lg mr10"></span>
+                                Add to cart
+                            </aa>
+                        </button>
+                        <button th:if="${canBuy}" onclick="buyNow();" class="mybtn btn_BN ml15">
+                            <aa style="color:white">Buy Now</aa>
+                        </button>
+                        <button th:if="${!canBuy}" disabled="disabled" onclick="buyNow();" class="mybtn btn_BN ml15"
+                                style="background-color: lightgrey;border: solid 1px lightgrey;cursor: not-allowed">
+                            <aa style="color:white">Buy Now</aa>
+                        </button>
+                    </div>
+                    <!--<div style="font-size: 16px;color: #A8A8A8;">&nbsp;&nbsp;You can buy up to 3 pieces per account-->
+                    <script>
+                        function addProIntoCart() {
+                            // 添加到购物车，先查看是否可以购买
+                            var pid = $("#pid").val();
+                            var nid = $("#nid").val();
+                            var num = $("#qty").val();
+                            setCartNum(pid, nid, num, 1);// 1 表示追加（add）
+                            alert("Added successfully!");
+                        }
+                        function buyNow() {
+                            // 添加购物车，跳转到购物车界面
+                            // addProIntoCart();
+                            var pid = $("#pid").val();
+                            var nid = $("#nid").val();
+                            var num = $("#qty").val();
+                            setCartNum(pid, nid, num, 1);// 1 表示追加（add）
+                            window.location.href = "/mycart";
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--
+            作者：yxs
+            时间：2017-08-11
+            描述：商品详情及评分评论
+        -->
+        <div class="col-xs-10">
+            <div>
+                <div class="ml15">
+                    <ul class="" id="details" style="margin-bottom: 0px">
+                        <label style="margin-bottom: 0px" class="btn_DC mybtn"><a
+                                href="#details">Description</a></label>
+                        <label style="margin-bottom: 0px" class="btn_RV mybtn"><a href="#rates">Review</a></label>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-12 product_details">
+                <!--<div class="solid_line" style="margin-top: -15px;"></div>-->
+                <div th:utext="${productIntro?.html}" class="decription_words"
+                     style="min-height:300px;padding-top:30px; padding-bottom:30px; overflow: hidden;border-top:2px solid #318EC3">
+                    这里是详情信息
+                </div>
+                <div class="decription_pics"></div>
+
+            </div>
+
+            <!--
+                作者：yxs
+                时间：2017-08-11
+                描述：详情评分
+            -->
+
+
+            <div class="col-xs-12 " id="rates" style="margin-top: -5px;">
+                <label class="mybtn btn_DC mt10"><a href="#rates">Review</a></label>
+                <div class="produt_rates col-xs-12" style="margin-top: -5px;">
+
+                    <div class="col-xs-12 mt10">
+                        <p>
+                            <span class="boldfont">Overall Customer Reviews Ratings:</span>
+                            <span id="commentStarOverallPanel" class="ml5" style="color:orange">★★★★★</span>
+                            <!--<span class="ml5 rates_rank">very good</span>-->
+                        </p>
+                    </div>
+                    <script>
+                        formStarOverall($("#starNum").val());
+                        function formStarOverall(num) {
+                            if (num == "") {
+                                return;
+                            }
+                            var i = num / 20;
+                            var content = "";
+                            var j = 0;
+                            for (; j < i; j++) {
+                                content += "★"; // 进一法
+                            }
+                            for (; j < 5; j++) {
+                                content += "✩"; // 补齐
+                            }
+                            $(".commentStarOverallPanel").html(content);
+                        }
+                    </script>
+
+                    <div class="col-xs-12 dashed_line"></div>
+
+
+                    <div class="col-xs-12">
+                        <div class="col-xs-5">
+                            <table class="ratingBarchart mb10" id="reviewRatingBarchart">
+                                <tbody class="colorblue">
+                                <tr>
+                                    <td>5 star
+                                    </td>
+                                    <td>
+                                        <span class="column">
+                                            <span th:style="'width:'+${100*product.star5Num/(product.starsNum+1)}+'%'"></span>
+                                        </span>
+                                    </td>
+                                    <td th:text="${product.star5Num}">
+                                        117
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4 star
+                                    </td>
+                                    <td>
+                                        <span class="column">
+                                            <span th:style="'width:'+${100*product.star4Num/(product.starsNum+1)}+'%'"></span>
+                                        </span>
+                                    </td>
+                                    <td th:text="${product.star4Num}">
+                                        117
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3 star
+                                    </td>
+                                    <td>
+                                        <span class="column">
+                                            <span th:style="'width:'+${100*product.star3Num/(product.starsNum+1)}+'%'"></span>
+                                        </span>
+                                    </td>
+                                    <td th:text="${product.star3Num}">
+                                        117
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2 star
+                                    </td>
+                                    <td>
+                                        <span class="column">
+                                            <span th:style="'width:'+${100*product.star2Num/(product.starsNum+1)}+'%'"></span>
+                                        </span>
+                                    </td>
+                                    <td th:text="${product.star2Num}">
+                                        117
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1 star
+                                    </td>
+                                    <td>
+                                        <span class="column">
+                                            <span th:style="'width:'+${100*product.star1Num/(product.starsNum+1)}+'%'"></span>
+                                        </span>
+                                    </td>
+                                    <td th:text="${product.star1Num}">
+                                        117
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--<div class="col-xs-7">
+                            <p style="margin-left: -50px;margin-bottom: 20px;">Share your views with other users</p>
+                            <label class="mybtn btn_WR"><a href="">write review</a></label>
+                        </div>-->
+                    </div>
+                    <div class="col-xs-12 dashed_line"></div>
+                    <div class="col-xs-12 mb35 boldfont">
+                        Top Buyer Review
+                    </div>
+                    <div class="col-xs-12 ">
+                        <div th:if="${#lists.size(productComments)==0}"
+                             style="margin-bottom: 70px;margin-left: 16px;color:#555"> No comment information
+                        </div>
+                        <div th:each="comment:${productComments}" class="TBR">
+                            <input type="hidden" class="commentStarNum" th:value="${comment.star}"/>
+                            <div class="TBR_star commentStarPanel" style="color:orange">★★★★★</div>
+                            <div class="TBR_info mb20">Comment by
+                                <span th:if="${comment.uid==0}" th:text="${comment.name}" class="ml5 mr5 TBR_buyer"
+                                      style="color:red">Admin</span>
+                                <span th:if="${comment.uid!=0}" th:text="${comment.name}"
+                                      class="ml5 mr5 TBR_buyer">User</span>
+                                On
+                                <span th:text="${comment.createDate}" class="ml5 TBR_time">July 28,2017</span>
+
+                                <!--<a class="ml15" href="">(Reply)</a>-->
+                            </div>
+                            <div th:text="${comment.contentHtml}" class="TBR_detail mb15">
+                                REVIEWS
+                            </div>
+                            <!--<div class="TBR_ask mb15">-->
+                            <!--<span>-->
+                            <!--Was this review helpful to you?-->
+                            <!--<label class="mybtn btn_ASK ml15"><a href="javascript:;">Yes</a></label>-->
+                            <!--<label class="mybtn btn_ASK ml10"><a href="javascript:;">No</a></label>-->
+                            <!--</span>-->
+                            <!--</div>-->
+                            <div class="dashed_line"></div>
+                        </div>
+                        <!--<div class="mb15"><a href="javascript:;">Review all&nbsp;<span>172</span>&nbsp;customer-->
+                        <!--review ></a></div>-->
+                    </div>
+                    <script>
+                        // num between 0 - 100
+                        $(".commentStarNum").each(function (i) {
+                            formStarComment($(this).val(), i);
+                        });
+                        function formStarComment(num, i) {
+                            if (num == "") {
+                                return;
+                            }
+                            var i = num / 20;
+                            var content = "";
+                            var j = 0;
+                            for (; j < i; j++) {
+                                content += "★"; // 进一法
+                            }
+                            for (; j < 5; j++) {
+                                content += "✩"; // 补齐
+                            }
+                            $(".commentStarPanel").eq(i).html(content);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+
+        <!--
+            作者：yxs
+            时间：2017-08-11
+            描述：侧边推荐
+        -->
+        <div class="col-xs-2">
+            <div class="MSI">
+                <div class="MSI_header">Most Similar Items</div>
+                <div th:each="hot:${hotProducts}" class="MSI_item">
+                    <div class="MSI_item_pic" th:onclick="${'window.location.href=''/product/' + hot.pid+''''}">
+                        <img th:src="${hot.img}" width="140" height="140" title="pic">
+                    </div>
+                    <div class="MSI_item_words">
+                        <a class="name" th:href="'/product/'+${hot.pid}" th:text="${hot.name}">[Official Global ROM]2
+                            6.44 Inch 5300mAh 4GB 64GB Android</a>
+                        <p>
+                            <span class="MSI_item_price1">
+                                <strong th:text="${unit + ' ' + hot.current_price}">USD&nbsp;199.99</strong>
+                            </span>
+                            <span class="MSI_item_price2"
+                                  th:text="${unit + ' ' + hot.origin_price}">&nbsp;USD 299.99</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+<div style="height:100px"></div>
+<!-- 加 100px 高度空白，因为 buyBanner 需要占用额外空间会遮住 footer -->
+<div id="buyBanner"
+     style="position: absolute;width: 100%;height:100px;background: linear-gradient(to bottom, #FFFFFF, #D4D4D4);box-shadow: 0px 0px 7px #000;">
+    <div class="row" style="width: 100%;">
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+            <img style="width:70px;height: 70px;margin: 15px" th:src="${product.img}"/>
+        </div>
+        <div class="col-md-5">
+            <div style="margin:15px;height:70px;font-size: 16px" th:text="${product.name}">
+                product name
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="font-size: 28px;color:#FC0016;margin-top: 15px;" th:text="${unit + ' ' + product.currentPrice}">
+                $0.00
+            </div>
+            <div style="font-size: 14px;color:#969696;margin-top: 8px;" th:unless="${product.currentPrice == product.originPrice}" th:text="${unit + ' ' + product.originPrice}">
+                $0.00
+            </div>
+        </div>
+        <div class="col-md-2" style="height: 100%">
+            <button th:if="${canBuy}" onclick="buyNow();" class="btn btn-block"
+                    style="color:white;margin: 29px 0px;width:128px;height:42px;background: linear-gradient(to bottom, #318EC3, #17648F);box-shadow: 0px 2px 4px #00384E;">
+                Buy it now
+            </button>
+            <button th:if="${!canBuy}" onclick="buyNow();" alt="stock empty" disabled="disabled" class="btn btn-block"
+                    style="color:white;cursor: not-allowed; margin: 29px 0px;width:128px;height:42px;background: linear-gradient(to bottom, #318EC3, #17648F);box-shadow: 0px 2px 4px #00384E;">
+                Buy it now
+            </button>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript" src="coderYin-master/mysite/js/pages/header.js"></script>-->
+<!--<script type="text/javascript" src="/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="/js/product_detail/jquery.imagezoom.min.js"></script>
+<script type="text/javascript" src="/js/product_detail.js"></script>
+<script type="text/javascript" src="/js/plugins/jssocials/jssocials.min.js"></script>
+
+
+<script type="text/javascript">//图片查看器
+$(document).ready(function () {
+
+    $(".jqzoom").imagezoom();
+    $("#thumblist li a").click(function () {
+        $(this).parents("li").addClass("tb-selected").siblings().removeClass("tb-selected");
+        $(".jqzoom").attr('src', $(this).find("img").attr("mid"));
+        $(".jqzoom").attr('rel', $(this).find("img").attr("big"));
+    });
+});
+</script>
+<script>
+    $("#share").jsSocials({
+        shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "stumbleupon"]
+    });
+</script>
+<script>
+    // 页脚滚动栏
+    floatBanner();
+    function floatBanner() {
+        // 滚动到开头
+        $(window).scrollTop(0);
+        var rectFirst = document.getElementById("addCartBtn").getBoundingClientRect();
+        var dived = rectFirst.bottom;
+
+        var isScrollInit = false;
+        $(window).scroll(function () {
+            var screenHeight = document.documentElement.offsetHeight;
+            var rect = document.getElementById("addCartBtn").getBoundingClientRect();
+            if (rect.bottom < 0) {
+                $("#buyBanner").css("visibility", "visible");
+                $("#buyBanner").css("top", screenHeight - 100 - rect.bottom + dived + "px");
+//                console.log(rect.bottom);
+            } else {
+                $("#buyBanner").css("visibility", "hidden");
+            }
+            if (!isScrollInit) {
+                $(window).scrollTop(0);
+                isScrollInit = true;
+            }
+        });
+    }
+</script>
+<!--Begin Comm100 Live Chat Code-->
+<div id="comm100-button-426"></div>
+<script type="text/javascript">
+    var Comm100API=Comm100API||{};(function(t){function e(e){var a=document.createElement("script"),c=document.getElementsByTagName("script")[0];a.type="text/javascript",a.async=!0,a.src=e+t.site_id,c.parentNode.insertBefore(a,c)}t.chat_buttons=t.chat_buttons||[],t.chat_buttons.push({code_plan:426,div_id:"comm100-button-426"}),t.site_id=226920,t.main_code_plan=426,e("https://chatserver.comm100.com/livechat.ashx?siteId="),setTimeout(function(){t.loaded||e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=")},5e3)})(Comm100API||{})
+</script>
+<!--End Comm100 Live Chat Code-->
+<script>
+    fbq('track', 'ViewContent', {
+        content_type: 'product', //  固定值：pruduct
+        content_ids: $("#pid").val() ,  // 对应网站产品的 id或者Sku
+        value:$("#product_price").val() ,     //对应产品的价值
+        currency: $("#coin_type").val() //对应货币类型
+    });
+</script>
+
+</body>
+</html>

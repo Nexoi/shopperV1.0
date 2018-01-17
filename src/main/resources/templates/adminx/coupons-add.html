@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Coupon-Add</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Import google fonts -->
+    <!--  <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet"/>
+    <link href="assets/plugins/magnific-popup/css/magnific-popup.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- end: CSS file-->
+</head>
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="index.html"><i class="icon fa fa-home"></i>优惠券</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>添加新优惠券</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>添加新优惠券</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="">
+                        <div class="form-horizontal bk-margin-top-15">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="type">优惠券类型</label>
+                                <div class="col-sm-6">
+                                    <select id="couponType" class="form-control">
+                                        <option value="public" selected="selected">5 位公开码</option>
+                                        <option value="private">20 位用户私有码</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="name">优惠券名字</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="name" name="input-small"
+                                           class="form-control input-sm"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="start_time">开始时间(格式：2017/09/01 01:01)</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="start_time" name="input-small"
+                                           class="form-control input-sm"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="end_time">截止时间(格式：2017/09/01 01:01)</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="end_time" name="input-small"
+                                           class="form-control input-sm"
+                                           value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="start_price">使用最低价格</label>
+                                <div class="col-sm-6">
+                                    <input type="number" step="0.01" id="start_price" name="input-small"
+                                           class="form-control input-sm"
+                                           value="0.00">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="type">类型</label>
+                                <div class="col-sm-6">
+                                    <select id="type" class="form-control">
+                                        <option value="2" selected="selected">打折</option>
+                                        <option value="1">满减</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="discount">打折（ 0.9 表示 10% discount ）</label>
+                                <div class="col-sm-6">
+                                    <input type="number" step="0.01" id="discount" name="input-small"
+                                           class="form-control input-sm"
+                                           value="1.00">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="disprice">满减额</label>
+                                <div class="col-sm-6">
+                                    <input type="number" step="0.01" id="disprice" name="input-small"
+                                           class="form-control input-sm"
+                                           value="0.00">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="available">是否可用</label>
+                                <div class="col-sm-6">
+                                    <select id="available" class="form-control">
+                                        <option value="true" selected="selected">可用</option>
+                                        <option value="false">不可用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="amount">优惠券数量</label>
+                                <div class="col-sm-6">
+                                    <input type="number" id="amount" name="input-small"
+                                           class="form-control input-sm"
+                                           value="10000">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 bk-margin-top-15">
+                            <button type="button" class="btn btn-primary center-block"
+                                    onclick="addCoupon()">新增优惠券
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+<script src="assets/plugins/magnific-popup/js/magnific-popup.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script>
+    function addCoupon() {
+        var couponType = $("#couponType").val();
+        var name = $("#name").val();
+        var start_time = $("#start_time").val();
+        var end_time = $("#end_time").val();
+        var start_price = $("#start_price").val();
+        var type = $("#type").val();
+        var discount = $("#discount").val();
+        var disprice = $("#disprice").val();
+        var available = $("#available").val();
+        var amount = $("#amount").val();
+        $.ajax({
+            url: "/api/admin/v1/coupon/" + couponType,
+            type: "POST",
+            data: {
+                name: name,
+                startTime: new Date(start_time),
+                endTime: new Date(end_time),
+                startPrice: start_price,
+                type: type,
+                discount: discount,
+                isAvailable: available,
+                amount: amount
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    // 绑定所有商品
+//                    bindAllProducts(res.data);已经没有绑定的必要了
+                    alert("添加成功！");
+                } else {
+                    alert("[" + res.code + "]" + res.message);
+                }
+            }
+        });
+    }
+
+    function bindAllProducts(cid) {
+        $.ajax({
+            url: "/api/admin/v1/coupon/available-all",
+            type: "POST",
+            data: {
+                cid: cid
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("添加成功！");
+                } else {
+                    alert("[" + res.code + "]" + res.message);
+                }
+            }
+
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

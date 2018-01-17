@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Resource Manager</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Import google fonts -->
+    <!--  <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- end: CSS file-->
+</head>
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="index.html"><i class="icon fa fa-home"></i>工具</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>资源存储</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>资源存储</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-body">
+
+                    <div id="attribute" class="tab-pane">
+                        <div style="height: 20px;"></div>
+
+                        <div>
+                            <button type="button" class="btn btn-success col-xs-offset-1"
+                                    onclick="addSrcModal()">添加新资源
+                            </button>
+                        </div>
+                        <div style="height: 20px;"></div>
+
+                        <div id="tab4_attr_container" class="form-horizontal bk-margin-top-15 col-xs-offset-1">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <div style="line-height: 30px;white-space: nowrap">名称</div>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div style="line-height: 30px;white-space: nowrap">URL地址</div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div style="line-height: 30px;white-space: nowrap">操作</div>
+                                </div>
+                            </div>
+                            <div id="container">
+                                <div th:each="line:${pagelist}" class="form-group">
+                                    <div class="col-xs-2">
+                                        <div style="line-height: 30px;white-space: nowrap" th:text="${line.name}">
+                                            介绍介绍介绍介绍介绍介绍
+                                        </div>
+                                    </div>
+                                    <label class="col-xs-4" th:attr="for='url'+${line.id}">
+                                        <input type="text" th:id="'url'+${line.id}"
+                                               class="attr_name form-control input-sm pull-right"
+                                               th:value="${line.url}"
+                                               value="http://www.desicomments.com/wp-content/uploads/2017/02/Lovely-Pic-Of-Winter.jpg"
+                                               placeholder="URL 地址">
+                                    </label>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-default center-block"
+                                                th:onclick="'delResource('+ ${line.id} +')'">删除资源
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <!-- 如果是图片的话 -->
+                                        <button type="button" th:if="${1==line.type}"
+                                                class="btn btn-success center-block"
+                                                th:onclick="'viewPicture('+ ${line.id} +')'">查看
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bk-margin-5 btn-group bk-margin-top-15">
+                        <a th:href="'/adminx/resources.html?page='+${page.prePage}+'&size=20'" class="btn btn-default"
+                           th:if=${page.hasPreviousPage}>
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <seeu th:each="which : ${index}">
+                            <a th:href="'/adminx/resources.html?page='+${which}+'&size=20'" class="btn btn-warning"
+                               th:text="${which}" th:if="${page.pageNum == which}">-1</a>
+                            <a th:href="'/adminx/resources.html?page='+${which}+'&size=20'" class="btn btn-default"
+                               th:text="${which}" th:if="${page.pageNum != which}">-1</a>
+                        </seeu>
+                        <a th:href="'/adminx/resources.html?page='+${page.nextPage}+'&size=20'"
+                           class="btn btn-default pull-right"
+                           th:if=${page.hasNextPage}>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pictureModal">
+    <div class="modal-dialog" style="width: 60%;margin: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">图片预览</h4>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center;width: 100%;overflow: hidden">
+                    <img id="image" style="width: 500px"
+                         src=""/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addSrcModal">
+    <div class="modal-dialog" style="width: 60%;margin: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">添加新资源</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal ">
+                    <div class="form-group">
+                        <label class="col-sm-3" for="name">
+                            <div class="pull-right" style="line-height: 30px">资源名称</div>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" id="name"
+                                   class="form-control input-sm pull-right"
+                                   placeholder="资源名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3" for="type">
+                            <div class="pull-right" style="line-height: 30px">资源类型</div>
+                        </label>
+                        <div class="col-sm-6">
+                            <select type="text" id="type"
+                                    class="form-control input-sm">
+                                <option value="1">图片</option>
+                                <option value="2">文件</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3" for="resource">
+                            <div class="pull-right" style="line-height: 30px">资源</div>
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="file" id="resource" style="padding: 1px"
+                                   class="form-control input-sm pull-right"
+                                   placeholder="资源名称">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" onclick="addSrc()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script>
+    function viewPicture(id) {
+        $("#pictureModal").modal("show");
+        var url = $("#url" + id).val();
+        $("#image").attr("src", url);
+    }
+
+    function delResource(id) {
+        $.ajax({
+            url: "/api/admin/v1/resource/" + id,
+            type: "DELETE",
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("删除成功！");
+                    window.location.reload();
+                } else {
+                    alert("删除失败：[" + res.code + "] " + res.message);
+                }
+            }
+        })
+    }
+
+    function addSrcModal() {
+        $("#addSrcModal").modal("show");
+    }
+
+    function addSrc() {
+        var formData = new FormData();
+        var pic = $('#resource')[0].files[0];
+        if (pic != undefined && pic != "undefined" && pic != null) {
+            formData.append('resource', pic);
+        }
+        formData.append('name', $('#name').val());
+        formData.append('type', $('#type').val());
+        $.ajax({
+            url: '/api/admin/v1/resource',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+            if (res.code == 200) {
+                alert("添加成功！");
+                window.location.reload();
+            } else {
+                alert("添加失败【 code = " + res.code + "】" + res.message)
+            }
+        }).fail(function (res) {
+            alert("网络／服务器异常")
+        });
+    }
+</script>
+<!-- end: JavaScript-->
+
+</body>
+</html>

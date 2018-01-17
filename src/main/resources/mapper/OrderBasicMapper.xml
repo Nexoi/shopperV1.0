@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.order.dao.OrderBasicMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.order.model.OrderBasic">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="oid" jdbcType="VARCHAR" property="oid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="origin_price" jdbcType="DECIMAL" property="originPrice" />
+    <result column="sale_price" jdbcType="DECIMAL" property="salePrice" />
+    <result column="save_price" jdbcType="DECIMAL" property="savePrice" />
+    <result column="ship_price" jdbcType="DECIMAL" property="shipPrice" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="coupon" jdbcType="VARCHAR" property="coupon" />
+    <result column="coupon_type" jdbcType="INTEGER" property="couponType" />
+    <result column="ship_id" jdbcType="INTEGER" property="shipId" />
+    <result column="pay_method" jdbcType="INTEGER" property="payMethod" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pay_finish_time" jdbcType="TIMESTAMP" property="payFinishTime" />
+    <result column="ship_start_time" jdbcType="TIMESTAMP" property="shipStartTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

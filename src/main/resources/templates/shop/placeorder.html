@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order Details</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/payment.css"/>
+</head>
+<body class="background-col">
+
+<header th:include="shop/frag/header :: header"></header>
+<div class="od-header">
+    <div class="container od-header-container">
+        <hr class="od-header-hr"/>
+        <div class="od-header-cart">Cart</div>
+        <div class="od-header-Finished">Finished</div>
+        <div class="od-header-PS">Payment & Shipping</div>
+    </div>
+</div>
+
+<div class="container od-container">
+    <div class="od-wrapper">
+        <div class="od-info">
+            <img src="/image/placeorder_1.png" class="od-pic">
+            <div class="od-words1">
+                <div class="od-words2">
+                    The order is submitted successfully. Please pay as soon as possible！
+                </div>
+                <hr class="od-words3"/>
+            </div>
+        </div>
+        <div class="od-other">
+            Order details:
+        </div>
+        <div class="od-other-wrapper">
+            <div class="od-consignee" th:text="${'Order ID : ' + oid}" >
+                Order ID : 000000000000000000
+            </div>
+
+            <div class="od-table-wrapper">
+                <table class="od-table">
+                    <tr>
+                        <th class="od-table-th1">Product</th>
+                        <th class="od-table-th2">Option</th>
+                        <th class="od-table-th3">Quantity</th>
+                        <th class="od-table-th4">Original price</th>
+                        <th class="od-table-th5">Final price</th>
+                    </tr>
+                    <tbody>
+                    <tr th:each="pro:${products}">
+                        <td th:text="${pro.name}" class="od-item1">
+                            [Spain Stock]Haier XShuai ShuaiXiaoBao Robot
+                        </td>
+                        <td th:text="${pro.norms}" class="od-item2">
+                            filed：ES Stock
+                        </td>
+                        <td th:text="${pro.amount}" class="od-item3">
+                            1
+                        </td>
+                        <td th:text="${unit + ' ' + pro.originPrice}" class="od-item4">
+                            US $ 299.99
+                        </td>
+                        <td th:text="${unit + ' ' + pro.currentPrice}" class="od-item5">
+                            US $ 199.99
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+
+                </table>
+                <hr style="border-bottom: 1px solid #979797;margin: 0;"/>
+                <div style="margin-top:32px;height: 149px;">
+                    <div style="display: inline;float:left;">
+                        <div>Delivery address:</div>
+                        <div style="font-size: 12px;color: #838383;line-height: 15px;margin-top:14px;">
+                            <div th:text="${receiver.name}"></div>
+                            <div th:text="${receiver.phone}"></div>
+                            <div th:text="${receiver.postcode}"></div>
+                            <div th:text="${receiver.country}"></div>
+                            <div th:text="${receiver.city}"></div>
+                            <div th:text="${receiver.detail}"></div>
+                        </div>
+                    </div>
+                    <div style="display: inline;float:right;margin-right: 46px;">
+                        <div>Express fee</div>
+                        <div style="font-size: 12px;color: #838383;line-height: 15px;margin-top:14px;" th:text="${unit + ' ' + order.shipPrice}" >US $ 22.00</div>
+                    </div>
+                </div>
+                <hr style="border-bottom: 1px solid #979797; margin: 0;"/>
+                <div style="height: 76px;">
+                    <div style="display: inline;float: right;height: 76px;line-height: 76px;" th:text="${'Final Price: ' + unit + ' ' + (order.price + order.shipPrice)}">Final Price：US $ 591.89
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <a th:href="${'/pay/' + oid}" target="_blank" class="od-gopay">
+            Go Pay
+        </a>
+        <div class="od-gap"></div>
+    </div>
+</div>
+
+<footer th:include="shop/frag/footer :: footer"></footer>
+</body>
+</html>

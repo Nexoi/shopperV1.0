@@ -1,0 +1,78 @@
+.reply-wrapper{
+	width: 845px;
+	margin-top: 15px;
+}
+.reply-whole-wrapper{
+	width: 845px;
+}
+.user-icon{
+	width: 30px;
+	height: 30px;
+	display: inline;
+	float: left;
+}
+.reply-content-wrapper{
+	display: inline;
+	margin-left: 32px;
+}
+.reply-person-text{
+	font-family: PingFangSC-Regular;
+font-size: 16px;
+color: #000000;
+line-height: 22px;
+}
+.relay-you-in{
+font-family: ArialMT;
+font-size: 16px;
+color: #3273B2;
+line-height: 22px;	
+margin-left: 14px!important;
+}
+.reply-item-name{
+	font-family: ArialMT;
+font-size: 16px;
+color: #000000;
+line-height: 22px;
+margin-left: 14px;
+}
+.reply-time{
+font-family: ArialMT;
+font-size: 12px;
+color: #707473;
+line-height: 22px;
+display: block;
+margin-left: 63px;
+position: relative;
+}
+.at-me{
+	font-family: ArialMT;
+font-size: 14px;
+color: #3273B2;
+line-height: 22px;
+}
+.reply-detail-wrapper{
+	margin-top: 14px;
+	margin-left: 63px;
+}
+.reply-dialog-content{
+	font-family: ArialMT;
+font-size: 14px;
+line-height: 22px;
+margin-left: 24px;
+}
+.view-dialog{
+	font-family: Roboto-Medium;
+font-size: 14px;
+color: #313131;
+line-height: 22px;
+display: inline;
+float: right;
+}
+.view-dialog:hover{
+	
+cursor: pointer;
+text-decoration: underline;
+}
+hr{
+	margin: 15px 0 0 0 !important;
+}

@@ -1,0 +1,113 @@
+<footer class="footer">
+    <!-- js 都放在最后添加 -->
+    <div class="container">
+        <div class="row footer_block">
+            <div class="row">
+                <div class="col-md-2">
+                    <img style="margin-top: 40px" src="/image/logo.png">
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div th:each="cate:${footer.category}" class="col-xs-3">
+                            <h4 th:text="${cate.name}">About</h4>
+                            <ul class="list-unstyled">
+                                <li th:each="item:${cate.items}">
+                                    <a href="#" class="foofont" th:text="${item.name}" th:href="${item.url}">About Leelbox</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h4>Contact</h4>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#" target="_blank"
+                               class="foofont">Tel:86-0775-28214904</a>
+                        </li>
+                        <!--<li>-->
+                            <!--<a href="#" target="_blank"-->
+                               <!--class="foofont">or (86)13424432001</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a href="mailto:sales@leelbox-tech.com" target="_blank"
+                               class="foofont">Before Sales: sales@leelbox-tech.com</a>
+                        </li>
+                        <li>
+                            <a href="mailto:aftersale@leelbox-tech.com" target="_blank"
+                               class="foofont">After Sales: aftersale@leelbox-tech.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px">
+                <img class="col-lg-1">
+                <img class="col-lg-1">
+                <img src="/image/sitemap/ems.png" class="col-lg-1">
+                <img src="/image/sitemap/dhl.png" class="col-lg-1">
+                <img src="/image/sitemap/discover.png" class="col-lg-1">
+                <img src="/image/sitemap/tnt.png" class="col-lg-1">
+                <img src="/image/sitemap/paypal.png" class="col-lg-1">
+                <img src="/image/sitemap/americanexpress.png" class="col-lg-1">
+                <img src="/image/sitemap/mastercard.png" class="col-lg-1">
+                <img src="/image/sitemap/visa.png" class="col-lg-1">
+
+            </div>
+        </div>
+        <div class="row footer-bottom copyright">
+            <div class="list-inline text-center" style="margin-top: 30px;margin-bottom: 30px">
+                <div style="font-size: 12px;">Copyright © 2012-2017</div>
+                <div style="font-size: 12px;">Note: Leelbox-tech reserves the right to change prices at any time
+                    without
+                    notice. Stock
+                    information
+                    may become invalid because of new orders and supply change.
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul id="topdown">
+        <li id="gotop"><i class="fa fa-angle-up"></i></li>
+        <li id="gobottom"><i class="fa fa-angle-down"></i></li>
+    </ul>
+    <style>
+        #topdown{
+            width: 38px;
+            position: fixed;
+            right: 0;
+            top: 360px;
+            z-index: 5;
+        }
+        #topdown li{
+            width: 38px;
+            height: 34px;
+            margin: 1px;
+            cursor: pointer;
+            text-align: center;
+            background-color: lightgrey;
+            line-height: 34px;
+        }
+    </style>
+    <script>
+        $('#gotop').click(function(){
+            $('body,html').animate({scrollTop:0},1000);
+            return false;
+        });
+        $('#gobottom').click(function(){
+            $('body,html').animate({scrollTop:document.body.scrollHeight},1000);
+            return false;
+        });
+    </script>
+    <!-- Google Translate -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</footer>

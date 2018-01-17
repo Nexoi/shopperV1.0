@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Support</title>
+    <!--以下是本页面的-->
+    <link rel="stylesheet" href="/css/support.css"/>
+    <link rel="icon" href="/image/@1xicon.png">
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView
+&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+<!--header-->
+<div class="container container-width" style="min-width: 1200px">
+    <!--<img src="/img/banner20178792423haier_robot_vacuum.png" class="banner-img"/>-->
+    <div style="height: 20px;width: 100%;"></div>
+    <div class="product-left-wrapper">
+        <div class="all-product-wrapper">
+            <div class="all-product-well">
+                <span class="all-product-title">Support</span>
+            </div>
+            <a class="all-product-text" th:each="cate:${cateList}" th:text="${cate.name}"
+               th:href="${'/support/' + cate.id}">Support 1</a>
+        </div>
+        <!--第一个well-->
+        <div class="best-sell-wrapper" style="padding-bottom: 32px;padding-left: 13px;padding-bottom: 32px;">
+            <span class="best-product-title">Contact us</span>
+            <!--第二个well-->
+            <p class="address-info" style="margin-top: 24px;margin-bottom: 0;">Adresse:</p>
+            <p class="address-info" style="margin: 0;">1502, Block B Tingyuju NO.6 Guifangyuan, East Street, Buji,
+                Longgang, Shenzhen</p>
+        </div>
+    </div>
+    <!--以上是左边的wrapper-->
+    <!--右边的wrapper开始-->
+    <div class="product-right-wrapper">
+        <span class="path"><a style="color: black;cursor: pointer;">Home</a> > <a style="color: black;cursor: pointer;">Support</a> > <a
+                th:text="${cateName}" style="color: black;cursor: pointer;">CateName</a></span>
+        <p class="solution">BEST TV Box Solutions 2017</p>
+        <div class="row">
+            <img src="/img/@1xshou.png"
+                 style="height: 60px;width: 50px;margin-left:166px;display: inline;float: left;position: relative;"/>
+            <span class="sub-solution-title" style="position: relative;">Useful Apps and Addons for TV Boxes without TVMC(or KODI) </span>
+        </div>
+        <!--product wrapper begin-->
+        <!--<div class="product-wrapper">-->
+            <!--&lt;!&ndash;top wrapper begin&ndash;&gt;-->
+            <!--<div class="row">-->
+                <!--<a th:each="support : ${supportList}" th:href="${support.src}">-->
+                    <!--<img class="support-img" th:src="${support.imgHref}"/>-->
+                <!--</a>-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a><img src="img/{136C989E-3D33-5E26-EDA1-4D7941BCB08D}.jpg" class="support-img" /></a>&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--product wrapper完-->
+        <div th:each="support:${supportList}" class="download-well">
+            <span class="download-name" th:text="${support.title}">Android tv User Manual</span>
+            <i class="fa fa-download" style="margin-left: 416px;"></i>
+            <span class="download-text"><a th:href="${support.src}">Download</a></span>
+            <span class="download-date" th:text="${support.updatetime}">2017-05-03</span>
+        </div>
+    </div>
+    <!--右边的wrapper完-->
+</div>
+
+<footer th:include="shop/frag/footer :: footer"></footer>
+
+
+</body>
+</html>

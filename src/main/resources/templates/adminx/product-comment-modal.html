@@ -1,0 +1,62 @@
+<div class="modal-content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title bk-fg-primary">评论信息</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal ">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="modal_name">用户显示名（显示在网页上的名称）</label>
+                <div class="col-sm-6">
+                    <input type="text" id="modal_name" class="form-control input-sm"
+                           th:value="${comment.name}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="modal_star">评分</label>
+                <div class="col-sm-6">
+                    <input type="text" id="modal_star" class="form-control input-sm"
+                           placeholder=".input-sm"
+                           th:value="${comment.star}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="modal_visible">是否显示</label>
+                <div class="col-sm-6">
+                    <select id="modal_visible" class="form-control">
+                        <option th:selected="${comment.isVisible}" value="true">显示</option>
+                        <option th:selected="${!comment.isVisible}" value="false">不显示</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="modal_carete_time">创建日期</label>
+                <div class="col-sm-6">
+                    <input type="text" id="modal_carete_time" class="form-control input-sm"
+                           readonly="readonly"
+                           th:value="${comment.createDate}">
+                </div>
+            </div>
+        </div>
+        <div class="h4">
+            <hr/>
+            新增回复
+        </div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="modal_reply_text">回复内容</label>
+                <div class="col-sm-6">
+                            <textarea type="text" id="modal_reply_text"
+                                      class="form-control input-sm"></textarea>
+                </div>
+            </div>
+        </div>
+        <div style="height: 80px;">
+            <button class="btn btn-warning center-block" th:onclick="'reply('+ ${comment.id} +');'">回复</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" th:onclick="'saveComment('+ ${comment.id} +');'">保存修改</button>
+    </div>
+</div>

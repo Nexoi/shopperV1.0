@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Product-Stock</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet"/>
+    <link href="assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+
+</head>
+
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="#"><i class="icon fa fa-home"></i>商品</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>管理库存</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>管理库存</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <form action="product-stock.html">
+                        <label class="col-sm-4 control-label">
+                            <div class="form-group">
+                                <input type="text" name="wd" class="form-control"
+                                       placeholder="输入商品名称" th:value="${word}"/>
+                            </div>
+                        </label>
+                        <label class="col-sm-1 control-label">
+                            <div class="">
+                                <input type="submit" name="submit" value="搜索"/>
+                            </div>
+                        </label>
+                        <input type="hidden" name="page" value="1">
+                        <input type="hidden" name="size" value="20">
+                        <div class="form-group">
+                            <div class="col-md-6 bk-margin-top-10">
+                                <div class="checkbox-custom pull-left">
+                                    <input type="checkbox" name="isUning" id="box" th:checked="${isUning}"
+                                           value="true">
+                                    <label for="box">显示未启用</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>名字</th>
+                                <th>规格</th>
+                                <th>原价</th>
+                                <th>售价</th>
+                                <th>库存</th>
+                                <th>是否启用</th>
+                                <th>最近修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="line : ${pagelist}">
+                                <td th:text="${line.sid}">Onions</td>
+                                <td th:text="${line.productName}">Onions</td>
+                                <td th:text="${line.normValues}">Onions</td>
+                                <td th:text="${line.orginPrice}">Onions</td>
+                                <td th:text="${line.price}">Onions</td>
+                                <td th:text="${line.currentStock}"></td>
+                                <td th:if="${line.isIng}"><span class="label label-success">已启用</span></td>
+                                <td th:if="${!line.isIng}"><span class="label label-warning">未启用</span></td>
+                                <td th:text="${line.updateDate}">Onions</td>
+                                <td>
+                                    <a class="btn btn-success"
+                                       th:onclick="'showDetail('+ ${line.sid} +');'">
+                                        出／入库
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bk-margin-5 btn-group bk-margin-top-15">
+                        <a th:href="@{'/adminx/product-stock.html?page='+${currentPage-1}+'&size=20&wd='+${word}}"
+                           class="btn btn-default"
+                           th:if="${currentPage}&gt;1" >
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <seeu th:each="which : ${index}">
+                            <a th:href="@{'/adminx/product-stock.html?page='+${currentPage}+'&size=20&wd='+${word}}"
+                               class="btn btn-warning"
+                               th:text="${currentPage}">-1</a>
+                        </seeu>
+                        <a th:href="@{'/adminx/product-stock.html?page='+${currentPage+1}+'&size=20&wd='+${word}}"
+                           class="btn btn-default pull-right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Main Page -->
+
+<!-- Modal Dialog -->
+<div class="modal fade" id="showDetail">
+    <div id="stock_modal" class="modal-dialog" style="width: 60%;">
+        <!-- Modal from Ajax HTML -->
+    </div>
+</div><!-- End Modal Dialog -->
+<!-- JS for modal -->
+<script>
+    function showDetail(sid) {
+        // 开启modal
+        $('#showDetail').modal('show')
+        // Ajax 加载数据 填充 modal
+        $.ajax({
+            url: "product-stock-modal.html?sid=" + sid,
+            type: "GET",
+            success: function (res) {
+                // 填充页面
+                $("#stock_modal").html(res);
+            }
+        });
+    }
+    function opStock(sid) {
+        var amount = $("#modal_amount").val();
+        var stock_type = $("#modal_type").val();
+        if (amount == 0 || amount == "0") {
+            swal("库存出入库数量不能为 0 ", "", "warning")
+            return;
+        }
+        $.ajax({
+            url: "/api/admin/v1/stock",
+            type: "POST",
+            data: {
+                sid: sid,
+                amount: amount,
+                type: stock_type
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    swal({
+                        title: "操作成功",
+                        text: res.message,
+                        type: "success"
+                    }, function () {
+                        // 刷新界面
+                        location.reload();
+                    })
+                } else {
+                    swal("库存信息获取失败【 code = " + res.code + "】", res.message, "warning")
+                }
+            }
+        });
+    }
+
+</script>
+
+
+<div class="clearfix"></div>
+
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script src="assets/js/pages/table.js"></script>
+
+<!-- end: JavaScript-->
+<script>
+    $(window).scrollTop(0);// 每次进入页面都滚动至最开头
+</script>
+</body>
+
+</html>

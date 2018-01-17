@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Product-Comment</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet"/>
+    <link href="assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+
+</head>
+
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="#"><i class="icon fa fa-home"></i>商品</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>商品评论</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>商品评论</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <form action="product-comment.html">
+                        <label class="col-sm-4 control-label">
+                            <div class="form-group">
+                                <input type="text" name="wd" class="form-control"
+                                       placeholder="输入商品名称" th:value="${word}"/>
+                            </div>
+                        </label>
+                        <input type="hidden" name="page" value="1">
+                        <input type="hidden" name="size" value="20">
+                    </form>
+                    <style>
+                        .op_pointer {
+                            cursor: pointer;
+                        }
+
+                        .op_pointer:hover {
+                            color: #5bc0de;
+                        }
+                    </style>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                            <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>名字</th>
+                                <th>评分</th>
+                                <th>内容</th>
+                                <th>用户名</th>
+                                <th>是否显示</th>
+                                <th>是否回复</th>
+                                <th>创建日期</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="line : ${pagelist}">
+                                <td th:text="${line.pid}">Onions</td>
+                                <td th:text="${line.productName}">Onions</td>
+                                <td th:text="${line.star}">Onions</td>
+                                <td th:text="${line.contentHtml}">Onions</td>
+                                <td th:text="${line.name}" th:onclick="'watchme('+${line.uid}+')'">Onions</td>
+                                <td th:if="${line.isVisible}"><span class="label label-success">显示</span></td>
+                                <td th:if="${!line.isVisible}"><span class="label label-warning">隐藏</span></td>
+                                <td th:if="${line.isReply}"><span class="label label-success">已回复</span></td>
+                                <td th:if="${!line.isReply}"><span class="label label-warning">未回复</span></td>
+                                <td th:text="${line.createDate}">Onions</td>
+                                <td>
+                                    <a class="op_pointer" target="_blank" th:href="@{'/product/'+${line.pid}}">
+                                        [查看商品]
+                                    </a>
+                                    <a class="op_pointer" th:onclick="'showDetail('+ ${line.id} +');'">
+                                        [更多操作]
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bk-margin-5 btn-group bk-margin-top-15">
+                        <a th:href="@{'/adminx/product-comment.html?page='+${currentPage-1}+'&size=20&wd='+${word}}"
+                           class="btn btn-default"
+                           th:if="${currentPage}&gt;1" >
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <seeu th:each="which : ${index}">
+                            <a th:href="@{'/adminx/product-comment.html?page='+${currentPage}+'&size=20&wd='+${word}}"
+                               class="btn btn-warning"
+                               th:text="${currentPage}">-1</a>
+                        </seeu>
+                        <a th:href="@{'/adminx/product-comment.html?page='+${currentPage+1}+'&size=20&wd='+${word}}"
+                           class="btn btn-default pull-right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Main Page -->
+
+<!-- Modal Dialog -->
+<div class="modal fade" id="showDetail">
+    <div id="modal_deatil" class="modal-dialog" style="width: 60%;">
+
+    </div>
+</div><!-- End Modal Dialog -->
+<!-- JS for modal -->
+<script>
+    function showDetail(commentID) {
+        // 开启modal
+        $('#showDetail').modal('show')
+        // Ajax 加载数据 填充 modal
+        $.ajax({
+            url: "product-comment-modal.html?commentid=" + commentID,
+            type: "GET",
+            success: function (res) {
+                // 填充页面
+                $("#modal_deatil").html(res);
+            }
+        });
+    }
+
+    function reply(commentID) {
+        var text = $("#modal_reply_text").val();
+        if (text == null || text == undefined || text == "undefined" || text == "") {
+            swal("回复内容不能为空", "", "warning");
+            return;
+        }
+        $.ajax({
+            url: "/api/admin/v1/product/comment",  // 添加管理员级回复
+            type: "POST",
+            data: {
+                commentID: commentID,
+                commentText: text
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    // 成功
+                    swal("回复成功", "", "success");
+                    $('#showDetail').modal('hide')
+                } else {
+                    swal("异常：" + res.code, res.message, "warning");
+                }
+            }
+        });
+    }
+    function saveComment(commentID) {
+        var name = $("#modal_name").val();
+        if (name == null || name == undefined || name == "undefined" || name == "") {
+            swal("用户显示名称不能为空", "该名称不会更改用户本名，只会在该条评论上显示此名字", "warning");
+            return;
+        }
+        var star = $("#modal_star").val();
+        var isVisible = $("#modal_visible").val();
+        $.ajax({
+            url: "/api/admin/v1/product/comment/edit",
+            type: "POST", // 修改用户回复内容
+            data: {
+                id: commentID,
+                name: name,
+                star: star,
+                isVisible: isVisible
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    // 成功
+                    swal("修改成功", "", "success");
+                    $('#showDetail').modal('hide')
+                    // 刷新该页面
+                    location.reload();
+                } else {
+                    swal("异常：" + res.code, res.message, "warning");
+                }
+            }
+        });
+    }
+
+</script>
+
+
+<div class="clearfix"></div>
+
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script src="assets/js/pages/table.js"></script>
+
+<!-- end: JavaScript-->
+
+<script>
+    $(window).scrollTop(0);// 每次进入页面都滚动至最开头
+</script>
+
+</body>
+
+</html>

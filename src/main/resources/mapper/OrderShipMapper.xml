@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.order.dao.OrderShipMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.order.model.OrderShip">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="oid" jdbcType="VARCHAR" property="oid" />
+    <result column="ship_name" jdbcType="VARCHAR" property="shipName" />
+    <result column="ship_note" jdbcType="VARCHAR" property="shipNote" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="ship_code" jdbcType="VARCHAR" property="shipCode" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Coupons</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/ct/nav_new.css"/>
+    <link rel="stylesheet" href="/css/ct/coupon_new.css"/>
+</head>
+
+<body>
+<header th:include="shop/frag/header :: header"></header>
+<div class="container" style="width: 1200px;margin-top: 30px;margin-bottom: 80px">
+    <div th:include="shop/frag/mycenternav :: div" class="nav-left-wrapper"></div>
+
+    <div class="content-wrapper">
+        <div class="title-well">
+            <p class="coupon-title">Personalization > My Coupons</p>
+        </div>
+        <div class="content-well" style="padding: 14px 14px 14px 14px;">
+            <div class="message-well">
+                <p class="message-title">Coupons
+                    (<span th:text="${size}">4</span>)</p>
+                <!--<a class="message-prepage">Previous page</a>-->
+                <!--<a class="message-nextpage">Next page</a>-->
+            </div>
+            <div th:each="line:${list}">
+                <div class="row margin-row">
+
+                    <div class="coupon-info-row">
+                        <p class="coupon-text coupon-first">Code : <span class="coupon-condition" th:text="${line.img}"></span>
+                        </p>
+                        <p class="coupon-text">Minimum consumer price :
+                            <span class="" th:text="${'USD ' + line.startPrice}">USD 300</span>
+                        </p>
+                        <p class="coupon-text">Available Time : <span class="time" th:text="${line.startTime + ' - ' + line.endTime}" >2017/08/20 - 2017/09/21</span></p>
+                    </div>
+                </div>
+                <hr/>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+
+</body>
+
+</html>

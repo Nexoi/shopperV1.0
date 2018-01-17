@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>PageConfig</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Import google fonts -->
+    <!--  <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- end: CSS file-->
+</head>
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="index.html"><i class="icon fa fa-home"></i>页面配置</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>首页配置信息</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>首页配置信息</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div style="height: 20px;"></div>
+                    <div class="tab-pane col-xs-12">
+                        <div style="line-height: 40px;margin-left: 15px">* 清空内容再保存修改将会删除该条目，请谨慎操作</div>
+                    </div>
+                    <div class="tab-pane col-sm-6">
+                        <hr/>
+                        <div class="h4 bk-margin-left-15">滚动轮播图</div>
+                        <hr/>
+                        <div class="bk-margin-left-15">
+                            <button class="btn btn-success" onclick="saveBanners()">保存更改</button>
+                        </div>
+                        <div id="tab1_container" class="form-horizontal bk-margin-top-15">
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <div>图片URL( *宽高 720*340px)</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div>跳转链接URL</div>
+                                </div>
+                            </div>
+                            <div th:each="banner:${index.banners}" class="form-group">
+                                <label class="col-sm-6">
+                                    <input type="text" th:value="${banner.imgURL}"
+                                           class="bannerImgURL form-control input-sm pull-right"
+                                           placeholder="图片地址 http://xxx">
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:value="${banner.url}"
+                                           class="bannerURL form-control input-sm"
+                                           placeholder="链接地址 http://xxx">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="center-block">
+                            <div style="margin-left: 15px">
+                                <button class="btn btn-success" onclick="addItem1()">添加新条目</button>
+                            </div>
+                        </div>
+                        <hr/>
+
+                    </div>
+
+                    <div class="tab-pane col-sm-6">
+                        <hr/>
+                        <div class="h4 bk-margin-left-15">右侧广告栏</div>
+                        <hr/>
+                        <div class="bk-margin-left-15">
+                            <button class="btn btn-success" onclick="saveAds()">保存更改</button>
+                        </div>
+                        <div id="tab2_container" class="form-horizontal bk-margin-top-15">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <div>图片URL( *宽 198px)</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div>跳转链接URL</div>
+                                </div>
+                            </div>
+                            <div th:each="ad:${index.ads}" class="form-group">
+                                <label class="col-sm-6">
+                                    <input type="text" th:value="${ad.imgURL}"
+                                           class="adImgURL form-control input-sm pull-right"
+                                           placeholder="图片地址 http://xxx">
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:value="${ad.url}"
+                                           class="adURL form-control input-sm"
+                                           placeholder="链接地址 http://xxx">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="center-block">
+                            <div style="margin-left: 15px">
+                                <button class="btn btn-success" onclick="addItem2()">添加新条目</button>
+                            </div>
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script>
+    function addItem1() {
+        var content = "<div class='form-group'> <label class='col-sm-6'> <input type='text'class='bannerImgURL form-control input-sm pull-right'placeholder='图片地址 http://xxx'> </label> <div class='col-sm-6'> <input type='text'class='bannerURL form-control input-sm'placeholder='链接地址 http://xxx'> </div> </div>";
+        $("#tab1_container").append(content);
+    }
+
+    function addItem2() {
+        var content = "<div class='form-group'> <label class='col-sm-6'> <input type='text'class='adImgURL form-control input-sm pull-right'placeholder='图片地址 http://xxx'> </label> <div class='col-sm-6'> <input type='text'class='adURL form-control input-sm'placeholder='链接地址 http://xxx'> </div> </div>";
+        $("#tab2_container").append(content);
+    }
+    function saveBanners() {
+        var banners = [];
+        $(".bannerImgURL").each(function (i) {
+            var imgURL = $(".bannerImgURL").eq(i).val();
+            var url = $(".bannerURL").eq(i).val();
+            if (imgURL.length > 1) {
+                var banner = {
+                    imgURL: imgURL,
+                    url: url
+                }
+                banners.push(banner);
+            }
+        })
+        $.ajax({
+            url: "/api/admin/v1/pageconfig/banner",
+            type: "put",
+            data: {
+                value: JSON.stringify(banners)
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("更新成功");
+                    window.location.reload();
+                } else {
+                    alert('请求失败 [' + res.code + '] ' + res.message);
+                }
+            }
+        })
+    }
+    function saveAds() {
+        var ads = [];
+        $(".adImgURL").each(function (i) {
+            var imgURL = $(".adImgURL").eq(i).val();
+            var url = $(".adURL").eq(i).val();
+            if (imgURL.length > 1) {
+                var ad = {
+                    imgURL: imgURL,
+                    url: url
+                }
+                ads.push(ad);
+            }
+        })
+        $.ajax({
+            url: "/api/admin/v1/pageconfig/ad",
+            type: "put",
+            data: {
+                value: JSON.stringify(ads)
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("更新成功");
+                    window.location.reload();
+                } else {
+                    alert('请求失败 [' + res.code + '] ' + res.message);
+                }
+            }
+        })
+    }
+</script>
+<!-- end: JavaScript-->
+
+</body>
+</html>

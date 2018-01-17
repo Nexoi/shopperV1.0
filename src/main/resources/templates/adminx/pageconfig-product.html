@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>PageConfig</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Import google fonts -->
+    <!--  <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- end: CSS file-->
+</head>
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="index.html"><i class="icon fa fa-home"></i>页面配置</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>首页配置信息</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>首页配置信息</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-body">
+
+                    <style>
+                        .cate-box {
+                            border: 1px #eee solid;
+                            padding: 10px 0;
+                        }
+
+                        .input-sm {
+                            overflow: hidden;
+                        }
+                    </style>
+                    <div class="tab-pane col-sm-6">
+                        <div style="height: 20px;"></div>
+                        <hr/>
+                        <div class="h4 bk-margin-left-15">中间分类商品信息</div>
+                        <hr/>
+                        <div class="bk-margin-left-15">
+                            <button class="btn btn-success" onclick="saveMainCate()">保存更改</button>
+                        </div>
+
+                        <div th:each="maincate,iterStat:${index.mainCates}"
+                             class="cate-box form-horizontal bk-margin-top-15">
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div th:text="${'分类 ' + iterStat.count + ' 名字'}">分类 1 名字</div>
+                                </div>
+                            </div>
+                            <div class="h4">
+                                <label class="col-sm-12">
+                                    <input type="text" th:id="${'m_cate_name_' + iterStat.count}"
+                                           th:value="${maincate.cateName}"
+                                           class="form-control input-sm pull-right"
+                                           placeholder="分类名">
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div style="height: 20px;"></div>
+                                    <div>商品信息</div>
+                                </div>
+                            </div>
+                            <div class="form-group" th:each="pid,iterStat2:${#strings.arraySplit(maincate.pids, ',')}">
+                                <div class="col-sm-12">
+                                    <select th:id="${'m_cate_pro_' + iterStat.count + '_' + iterStat2.count}"
+                                            th:class="'col-sm-12 input-sm mainPro'+${iterStat.count}">
+                                        <option th:each="pro:${proList}" th:value="${pro.pid}" th:text="${'[ ' + pro.pid + ' ] ' + pro.name}"
+                                                th:selected="${#strings.equalsIgnoreCase(pid, ''+pro.pid)}">[EU]Leelbox
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane col-sm-6">
+                        <div style="height: 20px;"></div>
+
+                        <hr/>
+                        <div class="h4 bk-margin-left-15">底部分类商品信息</div>
+                        <hr/>
+                        <div class="bk-margin-left-15">
+                            <button class="btn btn-success" onclick="saveSubCate()">保存更改</button>
+                        </div>
+
+                        <div th:each="subcate,iterStat:${index.subCates}"
+                             class="cate-box form-horizontal bk-margin-top-15">
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div th:text="${'分类 ' + iterStat.count + ' 名字'}">分类 1 名字</div>
+                                </div>
+                            </div>
+                            <div class="h4">
+                                <label class="col-sm-12">
+                                    <input type="text" th:id="${'s_cate_name_' + iterStat.count}"
+                                           th:value="${subcate.cateName}"
+                                           class="form-control input-sm pull-right"
+                                           placeholder="分类名">
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div style="height: 20px;"></div>
+                                    <div th:text="${'分类 ' + iterStat.count + ' 广告'}">分类 1 广告</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-6">
+                                    <input type="text" th:id="${'s_cate_adImgURL_' + iterStat.count}"
+                                           th:value="${subcate.imgURL}"
+                                           class="subImgURL1 form-control input-sm pull-right"
+                                           placeholder="图片地址 http://xxx">
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:id="${'s_cate_adURL_' + iterStat.count}"
+                                           th:value="${subcate.url}"
+                                           class="subURL1 form-control input-sm"
+                                           placeholder="链接地址 http://xxx">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div>商品信息</div>
+                                </div>
+                            </div>
+                            <div class="form-group" th:each="pid2,iterStat2:${#strings.arraySplit(subcate.pids, ',')}">
+                                <div class="col-sm-12">
+                                    <select th:id="${'s_cate_pro_' + iterStat.count + '_' + iterStat2.count}"
+                                            th:class="'col-sm-12 input-sm subPro'+${iterStat.count}">
+                                        <option th:each="pro:${proList}" th:value="${pro.pid}" th:text="${'[ ' + pro.pid + ' ] ' + pro.name}"
+                                                th:selected="${#strings.equalsIgnoreCase(pid2, ''+pro.pid)}">[EU]Leelbox
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script>
+    function saveMainCate() {
+        var mainCates = [];
+        for (var i = 1; i <= 4; i++) {
+            // 整合 pids 为 3,23,3,4,5,3,1,23 这样
+            var pids = "";
+            for (var j = 1; j < 8; j++) {
+                pids += $("#m_cate_pro_" + i + "_" + j).val() + ',';
+            }
+            pids += $("#m_cate_pro_" + i + "_8").val();
+
+            var mainCateItem = {
+                cateName: $("#m_cate_name_" + i).val(),
+                pids: pids
+            }
+            mainCates.push(mainCateItem);
+        }
+//        console.log(mainCates);
+        $.ajax({
+            url: "/api/admin/v1/pageconfig/maincate",
+            type: "put",
+            data: {
+                value: JSON.stringify(mainCates)
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("更新成功");
+                    window.location.reload();
+                } else {
+                    alert('请求失败 [' + res.code + '] ' + res.message);
+                }
+            }
+        })
+    }
+    function saveSubCate() {
+        var subCates = [];
+        for (var i = 1; i <= 4; i++) {
+            // 整合 pids 为 3,23,3,4,5,3,1,23 这样
+            var pids = "";
+            for (var j = 1; j < 3; j++) {
+                pids += $("#s_cate_pro_" + i + "_" + j).val() + ',';
+            }
+            pids += $("#s_cate_pro_" + i + "_3").val();
+
+            var subCateItem = {
+                cateName: $("#s_cate_name_" + i).val(),
+                imgURL: $("#s_cate_adImgURL_" + i).val(),
+                url: $("#s_cate_adURL_" + i).val(),
+                pids: pids
+            }
+            subCates.push(subCateItem);
+        }
+        $.ajax({
+            url: "/api/admin/v1/pageconfig/subcate",
+            type: "put",
+            data: {
+                value: JSON.stringify(subCates)
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("更新成功");
+                    window.location.reload();
+                } else {
+                    alert('请求失败 [' + res.code + '] ' + res.message);
+                }
+            }
+        })
+//        console.log(subCates);
+    }
+</script>
+<!-- end: JavaScript-->
+
+</body>
+</html>

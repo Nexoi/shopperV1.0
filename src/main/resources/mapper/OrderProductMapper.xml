@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.order.dao.OrderProductMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.order.model.OrderProduct">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="oid" jdbcType="VARCHAR" property="oid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="norms" jdbcType="VARCHAR" property="norms" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="origin_price" jdbcType="DECIMAL" property="originPrice" />
+    <result column="current_price" jdbcType="DECIMAL" property="currentPrice" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="is_deal" jdbcType="BIT" property="isDeal" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message</title>
+</head>
+<body>
+<div style="text-align: center;padding:160px;">
+    <div id="container" style="margin: auto 0">
+        <section>
+            <h1 style="font-size: 48px" th:text="${code}">404</h1>
+            <h3 style="font-size: 18px">Error ! <span style="margin-left: 10px" th:text="${message}">Page Not Found</span></h3>
+        </section>
+        <section>
+            <p>For Some Reason The Page You Requested Could Not Be Found On Our Server</p>
+            <p><a href="javascript:history.go(-1)">&laquo; Go Back</a> / <a href="/">Go Home &raquo;</a></p>
+        </section>
+    </div>
+</div>
+</body>
+</html>

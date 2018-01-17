@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Order</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/ct/nav_new.css"/>
+    <link rel="stylesheet" href="/css/ct/order_new.css"/>
+</head>
+
+<body>
+
+<header th:include="shop/frag/header :: header"></header>
+
+<input type="hidden" id="prePage" th:value="${page.prePage}">
+<input type="hidden" id="nextPage" th:value="${page.nextPage}">
+
+<div class="container" style="width: 1200px;margin-top: 30px;margin-bottom: 80px">
+    <div th:include="shop/frag/mycenternav :: div" class="nav-left-wrapper"></div>
+    <div class="content-wrapper">
+        <div class="title-well">
+            <p class="order-title">Order > My Order</p>
+            <a onclick="jacascript:window.location.href='/mycenter/order?page='+$('#prePage').val()+'&select='+$('#select').val()"
+               class="order-prepage">Previous page</a>
+            <a onclick="jacascript:window.location.href='/mycenter/order?page='+$('#nextPage').val()+'&select='+$('#select').val()"
+               class="order-nextpage">Next page</a>
+        </div>
+        <div class="content-well" style="padding: 14px 14px 14px 14px;">
+            <select id="select" class="select-order" onchange="refreshPage()">
+                <option value="1" th:selected="${select==1}">Waiting for payment</option>
+                <option value="2" th:selected="${select==2}">Processing</option>
+                <option value="3" th:selected="${select==3}">Delivery</option>
+                <option value="4" th:selected="${select==4}">Completed Order</option>
+                <option value="5" th:selected="${select==5}">Canceled Order</option>
+                <option value="99" th:selected="${select==99}">All Order</option>
+            </select>
+            <script>
+                function refreshPage() {
+                    window.location.href = '/mycenter/order?page=1&select=' + $('#select').val()
+                }
+            </script>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="order-table-head">
+                    <th>Order#</th>
+                    <th>Price</th>
+                    <th>Payment Method</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Operator</th>
+                    </thead>
+                    <tbody class="order-table-body">
+                    <tr th:each="order:${pagelist}">
+                        <td th:text="${order.oid}">119820</td>
+                        <td th:text="${order.unit + ' ' + (order.price + order.shipPrice)}">USD 923.01</td>
+                        <td th:if="${order.payMethod == 1}">Pay Pal</td>
+                        <td th:unless="${order.payMethod == 1}">Bank Transfer</td>
+                        <td th:text="${order.userName}">Unpaid</td>
+                        <td th:text="${order.createTime}">09/08/2017</td>
+                        <td class="operator-wrapper">
+                            <a th:href="${'/mycenter/order/'+order.oid}" class="operator-detail"> Detail </a>
+                            <a th:if="${order.quantity==0}" th:onclick="${'cancelOrder(' + order.oid + ')'}"
+                               class="operator-detail"> Cancel </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <a onclick="jacascript:window.location.href='/mycenter/order?page='+$('#prePage').val()+'&select='+$('#select').val()"
+               class="order-text-prepage">Previous page</a>
+
+            <a onclick="jacascript:window.location.href='/mycenter/order?page='+$('#nextPage').val()+'&select='+$('#select').val()"
+               class="order-text-nextpage">Next page</a>
+        </div>
+    </div>
+</div>
+
+<footer th:include="shop/frag/footer :: footer"></footer>
+<script>
+    // 取消订单
+    function cancelOrder(oid) {
+        $.ajax({
+            url: "/api/shop/v1/ct/order/" + oid,
+            type: "DELETE",
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("Cancel success!");
+                    window.location.reload();
+                } else {
+                    alert("[ " + res.code + " ] " + res.message);
+                }
+            }
+        });
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.coupon.dao.CouponMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.coupon.model.Coupon">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="coupon" jdbcType="VARCHAR" property="coupon" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="start_price" jdbcType="DECIMAL" property="startPrice" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+    <result column="disprice" jdbcType="DECIMAL" property="disprice" />
+    <result column="is_available" jdbcType="BIT" property="isAvailable" />
+    <result column="rest" jdbcType="INTEGER" property="rest" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Account Setting</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/ct/nav_new.css"/>
+    <link rel="stylesheet" href="/css/ct/account_setting_new.css"/>
+</head>
+
+<body>
+<header th:include="shop/frag/header :: header"></header>
+<div class="container" style="width: 1200px;margin-top: 30px;margin-bottom: 80px">
+    <div th:include="shop/frag/mycenternav :: div" class="nav-left-wrapper"></div>
+
+    <div class="content-wrapper">
+        <div class="title-well">
+            <p class="account-setting-title">Setting > Account Settings</p>
+        </div>
+        <div class="content-well" style="padding: 14px 14px 14px 14px;">
+            <div class="row">
+                <p class="account-content-title">Name</p>
+                <a class="account-content-edit" onclick="editUserName()">Edit</a>
+            </div>
+            <div class="row" id="nameEdit">
+                <input th:value="${info.userName}" type="text" class="account-input account-input-before"
+                       placeholder="your name" id="userName"
+                       readonly="readonly"/>
+            </div>
+            <hr/>
+            <div class="row">
+                <p class="account-content-title">Password</p>
+                <a class="account-content-edit-password" onclick="editPassword()">Edit</a>
+            </div>
+            <div class="row" id="passwordEdit">
+                <input type="password" class="account-input account-input-before" placeholder="********" id="password"
+                       readonly="readonly"/>
+            </div>
+            <hr/>
+            <div class="row">
+                <p class="account-content-title">Subscription Mail</p>
+                <a class="account-content-edit-email" onclick="editEmail()">Edit</a>
+            </div>
+            <div class="row" id="emailEdit">
+                <input th:value="${info.email}" type="email" class="account-input account-input-before"
+                       placeholder="your email address" id="email"
+                       readonly="readonly"/>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+
+<script>
+    function editUserName() {
+        if (!$("#userName").hasClass("account-input-before")) return null;
+        $("#userName").removeAttr("readonly");
+        $("#userName").removeClass("account-input-before");
+        $("#nameEdit").append(
+                "<button id='userNameButton' class='btn btn-primary text-center ' style='	margin-top: 22px;margin-left: 5px; height: 24px;font-size: 12px;line-height: 0px;display: inline;float: left;height: 24px;width: 56px;' onclick='removeUserEdit()'>OK</button>");
+    }
+
+    function removeUserEdit() {
+        // ajax 请求之后刷新页面
+        var user_name = $("#userName").val();
+        if (user_name.length == 0) {
+            alert("Please input an available name");
+            return;
+        }
+        $.ajax({
+            url: "/api/shop/v1/ct/setting/name",
+            type: "put",
+            data: {
+                userName: user_name
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("save success!");
+                    window.location.reload();
+                } else {
+                    alert("save operate did not work, please check your inputs and try again.");
+                }
+            },
+            error: function (res) {
+                // do nothing
+                alert("Please check your network and try again.");
+            }
+        });
+
+    }
+
+    function editPassword() {
+        $("#passwordEdit").empty();
+        $("#passwordEdit").append(
+                "<span class='pwd-span'><span style='color: red;'>*</span>Current login password:</span>" +
+                "<input type='password' class='pwd-text' id='currentPwd' />" +
+                "<span class='pwd-span'><span style='color: red;'>*</span>New password:</span>"
+                + "<input type='password'class='pwd-text' id='newPwd' />" +
+                "<span class='pwd-span'><span style='color: red;'>*</span>Confirm password:</span>"
+                + "<input type='password' class='pwd-text' id='newPwd2' />"
+                + "<button type='button' class='save-btn' onclick='removePasswordEdit()'> save </button>"
+        );
+    }
+
+    function removePasswordEdit() {
+        var oldPass = $("#currentPwd").val();
+        var newPass = $("#newPwd").val();
+        var newPass2 = $("#newPwd2").val();
+        if (newPass.length < 6) {
+            alert("password length must be larger than 6");
+            return;
+        }
+        if (newPass != newPass2) {
+            alert("Two password inputs are inconsistent, please enter again.");
+            return;
+        }
+
+        $.ajax({
+            url: "/api/shop/v1/ct/setting/passwd",
+            type: "put",
+            data: {
+                passwd: oldPass,
+                newPasswd: newPass
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("Password reset complete! Please sign in again!");
+                    window.location.reload();
+                } else if (res.code == 400) {
+                    alert(res.message);
+                } else {
+                    alert("Web Server Exception, Please contact the administrator.");
+                }
+            },
+            error: function (res) {
+                // do nothing
+                alert("Please check your network and try again.");
+            }
+        });
+
+
+    }
+
+    function editEmail() {
+        if (!$("#email").hasClass("account-input-before")) return null;
+        $("#email").removeAttr("readonly");
+        $("#email").removeClass("account-input-before");
+        $("#emailEdit").append(
+                "<button id='emailButton' class='btn btn-primary text-center ' style='margin-top: 22px;margin-left: 5px; height: 24px;font-size: 12px;line-height: 0px;display: inline;float: left;height: 24px;width: 56px;' onclick='removeEmailEdit()'>OK</button>");
+    }
+
+    function removeEmailEdit() {
+        if ($("#email").val().length == 0){
+            alert("Please enter your email!");
+            return;
+        }
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if (!myreg.test($("#email").val())) {
+            alert('Please enter right e-mail address!');
+            return;
+        }
+        // 更新
+        $.ajax({
+            url: "/api/shop/v1/ct/setting/email",
+            type: "put",
+            data: {
+                email: $("#email").val()
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("save success!");
+                    window.location.reload();
+                } else {
+                    alert("save operate did not work, please check your inputs and try again.");
+                }
+            },
+            error: function (res) {
+                // do nothing
+                alert("Please check your network and try again.");
+            }
+        });
+    }
+</script>
+</body>
+</html>

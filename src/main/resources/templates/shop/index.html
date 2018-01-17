@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv=X-UA-Compatible content=IE=8/>
+
+    <title>Leelbox</title>
+    <meta name="keywords" content="android tv box, tv box, kodi box, mxq, mxq tv box, smart tv box, kodi android box">
+    <meta name="description"
+          content="Shop the best Android TV boxes at lowest price at Leelbox. Android 6.0, Kodi 17.3, Support 3D 4K output, huge memory. You will get a wonderful experience with our tv box.">
+    <link rel="icon" href="/image/@1xicon.png">
+
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="css/home.css" type="text/css"/>
+
+    <link rel="stylesheet" href="/css/homepage.css"/>
+    <script src="/js/jquery-1.11.3.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- 其实 bootstrap.min.js 在 footer 中默认引入了 XX 更正：已经被移至 frag/header -->
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header>
+    <!--头部导航栏开始-->
+    <div class="header-nav">
+        <div class="header-wrap">
+            <div class="mgj-home">Shop the best Android TV Boxes Online</div>
+            <ul class="header-wrap-nav">
+                <li th:unless="${myemail}" class="header-item">
+                    <a href="/signin">Sign In<span style="margin:0 20px">|</span></a>
+                </li>
+                <li th:unless="${myemail}" class="header-item">
+                    <a href="/signin">Sign Up<span style="margin:0 20px">|</span></a>
+                </li>
+                <li th:if="${myemail}" class="header-item">
+                    <a href="/mycenter" th:text="${myemail}" alt="go to my center">my center</a>
+                    <span style='margin:0 20px;color:#ACACAC'>|</span>
+                </li>
+                <li class="header-item">
+                    <a class="seeu_unit" href="#">
+                        <select id="coin_type" name="coin" onchange="gradeChange()">
+                            <option value="USD" th:selected="${coin.equalsIgnoreCase('USD')}">USD $</option>
+                            <option value="EUR" th:selected="${coin.equalsIgnoreCase('EUR')}">EUR €</option>
+                            <option value="CAD" th:selected="${coin.equalsIgnoreCase('CAD')}">CAD $</option>
+                            <option value="GBP" th:selected="${coin.equalsIgnoreCase('GBP')}">GBP £</option>
+                        </select>
+                        <span style="margin:0 20px">|</span>
+                    </a>
+                    <script type="text/javascript">
+                        function gradeChange() {
+                            var objS = document.getElementById("coin_type");
+                            var grade = objS.options[objS.selectedIndex].value;
+                            window.location.href = "/index?coin=" + grade;
+                        }
+                    </script>
+                </li>
+                <li class="header-item">
+                    <div href="#" id="google_translate_element"></div>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!--头部导航栏结束-->
+    <div class="header-block">
+        <a href="/index">
+            <img id="logo" src="image/logo.png" alt="该链接已失效">
+        </a>
+        <!--头部搜索开始-->
+        <div class="header-mid">
+            <div class="">
+                <div class="search-content">
+                    <div class="top_nav_search">
+                        <div class="search-inner-box" style="margin-bottom: 10px">
+                            <form action="/product" method="get" id="top_nav_form">
+                                <input class="ts_txt fl" id="word" name="wd" value="" type="text">
+                                <input th:value="${coin}" type="hidden" name="coin">
+                                <span onclick="doSearch();" class="ts_btn fl" type="submit" value="">
+                                    <img src="/image/@search.png">
+                                </span>
+                            </form>
+                            <script>
+                                function doSearch() {
+                                    window.location.href = "/product?coin=" + $("#coin_type").val() + "&wd=" + $("#word").val();
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--头部搜索结束-->
+        <div class="pull-right right_cart">
+            <a href="/mycenter" class="pull-right" target="_blank" style="font-size: 16px;color: #666;">
+                <i class="fa fa-user fa-lg" style="font-size:1.8em;"></i> Account
+            </a>
+            <a th:href="${'/mycart?coin='+ coin }" target="_blank" class="pull-right"
+               style="font-size: 16px;color: #666;margin: auto 25px">
+                <i class="fa fa-shopping-cart fa-lg" style="font-size:1.8em;"></i> Cart
+                <div id="cartNum"
+                     style="font-size: 16px;border-radius: 12px;height: 24px;width: 24px;line-height:24px;background-color: #318EC3;color:white;float: right;margin-left: 10px">
+                    0
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 20px;">
+        <ul class="nav navbar-nav main_tablist">
+            <li class="dropdown">
+                <div id="all_cate" class="main_tab_cate" aria-expanded="false">
+                    <i class="fa fa-bars fa-lg"></i> All categories
+                </div>
+            </li>
+            <li class="main_tab">
+                <a href="/index">Home</a>
+            </li>
+            <li class="main_tab">
+                <a href="/product">Product</a>
+            </li>
+            <li class="main_tab">
+                <a href="/support">Support</a>
+            </li>
+            <li class="main_tab">
+                <a href="http://bbs.leelbox-tech.com" target="_blank">BBS</a>
+            </li>
+        </ul>
+        <div id="sharee">
+            <a style="color: #333; margin-right: 10px;margin-top: 5px"> Join us in </a>
+            <a href="https://business.facebook.com/Leelbox-923222927817376" target="_blank">
+                <img src="image/share/f1.png"></a>
+            <a href="https://twitter.com/LeelBox" target="_blank">
+                <img src="image/share/f2.png"></a>
+            <!--<a href="https://leelbox.blog/" target="_blank">-->
+                <!--<img src="image/share/bk.jpg"></a>-->
+            <a href="https://www.pinterest.com/leelboxtech/" target="_blank">
+                <img src="image/share/f3.png"></a>
+            <a href="https://www.instagram.com/leelboxtech/" target="_blank">
+                <img src="image/share/f4.png"></a>
+            <a href="https://www.youtube.com/channel/UCQMoL4Yajr7iM0aV79h7Azw" target="_blank">
+                <img src="image/share/f5.png"></a>
+            <a href="http://leelbox.blog/" target="_blank">
+                <img src="image/share/@1xwordpress.png"></a>
+        </div>
+    </div>
+</header>
+<!--主体部分开始-->
+<div>
+    <div class="container container-width">
+        <!--left-->
+        <div class="content-wrapper">
+            <!--carousel-->
+            <div class="sli sli-wrapper">
+                <div class="pc-indexPage-nav-menu fl" style="margin-left:15px;margin-right: 10px" id="banner-nav-menu">
+                    <ul class="nav-list" id="more-banner-list" style="padding-top: 4px">
+                        <li th:each="cate:${model.category}" class="nav-li">
+                            <dl class="nav-wrap">
+                                <dt>
+                                    <a class="catagory" href="#" th:text="${cate.name}">VR</a>
+                                </dt>
+                            </dl>
+                            <div data-ban="ban-menu" class="nav-more" style="display:none;">
+                                <div class="pull-left" style="width: 200px;">
+                                    <h2>
+                                        <a href="#" th:text="${cate.name}">VR</a>
+                                    </h2>
+                                    <dl class="nav-more-wrap">
+                                        <dt th:each="ite:${cate.items}">
+                                            <a th:href="${ite?.url}" th:text="${ite?.name}">Flying KeyBoard V1</a>
+                                        </dt>
+                                    </dl>
+                                </div>
+                                <div class="pull-left" style="width: 300px;">
+                                    <img style="height: 360px;width: 500px;"
+                                         th:src="${cate.imgURL}"/>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="myCarousel" class="carousel slide pull-left" style="">
+                    <!-- 轮播（Carousel）指标 -->
+                    <ol class="carousel-indicators" id="banner_indic">
+                    </ol>
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner carousel_img" id="banner_img">
+                        <a th:each="line : ${model.banners}" th:href="${line.url}" class="item">
+                            <img style="height:100%" th:src="${line.imgURL}" alt="slide image not available">
+                        </a>
+                    </div>
+                    <script>
+                        $("#banner_img a").eq(0).addClass("active");
+                        $("#banner_img a").each(function (i) {
+                            if (i == 0) {
+                                $("#banner_indic").append("<li data-target='#myCarousel' class='active' data-slide-to='" + i + "'></li>");
+                            } else {
+                                $("#banner_indic").append("<li data-target='#myCarousel' data-slide-to='" + i + "'></li>");
+                            }
+                        })
+                    </script>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="carousel-control left" href="#myCarousel" data-slide="prev"
+                       style="line-height: 340px">&lsaquo;</a>
+                    <a class="carousel-control right" href="#myCarousel" data-slide="next"
+                       style="line-height: 340px">&rsaquo;</a>
+                </div>
+            </div>
+            <!--end of carousel-->
+
+            <!--Best Selling-->
+
+            <div>
+                <ul id="maincate_tab" class="nav nav-tabs nav-justified navsize">
+
+                    <li class="nav1-color" th:each="mcate:${maincate}">
+                        <a th:href="'#'+${mcate.id}" th:text="${mcate.cateName}" data-toggle="tab" class="nav1-a-color">
+                            Best Selling
+                        </a>
+                    </li>
+                </ul>
+
+                <script>
+                    $("#maincate_tab li").eq(0).addClass("active");
+                </script>
+            </div>
+            <div class="nav-gap"></div>
+            <div class="tab-content items-panel" name="myTabContent" id="maincate_panel">
+                <div th:each="mcate:${maincate}" class="tab-pane fade" th:id="${mcate.id}">
+                    <div class="items-wrapper row">
+                        <div th:each="product:${mcate.products}" onmouseleave="hideItemBorder(this)"
+                             onmousemove="showItemBorder(this)"
+                             class="item-page col-md-3 col-xs-3">
+
+                            <img th:if="${product.isDeal}" src="img/Bitmap的副本.png" class="item-sale">
+                            <img th:src="${product.img}" class="item-pic" style="cursor:pointer;"
+                                 th:onclick="${'window.location.href=''/product/' + #strings.replace(product.name,' ','-') + '/' + product.pid + '.html?coin='+coin+''''}">
+                            <div class="item-intro">
+                                <a th:href="'/product/'+${product.pid} + '?coin=' + ${coin}" th:text="${product.name}"
+                                   class="item-intro-font">[Official Global ROM]2 6.44 Inch 5300mAh 4GB 64GB
+                                    Android</a>
+                            </div>
+                            <div class="item-bottom">
+                                <div th:text="${unit+''+product.currentPrice}" class="item-price1">$0.00</div>
+                                <div th:unless="${product.currentPrice == product.originPrice}" th:text="${unit+''+product.originPrice}" class="item-price2">$0.00</div>
+                            </div>
+                            <div th:onclick="'addIntoCart('+${product.pid}+',0)'" class="item-cart">
+                                <div class="fa fa-shopping-cart fa-2x"></div>
+                                <div>add in cart</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $("#maincate_panel>div").eq(0).addClass("in");
+                $("#maincate_panel>div").eq(0).addClass("active");
+            </script>
+            <!--end of best selling-->
+
+            <!--worth buying-->
+            <div class="colwhite" style="width:950px;">
+                <div>
+                    <ul id="subcate_tab" class="nav nav-tabs nav-justified">
+                        <li class="" th:each="subcate:${subcate}">
+                            <a th:href="'#'+${subcate.id}" data-toggle="tab">
+                                <h7 th:text="${subcate.cateName}" class="ah7">TV - Box</h7>
+                            </a>
+                        </li>
+                    </ul>
+                    <script>
+                        $("#subcate_tab li").eq(0).addClass("active");
+                    </script>
+                </div>
+            </div>
+
+            <div class="nav-gap"></div>
+            <div id="subcate_panel" class="tab-content" style="padding-bottom: 20px">
+                <div th:each="scate:${subcate}" class="tab-pane fade" th:id="${scate.id}">
+                    <div class="items2-panel">
+                        <img th:src="${scate.imgURL}" style="cursor: pointer" class="items2-pic"
+                             th:onclick="${'window.location.href=''' + scate.url + ''''}">
+                        <div class="items2-wrapper">
+                            <div>
+                                <div class="items2-words" th:text="${scate.subName}">The most worth buying TV - Box
+                                </div>
+                                <!--<div class="items2-more"><a>More ></a></div>-->
+                            </div>
+                            <hr class="items2-hr"/>
+                            <div class="items-wrapper">
+                                <div th:each="product:${scate.products}" onmouseleave="hideItemBorder(this)"
+                                     onmousemove="showItemBorder(this)"
+                                     class="item-page items2-item">
+                                    <img src="img/recommended.png" class="items-recommanded">
+                                    <img th:if="${product.isDeal}" src="img/Bitmap的副本.png" class="item-sale">
+                                    <img th:src="${product.img}" class="item-pic"
+                                         th:onclick="${'javascript:window.location.href=''/product/' + #strings.replace(product.name,' ','-') + '/' + product.pid + '.html?coin='+coin+''''}">
+                                    <div class="item-intro">
+                                        <a th:href="'/product/'+${product.pid+'?coin='+coin}" th:text="${product.name}"
+                                           class="item-intro-font">
+                                            [Official Global ROM]2 6.44 Inch 5300mAh
+                                            4GB
+                                            64GB Android</a>
+                                    </div>
+                                    <div class="item-bottom">
+                                        <div th:text="${unit+''+product.currentPrice}" class="item-price1">$14.99</div>
+                                        <div th:unless="${product.currentPrice == product.originPrice}" th:text="${unit+''+product.originPrice}" class="item-price2">$23.69</div>
+                                    </div>
+                                    <div th:onclick="'addIntoCart('+${product.pid}+',0)'" class="item-cart">
+                                        <div class="fa fa-shopping-cart fa-2x"></div>
+                                        <div>add in cart</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $("#subcate_panel>div").eq(0).addClass("in");
+                $("#subcate_panel>div").eq(0).addClass("active");
+            </script>
+
+            <!--end of worth buying-->
+
+            <!--subsribe-->
+            <div class="subsribe">
+                <div class="fa fa-envelope fa-lg sub-envelope">&nbsp;&nbsp;&nbsp;Subscribe to us</div>
+
+                <div class="sub-bottom">
+                    <div class="sub-input">
+                        <div class="input-group input-group-sm sub-in-box">
+                            <input id="subEmail" type="text" class="form-control sub-in-input"
+                                   placeholder="your email address">
+                            <span class="input-group-addon" onclick="subscribe()">OK</span>
+                        </div>
+                    </div>
+                    <div class="sub-words">
+                        <!-- 如果没有登录才会出现这个标示 -->
+                        <a href="#" th:unless="${myemail}" href="/signin">haven't sign in/sign up</a>
+                    </div>
+                </div>
+                <script>
+                    function subscribe() {
+                        var email = $("#subEmail").val();
+                        if (email.length < 6) {
+                            alert("Please enter an available mailbox!");
+                            return;
+                        }
+                        $.ajax({
+                            url: "/api/shop/v1/subscrible",
+                            type: "POST",
+                            data: {
+                                email: email
+                            },
+                            success: function (res) {
+                                if (res.code == 200) {
+                                    alert("Subscribe successfully! We will send you the lastest product by this mail.");
+                                } else {
+                                    alert("Subscribe failure! " + res.message);
+                                }
+                            }
+                        });
+                    }
+                </script>
+
+            </div>
+            <!--end of subsribe-->
+        </div>
+        <!--end of left-->
+
+        <!--right-->
+        <div class="adv-wrapper">
+
+            <!--first-->
+            <!--<div class="adv-first">-->
+            <!--<div class="adv-first-name">Flash Deals</div>-->
+            <!--<hr class="adv-first-hr"/>-->
+            <!--<div class="adv-first-remain">remain: 01 days 12:12:03</div>-->
+            <!--<img src="img/Bitmap.png" class="adv-first-pic">-->
+            <!--<div class="item-intro">-->
+            <!--<a href="#" class="item-intro-font">[Flying Keyboard]Compatible with many kinds of Phones et tv-->
+            <!--box</a>-->
+            <!--</div>-->
+            <!--<div class="item-bottom">-->
+            <!--<div class="item-price1">$14.99</div>-->
+            <!--<div class="item-price2">$23.69</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
+
+            <!--<div class="adv-first-grey">-->
+            <!--View All Deals-->
+            <!--</div>-->
+            <!--end of first-->
+
+            <!--second-->
+            <a th:each="ad:${model.ads}" th:href="${ad.url}" class="adv-second">
+                <img th:src="${ad.imgURL}">
+            </a>
+
+            <!--end of second-->
+
+            <!--third-->
+            <div class="adv-third-wrapper">
+                <div class="adv-third-head">
+                    our cooperative partner
+                </div>
+                <div class="adv-third-amazon-wrapper">
+                    <!--<a class="adv-third-amazon-url" target="_blank"-->
+                       <!--href="https://sellercentral.amazon.co.uk/gp/sc-redirect/seller-page.html/ref=aag_m_ss?ie=UTF8&marketplace=A1F83G8C2ARO7P&nickname=A3KWDLC9V3MBW&servername=www.amazon.co.uk&type=shops">-->
+                        <!--<img src="img/amazon.png" class="adv-third-amazon-pic">-->
+                        <!--<span class="small">Amazon UK</span>-->
+                    <!--</a>-->
+                    <a class="adv-third-amazon-url" target="_blank"
+                       href="https://www.amazon.it/s?marketplaceID=A1RKKUPIHCS9HS&me=A3KWDLC9V3MBW&merchant=A3KWDLC9V3MBW&redirect=true">
+                        <img src="img/amazon.png" class="adv-third-amazon-pic">
+                        <span class="small">Amazon IT</span>
+                    </a>
+                    <a class="adv-third-amazon-url" target="_blank"
+                       href="https://www.amazon.ca/s?marketplaceID=A2EUQ1WTGCTBG2&me=A1GS6Q3UX5O1FF&merchant=A1GS6Q3UX5O1FF&redirect=true">
+                        <img src="img/amazon.png" class="adv-third-amazon-pic">
+                        <span class="small">Amazon CA</span>
+                    </a>
+                    <a class="adv-third-amazon-url" target="_blank"
+                       href="https://www.amazon.co.jp/s?marketplaceID=A1VC38T7YXB528&redirect=true&me=A1UHYZ7VFMAAAU&merchant=A1UHYZ7VFMAAAU">
+                        <img src="img/amazon.png" class="adv-third-amazon-pic">
+                        <span class="small">Amazon JP</span>
+                    </a>
+                    <a class="adv-third-amazon-url" target="_blank"
+                       href="https://www.amazon.es/s?marketplaceID=A1RKKUPIHCS9HS&me=A3KWDLC9V3MBW&merchant=A3KWDLC9V3MBW&redirect=true">
+                        <img src="img/amazon.png" class="adv-third-amazon-pic">
+                        <span class="small">Amazon ES</span>
+                    </a>
+                    <a class="adv-third-amazon-url" target="_blank"
+                       href="https://www.amazon.de/s?marketplaceID=A1RKKUPIHCS9HS&me=A3KWDLC9V3MBW&merchant=A3KWDLC9V3MBW&redirect=true">
+                        <img src="img/amazon.png" class="adv-third-amazon-pic">
+                        <span class="small">Amazon DE</span>
+                    </a>
+                    <a class="adv-third-amazon-url" target="_blank"
+                       href="https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&me=A1GS6Q3UX5O1FF&merchant=A1GS6Q3UX5O1FF&redirect=true">
+                        <img src="img/amazon.png" class="adv-third-amazon-pic">
+                        <span class="small">Amazon US</span>
+                    </a>
+                    <a class="adv-third-amazon-url" target="_blank"
+                       href="https://www.amazon.fr/s?marketplaceID=A1RKKUPIHCS9HS&me=A3KWDLC9V3MBW&merchant=A3KWDLC9V3MBW&redirect=true">
+                        <img src="img/amazon.png" class="adv-third-amazon-pic">
+                        <span class="small">Amazon FR</span>
+                    </a>
+                </div>
+
+            </div>
+            <!--end of third-->
+
+        </div>
+
+        <!--end of right-->
+
+    </div>
+    <script>
+        function showItemBorder(txt) {
+            $(txt).css("border", "1px solid #318EC3");
+            $(txt).children("div:last-child").css("visibility", "visible");
+        }
+        function hideItemBorder(txt) {
+            $(txt).css("border", "hidden");
+            $(txt).children("div:last-child").css("visibility", "hidden");
+        }
+    </script>
+</div>
+<!--主体部分结束-->
+
+<!--页脚开始-->
+<footer th:include="shop/frag/footer :: footer"></footer>
+
+<!--页脚结束-->
+<script src="/js/index.js"></script>
+<script src="/js/cart.js"></script>
+<!--Begin Comm100 Live Chat Code-->
+<div id="comm100-button-426"></div>
+<script type="text/javascript">
+    var Comm100API=Comm100API||{};(function(t){function e(e){var a=document.createElement("script"),c=document.getElementsByTagName("script")[0];a.type="text/javascript",a.async=!0,a.src=e+t.site_id,c.parentNode.insertBefore(a,c)}t.chat_buttons=t.chat_buttons||[],t.chat_buttons.push({code_plan:426,div_id:"comm100-button-426"}),t.site_id=226920,t.main_code_plan=426,e("https://chatserver.comm100.com/livechat.ashx?siteId="),setTimeout(function(){t.loaded||e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=")},5e3)})(Comm100API||{})
+</script>
+<!--End Comm100 Live Chat Code-->
+</body>
+</html>

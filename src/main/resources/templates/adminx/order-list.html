@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Order-List</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet"/>
+    <link href="assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+
+</head>
+
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="#"><i class="icon fa fa-home"></i>订单</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>订单管理</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>订单管理</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <form action="order-list.html">
+                        <label class="col-sm-4 control-label">
+                            <div class="form-group">
+                                <input type="text" name="wd" class="form-control"
+                                       placeholder="输入搜索内容" th:value="${word}"/>
+                            </div>
+                        </label>
+                        <label class="col-sm-1 control-label">
+                            <div class="">
+                                <input type="submit" name="submit" value="搜索"/>
+                            </div>
+                        </label>
+                        <input type="hidden" name="page" value="1">
+                        <input type="hidden" name="size" value="20">
+                        <div class="form-group">
+                            <div class="col-md-5 bk-margin-top-10">
+                                <div class="radio-custom radio-success pull-left">
+                                    <input type="radio" id="radioExample1" name="by" value="oid" checked="checked">
+                                    <label for="radioExample1">按订单编号</label>
+                                </div>
+
+                                <div class="radio-custom radio-success pull-left bk-margin-left-15">
+                                    <input type="radio" id="radioExample2" name="by" value="username">
+                                    <label for="radioExample2">按用户名</label>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 control-label">
+                            <div class="pull-right">
+                                <div class="btn btn-warning" onclick="$('#exportExcelModal').modal('show')">导出</div>
+                            </div>
+                        </label>
+                    </form>
+                    <style>
+                        .op_pointer {
+                            cursor: pointer;
+                        }
+
+                        .op_pointer:hover {
+                            color: #5bc0de;
+                        }
+                    </style>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>状态</th>
+                                <th>用户</th>
+                                <th>计价单位</th>
+                                <th>总售价</th>
+                                <th>物流价</th>
+                                <th>商品售价</th>
+                                <th>购买数量</th>
+                                <th>总重量(克)</th>
+                                <th>优惠券</th>
+                                <th>支付方式</th>
+                                <th>最近更新时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="line : ${pagelist}">
+                                <td th:text="${line.oid}">Onions</td>
+
+                                <td th:if="${line.status == -2}"><span class="label label-default">强制取消</span></td>
+                                <td th:if="${line.status == -1}"><span class="label label-default">取消</span></td>
+                                <td th:if="${line.status == 1}"><span class="label label-warning">未支付</span></td>
+                                <td th:if="${line.status == 2}"><span class="label label-warning">支付中</span></td>
+                                <td th:if="${line.status == 3}"><span class="label label-success">支付成功</span></td>
+                                <td th:if="${line.status == 4}"><span class="label label-warning">已发货</span></td>
+                                <td th:if="${line.status == 5}"><span class="label label-success">交易完成</span></td>
+                                <td th:if="${line.status == 0}"><span class="label label-success">交易完成</span></td>
+                                <td th:if="${line.status == 201}"><span class="label label-warning">超时未支付 已取消</span>
+                                </td>
+                                <td th:if="${line.status == 211}"><span class="label label-success">转账中</span></td>
+                                <td th:if="${line.status == 212}"><span class="label label-success">PayPal支付中</span>
+                                </td>
+                                <td th:if="${line.status == 213}"><span class="label label-success">信用卡支付中</span></td>
+                                <td th:if="${line.status == 301}"><span class="label label-warning">退款申请</span></td>
+                                <td th:if="${line.status == 302}"><span class="label label-info">同意退款</span></td>
+                                <td th:if="${line.status == 321}"><span class="label label-info">拒绝退款</span></td>
+                                <td th:if="${line.status == 400}"><span class="label label-warning">申请退货</span></td>
+                                <td th:if="${line.status == 401}"><span class="label label-info">同意退货</span></td>
+                                <td th:if="${line.status == 402}"><span class="label label-info">正在退款</span></td>
+                                <td th:if="${line.status == 403}"><span class="label label-info">超时未确定 自动确认收货</span>
+                                </td>
+                                <td th:if="${line.status == 421}"><span class="label label-info">拒绝退货</span></td>
+                                <td th:if="${line.status == 4021}"><span class="label label-default">退款成功 交易关闭</span>
+                                </td>
+
+                                <td th:text="${line.userName}">Onions</td>
+                                <td th:text="${line.unit}">Onions</td>
+                                <td th:text="${line.price + line.shipPrice}">Onions</td>
+                                <td th:text="${line.shipPrice}">Onions</td>
+                                <td th:text="${line.price}">2.41</td>
+                                <td th:text="${line.quantity}">2.41</td>
+                                <td th:text="${line.weight}">2.41</td>
+                                <td th:if="${line.coupon}" th:text="${line.coupon}">2.41</td>
+                                <td th:unless="${line.coupon}"><span class="label label-warning">未使用</span></td>
+                                <td th:if="${line.payMethod==1}"><span class="label label-info">PayPal</span></td>
+                                <td th:if="${line.payMethod==2}"><span class="label label-success">银行转账</span></td>
+                                <td th:text="${line.updateTime}">2.41</td>
+                                <td>
+                                    <a class="op_pointer" th:href="${'order-detail.html?oid='+line.oid}">
+                                        [查看]
+                                    </a>
+                                    <a class="op_pointer" th:href="${'order-print.html?oid='+line.oid}">
+                                        [打印]
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bk-margin-5 btn-group bk-margin-top-15">
+                        <a th:href="@{'/adminx/order-list.html?page='+${page.prePage}+'&size=20&wd='+${word}}"
+                           class="btn btn-default"
+                           th:if=${page.hasPreviousPage}>
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <seeu th:each="which : ${index}">
+                            <a th:href="@{'/adminx/order-list.html?page='+${which}+'&size=20&wd='+${word}}"
+                               class="btn btn-warning"
+                               th:text="${which}" th:if="${page.pageNum == which}">-1</a>
+                            <a th:href="@{'/adminx/order-list.html?page='+${which}+'&size=20&wd='+${word}}"
+                               class="btn btn-default"
+                               th:text="${which}" th:if="${page.pageNum != which}">-1</a>
+                        </seeu>
+                        <a th:href="@{'/adminx/order-list.html?page='+${page.nextPage}+'&size=20&wd='+${word}}"
+                           class="btn btn-default pull-right"
+                           th:if=${page.hasNextPage}>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exportExcelModal">
+    <div class="modal-dialog" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">导出订单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal ">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="startTime">起始时间</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="startTime" name="input-small"
+                                   class="form-control input-sm" placeholder="起始时间，格式：2017-01-01"
+                                   value="2017-09-01" onchange="setExportInfo()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="endTime">终止时间</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="endTime" name="input-small"
+                                   class="form-control input-sm" placeholder="终止时间，格式：2017-01-01"
+                                   value="2017-12-30" onchange="setExportInfo()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="orderStatus">订单状态</label>
+                        <div class="col-sm-6">
+                            <select id="orderStatus" class="form-control" onchange="setExportInfo()">
+                                <option value="1" selected="selected">已支付</option>
+                                <option value="2">已发货</option>
+                                <option value="3">已经完成／关闭</option>
+                                <option value="4">全部订单</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="exportIt()">
+                    <a target="_blank" id="exportBtn" style="color:white" onclick="exportInfo()">导出</a>
+                </button>
+            </div>
+            <script>
+                function setExportInfo() {
+                    // 暂时去掉该方式下载内容
+//                    var startTime = $("#startTime").val();
+//                    var endTime = $("#endTime").val();
+//                    var orderStatus = $("#orderStatus").val();
+//                    var now = new Date().toDateString();
+//                    var url = "/api/admin/v1/export/order " + now + ".xls?startTime=" + startTime + "&endTime=" + endTime + "&orderStatus=" + orderStatus;
+//                    $("#exportBtn").attr("href", url);
+                }
+                function exportInfo() {
+                    var startTime = $("#startTime").val();
+                    var endTime = $("#endTime").val();
+                    var orderStatus = $("#orderStatus").val();
+                    var now = new Date().toDateString();
+                    var url = "/api/admin/v1/export/order " + now + ".xls?startTime=" + startTime + "&endTime=" + endTime + "&orderStatus=" + orderStatus;
+                    window.open(url)
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+
+<!-- End Main Page -->
+
+<div class="clearfix"></div>
+
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script src="assets/js/pages/table.js"></script>
+
+<!-- end: JavaScript-->
+
+<script>
+    function deleteProduct(pid) {
+        swal({
+            title: "确定删除吗？",
+            text: "删除后将不可恢复",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "删除",
+            closeOnConfirm: false
+        }, function () {
+            // 删除
+            $.ajax({
+                url: "/api/admin/v1/product/" + pid,
+                type: "DELETE",
+                success: function (res) {
+                    if (res.code == 200) {
+                        swal("删除成功", "", "success")
+                        // 刷新界面
+                        location.reload();
+                    } else {
+                        swal("删除失败【 code = " + res.code + "】", res.message, "warning")
+                    }
+                },
+                error: function (data) {
+                    swal("网络异常", "", "warning");
+                }
+            });
+        });
+    }
+</script>
+
+<script>
+    $(window).scrollTop(0);// 每次进入页面都滚动至最开头
+</script>
+</body>
+
+</html>

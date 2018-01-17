@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Order-Detail</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Import google fonts -->
+    <!--  <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- end: CSS file-->
+</head>
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="index.html"><i class="icon fa fa-home"></i>订单</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>订单详情</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>订单详情</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#basic" data-toggle="tab">订单信息</a>
+                            </li>
+                            <li class="">
+                                <a href="#product" data-toggle="tab">商品信息</a>
+                            </li>
+                            <li class="">
+                                <a href="#receiver" data-toggle="tab">收货人信息</a>
+                            </li>
+                            <li class="">
+                                <!-- 直接列出物流跟踪 -->
+                                <a href="#ship" data-toggle="tab">物流信息</a>
+                            </li>
+                            <li class="">
+                                <a href="#log" data-toggle="tab">操作记录</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="basic" class="tab-pane active">
+                                <div class="form-horizontal bk-margin-top-15">
+                                    <div class="form-group row center-block" style="margin-top: 30px">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1">
+                                            <div th:unless="${shoukuan}" class="btn btn-default center-block disabled"
+                                                 onclick="shoukuan()">收款
+                                            </div>
+                                            <div th:if="${shoukuan}" class="btn btn-success center-block"
+                                                 onclick="shoukuan()">收款
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <div th:unless="${fahuo}" class="btn btn-default center-block disabled"
+                                                 onclick="fahuo()">发货
+                                            </div>
+                                            <div th:if="${fahuo}" class="btn btn-success center-block"
+                                                 onclick="fahuo()">发货
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-xs-1">-->
+                                        <!--<div class="btn btn-default center-block disabled">退款</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-xs-1">-->
+                                        <!--<div class="btn btn-default center-block disabled">退货</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-xs-1">-->
+                                        <!--<div class="btn btn-default center-block disabled" onclick="wancheng()">完成-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                        <div class="col-xs-1">
+                                            <!-- 状态直接改为 -2 -->
+                                            <div th:unless="${shibai}" class="btn btn-default center-block disabled"
+                                                 onclick="shibai()">失败
+                                            </div>
+                                            <div th:if="${shibai}" class="btn btn-success center-block"
+                                                 onclick="shibai()">失败
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 50px">
+                                        <div class="col-xs-2"></div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="oid">订单号</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" id="oid" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.oid}">
+                                                </div>
+                                                <div id="btn_oid" class="col-sm-2 btn btn-info"
+                                                     style="height: 26px;width: 40px;font-size: 10px;white-space: nowrap;padding: 6px 0;"
+                                                     onclick="copyOID()" data-clipboard-text="201709141048527202">复制
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_subname">状态</label>
+                                                <div class="col-sm-6">
+                                                    <input th:if="${basic.status == -1}" value="取消" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 1}" value="未支付" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 2}" value="支付中" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 3}" value="支付成功" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 4}" value="已发货" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 5}" value="交易完成" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 0}" value="交易完成" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 201}" value="超时未支付 已取消" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 211}" value="转账中" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 212}" value="PayPal支付中" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 213}" value="信用卡支付中" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 301}" value="退款申请" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 302}" value="同意退款" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 321}" value="拒绝退款" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 400}" value="申请退货" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 401}" value="同意退货" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 402}" value="正在退款" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 403}" value="超时未确定 自动确认收货"
+                                                           type="text" id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 421}" value="拒绝退货" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == 4021}" value="退款成功 交易关闭" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                    <input th:if="${basic.status == -2}" value="交易强制关闭" type="text"
+                                                           id="tab_subname" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab1">支付方式</label>
+                                                <div class="col-sm-6">
+                                                    <input th:if="${basic.payMethod==1}" type="text" id="tab1"
+                                                           name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           value="PayPal">
+                                                    <input th:if="${basic.payMethod==2}" type="text" id="tab1"
+                                                           name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           value="BankTransfer">
+                                                    <input th:if="${basic.payMethod!=1 && basic.payMethod!=2 }"
+                                                           type="text" id="tab1" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           value="Unknow">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_orgin_price">购买数量</label>
+                                                <div class="col-sm-6">
+                                                    <input type="number" id="tab_orgin_price" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.quantity}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_price">商品原价</label>
+                                                <div class="col-sm-6">
+                                                    <input type="number" id="tab_price" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.originPrice}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="tab_3">商品售价</label>
+                                                <div class="col-md-6">
+                                                    <input type="number" id="tab_3" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.price}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_tag">用户ID</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" id="tab_tag" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.uid}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_keyword">用户名</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" id="tab_keyword" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.userName}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_2">优惠券</label>
+                                                <div class="col-sm-6">
+                                                    <input th:unless="${basic.coupon}" type="text" id="tab_2"
+                                                           name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           value="未使用优惠券">
+                                                    <input th:if="${basic.coupon}" type="text" id="tab_2"
+                                                           name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.coupon}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="unit">计价单位</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" id="unit" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.unit}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_weight">总重量(克)</label>
+                                                <div class="col-sm-6">
+                                                    <input type="number" id="tab_weight" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.weight}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="tab_4">物流价格</label>
+                                                <div class="col-sm-6">
+                                                    <input type="number" id="tab_4" name="input-small"
+                                                           class="form-control input-sm" disabled="disabled"
+                                                           th:value="${basic.shipPrice}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="price">总价格</label>
+                                                <div class="col-sm-6">
+                                                    <input type="number" id="price" name="input-small"
+                                                           class="form-control input-sm"
+                                                           style="background-color: #d9edf7;"
+                                                           th:value="${basic.shipPrice + basic.price}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-8">
+                                            留言：
+                                            <p style="border: 1px #eee solid;padding: 10px;margin: 10px 0px;"
+                                               th:text="${rc.note}">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 bk-margin-top-15 center-block">
+                                    <div class="col-md-offset-5 col-md-1">
+                                        <button type="button" class="btn btn-primary" onclick="history.back()">
+                                            返回
+                                        </button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="button" class="btn btn-primary" onclick="">
+                                            保存
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="product" class="tab-pane">
+                                <div class="h4">
+                                    <br/>
+                                    商品信息
+
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                        <thead>
+                                        <tr>
+                                            <th>PID</th>
+                                            <th>名字</th>
+                                            <th>规格</th>
+                                            <th>原价</th>
+                                            <th>售价</th>
+                                            <th>数量</th>
+                                            <th>是否促销</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="pro:${products}">
+                                            <td th:text="${pro.pid}">10031</td>
+                                            <td th:text="${pro.name}">10031</td>
+                                            <td th:text="${pro.norms}">10031</td>
+                                            <td th:text="${pro.originPrice}">10031</td>
+                                            <td th:text="${pro.currentPrice}">10031</td>
+                                            <td th:text="${pro.amount}">10031</td>
+                                            <td>
+                                                <span th:if="${pro.isDeal}" class="label label-success">是</span>
+                                                <span th:unless="${pro.isDeal}" class="label label-warning">否</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-12 bk-margin-top-15">
+                                    <button type="button" class="btn btn-primary center-block"
+                                            onclick="window.history.back()">返回
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="receiver" class="tab-pane">
+                                <div class="h4">
+                                    <br/>
+                                    收货地址
+                                </div>
+                                <div class="form-horizontal">
+                                    <div>
+                                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                            <thead>
+                                            <tr>
+                                                <th>name</th>
+                                                <th>email</th>
+                                                <th>phone</th>
+                                                <th>country</th>
+                                                <th>street, city, state</th>
+                                                <th>detail</th>
+                                                <th>zipcode</th>
+                                                <th>最近修改时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${rc.name}">neo</td>
+                                                <td th:text="${rc.email}">neo@163.com</td>
+                                                <td th:text="${rc.phone}">+86 18699998888</td>
+                                                <td th:text="${rc.country}">China</td>
+                                                <td th:text="${rc.city}">ShenZhen, GuangDong</td>
+                                                <td th:text="${rc.detail}">NanShan,SUSTC #1088</td>
+                                                <td th:text="${rc.postcode}">518055</td>
+                                                <td th:text="${rc.createTime}">2017/05/05 09:48</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 bk-margin-top-15">
+                                    <button type="button" class="btn btn-primary center-block"
+                                            onclick="window.history.back()">返回
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="ship" class="tab-pane">
+                                <div class="h4">
+                                    <br/>
+                                    物流信息
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                        <thead>
+                                        <tr>
+                                            <th>物流名称</th>
+                                            <th>备注</th>
+                                            <th>价格</th>
+                                            <th>物流单号</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td th:text="${ship.shipName}">10031</td>
+                                            <td th:text="${ship.shipNote}">机顶盒</td>
+                                            <td th:text="${ship.price}">120</td>
+                                            <td th:text="${ship.shipCode}">null_ship</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-12 bk-margin-top-15 center-block">
+                                    <div class="col-md-offset-5 col-md-1">
+                                        <button type="button" class="btn btn-primary" onclick="history.back()">
+                                            返回
+                                        </button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="button" class="btn btn-primary" style="white-space: nowrap"
+                                                onclick="changeShipOrder()">
+                                            修改物流单号
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="log" class="tab-pane">
+                                <div class="h4">
+                                    <br/>
+                                    操作记录
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                        <thead>
+                                        <tr>
+                                            <th>操作人ID</th>
+                                            <th>操作人</th>
+                                            <th>操作人类型</th>
+                                            <th>记录</th>
+                                            <th>备注</th>
+                                            <th>时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="log:${logs}">
+                                            <td th:text="${log.userId}">10031</td>
+                                            <td th:text="${log.userName}">我我我</td>
+                                            <td>
+                                                <span th:if="${log.userType==1}" class="label label-warning">普通用户</span>
+                                                <span th:if="${log.userType==2}" class="label label-warning">管理员</span>
+                                            </td>
+                                            <td th:text="${log.type}">创建订单</td>
+                                            <td th:text="${log.detail}"></td>
+                                            <td th:text="${log.createDate}">2017-08-09 18:56</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-12 bk-margin-top-15">
+                                    <button type="button" class="btn btn-primary center-block"
+                                            onclick="window.history.back()">返回
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="fahuoModal">
+    <div class="modal-dialog" style="width: 40%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">发货</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal ">
+                    <div class="form-group">
+                        <input type="text" id="ship_code1"
+                               class="form-control input-sm"
+                               placeholder="物流单号">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="savefahuo()">确认发货</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="wuliuModal">
+    <div class="modal-dialog" style="width: 40%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">物流信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal ">
+                    <div class="form-group">
+                        <input type="text" id="ship_code2"
+                               class="form-control input-sm"
+                               placeholder="物流单号">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updateShip()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+<script src="assets/plugins/clipboard/clipboard.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script>
+    function shoukuan() {
+        swal({
+            title: "确定已收到 " + $("#unit").val() + " " + $("#price").val() + " 的款项吗？",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "确定收到",
+            cancelButtonText: "取消"
+        }, function () {
+            // 更改订单状态
+            $.ajax({
+                url: "/api/admin/v1/order/paid/" + $("#oid").val(),
+                type: "POST",
+                success: function (res) {
+                    if (res.code == 200) {
+//                        swal("订单状态修改成功").then(function () {
+//                            window.location.reload();
+//                        });
+                        alert("订单状态修改成功");
+                        window.location.reload();
+                    } else {
+                        swal("订单状态修改失败，CODE[" + res.code + "]", res.message);
+                    }
+                }
+            });
+        })
+    }
+
+    /**
+     * 弹出发货对话框
+     */
+    function fahuo() {
+        $("#fahuoModal").modal("show");
+    }
+    function savefahuo() {
+        // 确认发货 ajax 填写物流单号
+        var shipcode = $("#ship_code1").val();
+        if (shipcode.length < 1) {
+            swal("请填写物流单号（快递单号）");
+        }
+        $.ajax({
+            url: "/api/admin/v1/order/send-product/" + $("#oid").val() + "/" + shipcode,
+            type: "POST",
+            success: function (res) {
+                if (res.code == 200) {
+//                    swal("物流单号添加成功，该订单已进入发货状态").then(function () {
+//                        window.location.reload();
+//                    });
+                    alert("物流单号添加成功，该订单已进入发货状态");
+                    window.location.reload();
+                    $("#fahuoModal").modal("hide");
+                } else {
+                    swal("物流单号添加失败，CODE[" + res.code + "]", res.message);
+                }
+            }
+        });
+    }
+
+    // 修改物流单
+    function changeShipOrder() {
+        $("#wuliuModal").modal("show");
+    }
+
+    function updateShip() {
+        var ship = $("#ship_code2").val();
+        if (ship.length < 1) {
+            swal("请填写物流单号（快递单号）");
+        }
+        swal({
+            title: "确定修改物流单为 " + ship + " 吗？",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "确定",
+            cancelButtonText: "取消"
+        }, function () {
+            // ajax
+            $.ajax({
+                url: "/api/admin/v1/order/shipcode/" + $("#oid").val() + "/" + ship,
+                type: "POST",
+                success: function (res) {
+                    if (res.code == 200) {
+//                        swal("物流单号修改成功").then(function () {
+//                            window.location.reload();
+//                        });
+                        alert("物流单号修改成功");
+                        window.location.reload();
+                        $("#wuliuModal").modal("hide");
+                    } else {
+                        swal("物流单号修改失败，CODE[" + res.code + "]", res.message);
+                    }
+                }
+            });
+        })
+    }
+
+    function shibai() {
+
+        swal({
+            title: "确定无条件终止交易吗？",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "确定",
+            cancelButtonText: "取消"
+        }, function () {
+            // 更改订单状态
+            $.ajax({
+                url: "/api/admin/v1/order/force-finish/" + $("#oid").val(),
+                type: "POST",
+                success: function (res) {
+                    if (res.code == 200) {
+//                        swal("订单关闭成功").then(function () {
+//                            window.location.reload();
+//                        });
+                        alert("订单关闭成功");
+                        window.location.reload();
+                    } else {
+                        swal("订单关闭失败，CODE[" + res.code + "]", res.message);
+                    }
+                }
+            });
+        })
+    }
+
+
+    //
+    function copyOID() {
+        var shiporder = document.getElementById("btn_oid");
+        var clipboard = new Clipboard(shiporder);//实例化
+
+        //复制成功执行的回调，可选
+        clipboard.on('success', function (e) {
+            console.log(e);
+            alert("已成功复制到粘贴板。");
+
+        });
+
+        //复制失败执行的回调，可选
+        clipboard.on('error', function (e) {
+            console.log(e);
+            alert("复制失败。");
+
+        });
+    }
+</script>
+
+<!-- end: JavaScript-->
+
+</body>
+</html>

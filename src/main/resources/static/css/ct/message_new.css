@@ -1,0 +1,173 @@
+.message-title{
+	font-size: 16px;
+	line-height: 20px;
+	margin:14px 0 13px 18px;
+	padding: 0;
+}
+.message-well{
+	background: #EFEFEF;
+	width: 845px;
+	height: 30px;
+	padding: 6px 0 7px 12px;
+}
+.review-title{
+	font-size: 12px;
+	line-height: 17px;
+	padding: 0;
+	margin: 0;
+	color: black;
+	display: inline;
+	float: left;
+}
+.message-prepage{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: 2px 0 0 591px;
+	padding: 0;
+	display: inline;
+	float: left;
+	cursor: pointer;
+}
+.message-prepage:hover{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: 2px 0 0 591px;
+	padding: 0;
+	display: inline;
+	float: left;
+	text-decoration: underline;
+}
+.message-nextpage{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: 2px 0 0 14px;
+	padding: 0;
+	display: inline;
+	float: left;
+	cursor: pointer;
+}
+.message-nextpage:hover{
+	color: #515151;
+	font-size: 12px;
+	line-height: 14px;
+	margin: 2px 0 0 14px;
+	padding: 0;
+	display: inline;
+	float: left;
+	text-decoration: underline;
+}
+//上面是我写的 要改改上面
+.img-modify{
+	margin-left: 54px;
+	height: 100px;
+	width: 100px;
+	padding: 0;
+	display: inline;
+	float: left;
+}
+.message-img{
+	height: 100px;
+	width: 100px;
+	display: inline;
+	float: left;
+}
+.coupon-text{
+font-family: ArialMT;
+font-size: 12px;
+color: #000000;
+line-height: 16px;
+margin: 0;
+}
+.coupon-condition{
+	color:#969696;
+	font-family: arial;
+	font-size: 16px;
+}
+
+hr{
+	margin-top:10px;
+	margin-bottom: 10px;
+}
+.page{
+	float: right;
+	position: relative;
+	width:7%;
+	margin-right: 5px;
+	text-align: right;
+}
+.title{
+	float: left;
+	position: relative;
+	margin-left: 5px;
+	line-height: 32px;
+	font-size: 12px;
+	margin-bottom: 0px;
+}
+.pre-page{
+	float: left;
+	position: relative;
+	width:11%;
+	margin-left: 69%;
+	text-align: right;
+}
+.enable{
+	text-decoration: none;
+}
+.time{
+	color: black;
+	text-decoration: none;
+	font:arial bold;
+}
+.coupon-first{
+	font-size: 16px;
+}
+.coupon-info-row{
+	margin-left: 20px;
+}
+.panel-main{
+	padding: 12px;
+}
+.panel-row{
+	padding: 0;
+	margin-bottom: 0;
+
+}
+.margin-row{
+	padding: 0;
+	margin-bottom: 0;
+	margin-left: 18px;
+	margin-right: 18px;
+}
+.message-detail{
+	margin-left: 12px;
+	padding: 0;
+	display: inline;
+	float: left;
+}
+.star{
+	font-family: ArialMT;
+	font-size: 16px;
+	color: #000000;
+}
+.review{
+	font-family: ArialMT;
+	font-size: 16px;
+	color: #000000;
+	margin: 0;
+}
+.comment-text{
+	font-family: ArialMT;
+font-size: 16px;
+color: #969696;
+line-height: 21px;
+margin-top: 0px;
+}
+.item-title{
+	font-family: arial;
+font-size: 16px;
+color: #000000;
+text-decoration: none;
+}

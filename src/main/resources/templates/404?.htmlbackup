@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Page 404</title>
+    <link rel="icon" href="/image/@1xicon.png">
+</head>
+<body>
+<header th:include="shop/frag/header :: header"></header>
+<!-- 提示页面，请求错误、异常结果页 -->
+<div style="text-align: center;padding:160px;">
+    <div id="container" style="margin: auto 0">
+        <section>
+            <h1 style="font-size: 48px" >404</h1>
+            <h3 style="font-size: 18px">Error ! <span style="margin-left: 10px">Page Not Found</span></h3>
+        </section>
+        <section>
+            <p>For Some Reason The Page You Requested Could Not Be Found On Our Server</p>
+            <p><a href="javascript:history.go(-1)">&laquo; Go Back</a> / <a href="/">Go Home &raquo;</a></p>
+        </section>
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+</body>
+</html>

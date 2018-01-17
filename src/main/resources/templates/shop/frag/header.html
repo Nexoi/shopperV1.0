@@ -1,0 +1,160 @@
+<header>
+    <!-- Refrence -->
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/home.css" type="text/css"/>
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <!-- End -->
+    <!--头部导航栏开始-->
+    <div class="header-nav">
+        <div class="header-wrap">
+            <div class="mgj-home">Shop the best Android TV Boxes Online</div>
+            <ul class="header-wrap-nav">
+                <li th:unless="${myemail}" class="header-item">
+                    <a href="/signin">Sign In<span style="margin:0 20px">|</span></a>
+                </li>
+                <li th:unless="${myemail}" class="header-item">
+                    <a href="/signin">Sign Up<span style="margin:0 20px">|</span></a>
+                </li>
+                <li th:if="${myemail}" class="header-item">
+                    <a href="/mycenter" th:text="${myemail}" alt="go to my center">my center</a>
+                    <span style='margin:0 20px;color:#ACACAC'>|</span>
+                </li>
+                <li class="header-item">
+                    <a class="seeu_unit" href="#">
+                        <select id="coin_type" name="coin" onchange="gradeChange()">
+                            <option value="USD" th:selected="${'USD'.equalsIgnoreCase(coin)}">USD $</option>
+                            <option value="EUR" th:selected="${'EUR'.equalsIgnoreCase(coin)}">EUR €</option>
+                            <option value="CAD" th:selected="${'CAD'.equalsIgnoreCase(coin)}">CAD $</option>
+                            <option value="GBP" th:selected="${'GBP'.equalsIgnoreCase(coin)}">GBP £</option>
+                        </select>
+                        <span style="margin:0 20px">|</span>
+                    </a>
+                    <script type="text/javascript">
+                        function gradeChange() {
+                            var objS = document.getElementById("coin_type");
+                            var grade = objS.options[objS.selectedIndex].value;
+                            window.location.href = "?coin=" + grade;
+                        }
+                    </script>
+                </li>
+                <li class="header-item">
+                    <div href="#" id="google_translate_element"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--头部导航栏结束-->
+    <div class="header-block">
+        <a href="/index">
+            <img id="logo" src="/image/logo.png" alt="该链接已失效">
+        </a>
+        <!--头部搜索开始-->
+        <div class="header-mid">
+            <div class="">
+                <div class="search-content">
+                    <div class="top_nav_search">
+                        <div class="search-inner-box" style="margin-bottom: 10px">
+                            <form action="/product" method="get" id="top_nav_form">
+                                <input class="ts_txt fl" id="word" name="wd" value="" type="text">
+                                <input th:value="${coin}" type="hidden" name="coin">
+                                <span onclick="doSearch();" class="ts_btn fl" type="submit" value="">
+                                    <img src="/image/@search.png">
+                                </span>
+                            </form>
+                            <script>
+                                function doSearch() {
+                                    window.location.href = "/product?coin=" + $("#coin_type").val() + "&wd=" + $("#word").val();
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--头部搜索结束-->
+        <div class="pull-right right_cart">
+            <a href="/mycenter" class="pull-right"  target="_blank" style="font-size: 16px;color: #666;">
+                <i class="fa fa-user fa-lg" style="font-size:1.8em;"></i> Account
+            </a>
+            <a th:href="${'/mycart?coin='+coin}" target="_blank" class="pull-right" style="font-size: 16px;color: #666;margin: auto 25px">
+                <i class="fa fa-shopping-cart fa-lg" style="font-size:1.8em;"></i> Cart
+                <div id="cartNum"
+                     style="font-size: 16px;border-radius: 12px;height: 24px;width: 24px;line-height:24px;background-color: #318EC3;color:white;float: right;margin-left: 10px">
+                    0
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 20px;">
+        <ul class="nav navbar-nav main_tablist">
+            <li class="dropdown">
+                <div id="all_cate" class="main_tab_cate dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars fa-lg"></i> All categories
+                </div>
+                <div class="dropdown-menu" style="padding: 0">
+                    <div class="pc-indexPage-nav-menu fl" id="banner-nav-menu">
+                        <ul class="nav-list" id="more-banner-list" style="padding-top: 4px">
+                            <li th:each="cate:${header.category}" class="nav-li">
+                                <dl class="nav-wrap">
+                                    <dt>
+                                        <a class="catagory" href="#" th:text="${cate.name}">VR</a>
+                                    </dt>
+                                </dl>
+                                <div data-ban="ban-menu" class="nav-more" style="display:none;">
+                                    <div class="pull-left" style="width: 200px;">
+                                        <h2>
+                                            <a href="#" th:text="${cate.name}">VR</a>
+                                        </h2>
+                                        <dl class="nav-more-wrap">
+                                            <dt th:each="ite:${cate.items}">
+                                                <a th:href="${ite?.url}" th:text="${ite?.name}">Flying KeyBoard V1</a>
+                                            </dt>
+                                        </dl>
+                                    </div>
+                                    <div class="pull-left" style="width: 300px;">
+                                        <img style="height: 360px;width: 500px;"
+                                             th:src="${cate.imgURL}"/>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main_tab">
+                <a href="/index">Home</a>
+            </li>
+            <li class="main_tab">
+                <a href="/product">Product</a>
+            </li>
+            <li class="main_tab">
+                <a href="/support">Support</a>
+            </li>
+            <li class="main_tab">
+                <a href="http://bbs.leelbox-tech.com" target="_blank">BBS</a>
+            </li>
+        </ul>
+        <div id="sharee">
+            <a style="color: #333; margin-right: 10px;margin-top: 5px"> Join us in </a>
+            <a href="https://business.facebook.com/Leelbox-923222927817376" target="_blank">
+                <img src="/image/share/f1.png"></a>
+            <a href="https://twitter.com/LeelBox" target="_blank">
+                <img src="/image/share/f2.png"></a>
+            <!--<a href="https://leelbox.blog/" target="_blank">-->
+                <!--<img src="/image/share/bk.jpg"></a>-->
+            <a href="https://www.pinterest.com/leelboxtech/" target="_blank">
+                <img src="/image/share/f3.png"></a>
+            <a href="https://www.instagram.com/leelboxtech/" target="_blank">
+                <img src="/image/share/f4.png"></a>
+            <a href="https://www.youtube.com/channel/UCQMoL4Yajr7iM0aV79h7Azw" target="_blank">
+                <img src="/image/share/f5.png"></a>
+            <a href="http://leelbox.blog/" target="_blank">
+                <img src="/image/share/@1xwordpress.png"></a>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/header.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+</header>

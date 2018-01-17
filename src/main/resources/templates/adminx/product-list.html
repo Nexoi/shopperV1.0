@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>Product-List</title>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png"/>
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet"/>
+    <link href="assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet"/>
+    <link href="assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/sweetalert2/sweetalert.css" rel="stylesheet"/>
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/add-ons.min.css" rel="stylesheet"/>
+
+    <!-- end: CSS file-->
+
+
+    <!-- Head Libs -->
+    <script src="assets/plugins/modernizr/js/modernizr.js"></script>
+
+
+</head>
+
+<body>
+<div class="main">
+    <div class="page-header">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="#"><i class="icon fa fa-home"></i>商品</a></li>
+                <li class="active"><i class="fa fa-pencil"></i>商品管理</li>
+            </ol>
+        </div>
+        <div class="pull-right">
+            <h2>商品管理</h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <form action="product-list.html">
+                        <label class="col-sm-4 control-label">
+                            <div class="form-group">
+                                <input type="text" name="wd" class="form-control"
+                                       placeholder="输入商品名称" th:value="${word}"/>
+                            </div>
+                        </label>
+                        <label class="col-sm-1 control-label">
+                            <div class="">
+                                <input type="submit" name="submit" value="搜索"/>
+                            </div>
+                        </label>
+                        <input type="hidden" name="page" value="1">
+                        <input type="hidden" name="size" value="20">
+                        <div class="form-group">
+                            <div class="col-md-6 bk-margin-top-10">
+                                <div class="checkbox-custom pull-left">
+                                    <input type="checkbox" id="inline-checkbox1" name="deal" th:checked="${deal}"
+                                           value="true">
+                                    <label for="inline-checkbox1">促销</label>
+                                </div>
+                                <div class="checkbox-custom pull-left bk-margin-left-15">
+                                    <input type="checkbox" id="inline-checkbox2" name="onstock" th:checked="${onstock}"
+                                           value="true">
+                                    <label for="inline-checkbox2">已上架</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <style>
+                        .op_pointer {
+                            cursor: pointer;
+                        }
+
+                        .op_pointer:hover {
+                            color: #5bc0de;
+                        }
+                    </style>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                            <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>名字</th>
+                                <th>分类</th>
+                                <th>原价</th>
+                                <th>售价</th>
+                                <th>是否促销</th>
+                                <th>状态</th>
+                                <th>评分</th>
+                                <th>评分次数</th>
+                                <th>销售量</th>
+                                <th>点击次数</th>
+                                <th>最近修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="line : ${pagelist}">
+                                <td th:text="${line.pid}">Onions</td>
+                                <td th:text="${line.name}">Onions</td>
+                                <td th:text="${line.subname}">Onions</td>
+                                <td th:text="${line.originPrice}">Onions</td>
+                                <td th:text="${line.currentPrice}">Onions</td>
+                                <td th:unless="${line.originPrice == line.currentPrice}"><span class="label label-success">是</span></td>
+                                <td th:if="${line.originPrice == line.currentPrice}"><span class="label label-warning">否</span></td>
+                                <td th:if="${line.status == 1}"><span class="label label-success">上架</span></td>
+                                <td th:if="${line.status == 0}"><span class="label label-warning">下架</span></td>
+                                <td th:text="${line.stars}">2.41</td>
+                                <td th:text="${line.starsNum}">2.41</td>
+                                <td th:text="${line.sales}">2.41</td>
+                                <td th:text="${line.clickTimes}">2.41</td>
+                                <td th:text="${line.updatedate}">2.41</td>
+                                <td>
+                                    <a class="op_pointer"
+                                       th:href="@{'/product/'+${line.pid}}" target="_blank">
+                                        [查看]
+                                    </a>
+                                    <a class="op_pointer" th:href="@{'product-update.html?pid='+${line.pid}}">
+                                        [修改]
+                                    </a>
+                                    <a class="op_pointer"
+                                       th:onclick="'deleteProduct('+ ${line.pid} +');'">
+                                        [删除]
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bk-margin-5 btn-group bk-margin-top-15">
+                        <a th:href="@{'/adminx/product-list.html?page='+${page.prePage}+'&size=20&wd='+${word}}"
+                           class="btn btn-default"
+                           th:if=${page.hasPreviousPage}>
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <seeu th:each="which : ${index}">
+                            <a th:href="@{'/adminx/product-list.html?page='+${which}+'&size=20&wd='+${word}}"
+                               class="btn btn-warning"
+                               th:text="${which}" th:if="${page.pageNum == which}">-1</a>
+                            <a th:href="@{'/adminx/product-list.html?page='+${which}+'&size=20&wd='+${word}}"
+                               class="btn btn-default"
+                               th:text="${which}" th:if="${page.pageNum != which}">-1</a>
+                        </seeu>
+                        <a th:href="@{'/adminx/product-list.html?page='+${page.nextPage}+'&size=20&wd='+${word}}"
+                           class="btn btn-default pull-right"
+                           th:if=${page.hasNextPage}>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Main Page -->
+
+<div class="clearfix"></div>
+
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/skycons/js/skycons.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+<script src="assets/plugins/moment/js/moment.min.js"></script>
+<script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert.min.js"></script>
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script src="assets/js/pages/table.js"></script>
+
+<!-- end: JavaScript-->
+
+<script>
+    function deleteProduct(pid) {
+        swal({
+            title: "确定删除吗？",
+            text: "删除后将不可恢复",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "删除",
+            closeOnConfirm: false
+        }, function () {
+            // 删除
+            $.ajax({
+                url: "/api/admin/v1/product/" + pid,
+                type: "DELETE",
+                success: function (res) {
+                    if (res.code == 200) {
+                        swal("删除成功", "", "success")
+                        // 刷新界面
+                        location.reload();
+                    } else {
+                        swal("删除失败【 code = " + res.code + "】", res.message, "warning")
+                    }
+                },
+                error: function (data) {
+                    swal("网络异常", "", "warning");
+                }
+            });
+        });
+    }
+</script>
+
+<script>
+    $(window).scrollTop(0);// 每次进入页面都滚动至最开头
+</script>
+</body>
+
+</html>

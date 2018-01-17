@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Cart</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/payment.css"/>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq)return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq)f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+//        fbq('track', 'AddToCart');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body class="background-col">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+<input type="hidden" id="couponCODE" th:value="${coupon}">
+<input type="hidden" id="coin" th:value="${coin}">
+<input type="hidden" id="total_price" th:value="${model.price}">
+
+<div class="paying-header" style="min-width:1200px">
+    <div class="container od-header-container">
+        <hr class="od-header-hr"/>
+        <div class="cart-header-cart">Cart</div>
+        <div class="cart-header-Finished">Finished</div>
+        <div class="cart-header-PS">Payment & Shipping</div>
+    </div>
+</div>
+<div class="container row paying-container" style="min-width:1200px;margin: 30px auto 90px auto">
+    <div class="col-md-10">
+
+        <div class="paying-shipadd">Shopping Cart</div>
+
+        <!--left-->
+        <div class="paying-content-wrapper">
+            <div class="cart-checkall">
+                <!--<input name="cart" type="checkbox" value="1" class="cart-checkall-1" onclick="selectAll(this)"/>-->
+                <!--<div class="cart-checkall-2">check all</div>-->
+                <div class="cart-checkall-3">product</div>
+                <div class="cart-checkall-4">option</div>
+                <div class="cart-checkall-5">price</div>
+            </div>
+
+            <div th:each="pro:${model.products}" class="cart-item" style="display: block;">
+                <div class="cart-item-inside">
+                    <input name="product_pid" type="hidden" th:value="${pro.pid}">
+                    <!--<input name="cart" type="checkbox" value="2" style="" class="cart-item-0"/>-->
+                    <img th:src="${pro.product.img}" class="cart-item-1"/>
+                    <div class="cart-item-2">
+                        <a th:text="${pro.product.name}" th:href="${'/product/'+pro.pid+'?nid='+pro.normValues}"
+                           class="cart-item-2-1">
+                            [Spain Stock]Haier XShuai ShuaiXiaoBao Robot Vacuum Cleaner 3-cleaning Modes 5-step Cleaning
+                            System P2P Video App Control Night
+                        </a>
+                        <div class="cart-item-2-2" th:text="${'current inventory : '+pro.currentStock}">only one left in
+                            the invento
+                        </div>
+                        <div>
+                        <span class="cart-a-1" style="cursor: pointer"
+                              th:onclick="${'collect('+pro.pid+','+ pro.normValues +')'}">collection</span>
+                            <span class="cart-a-2" style="cursor: pointer"
+                                  th:onclick="${'deleteCart('+pro.pid+','+ pro.normValues +')'}">delete</span>
+                        </div>
+                    </div>
+                    <div class="cart-item-3">
+                        <p th:each="norm:${pro.norms}" th:normid="${norm.key}" th:text="${norm.value}">filed：ES
+                            Stock</p>
+                        <!--<p>color：White</p>-->
+                    </div>
+                    <div class="cart-item-4">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="cursor: pointer"
+                                  th:onclick="${'subtraction('+pro.pid+','+ pro.normValues +')'}">-</span>
+                            <input type="number" class="form-control myinput" th:value="${pro.quantity}"
+                                   th:id="${'pro'+pro.pid}" style="cursor: not-allowed">
+                            <span class="input-group-addon" style="cursor: pointer"
+                                  th:onclick="${'add('+pro.pid+','+ pro.normValues +')'}">+</span>
+                        </div>
+                        <div th:text="${unit+' '+pro.price}" class="cart-item-4-1">$199.99</div>
+                        <div th:text="${unit+' '+pro.originPrice}" class="cart-item-4-2">$299.99</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-coupon">Coupon</div>
+
+        <div class="cart-coupon-wrapper">
+            <div class="cart-coupon-inside">
+                <div>
+                    <div name="selectcoupon">
+                        <span class="cart-coupon-word-1">Enter a Coupon</span>
+                        <br/>
+                        <div class="cart-coupon-gap">
+                            <input class="cp1" type="text" id="coupon" th:value="${coupon}"
+                                   placeholder="&nbsp;&nbsp;&nbsp;Your coupons code"/>
+                            <input style="display: inline;" class="cp2" type="button" onclick="couponCal()"
+                                   value="Apply"/>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end of left-->
+
+    <!--right-->
+    <div class="col-md-2">
+        <div class="paying-ad-wrapper">
+            <div class="cart-ad-whole">
+                <div class="cart-ad-first">Order Summary</div>
+
+                <div class="cart-ad-second">
+                    <div class="cart-ad-second-font">
+                        <span>QTY</span>
+                        <span class="cart-ad-right" th:text="${model.quantity}">3</span>
+                    </div>
+                    <div class="cart-ad-second-font">
+                        <span>Subtotal</span><span class="cart-ad-right"
+                                                   th:text="${unit+' '+model.originPrice}">$659.95</span>
+                    </div>
+                    <div class="cart-ad-second-font">
+                        <span>Discount</span><span class="cart-ad-right"
+                                                   th:text="${unit+' '+(model.originPrice-model.price)}">$269.97</span>
+                    </div>
+                </div>
+                <div class="cart-ad-third">
+                    <div class="cart-ad-third-1">
+                        <span>Total</span><span style="float: right;font-size: 16px;color: #FF4500;"
+                                                th:text="${unit+' '+model.price}">$269.97</span>
+                    </div>
+                    <div style="margin-top: 22px;margin-top: 22px">
+                        <div onclick="javascript:window.location.href='/checkout?coin='+$('#coin').val()"
+                             style="cursor: pointer; color:white;margin: 29px 0px;width:177px;height:42px;line-height:42px;background: linear-gradient(to bottom, #318EC3, #17648F);box-shadow: 0px 2px 4px #00384E;text-align: center">
+                            Check Out
+                        </div>
+                    </div>
+                    <!--<div class="cart-ad-third-3">-->
+                    <!--<div class="cart-ad-third-6">we accept</div>-->
+                    <!--<div class="row col-md-12">-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 cart-pic-mid">-->
+                    <!--<img src="img/paypal.png">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+
+            <style>
+                .cart-moneyback > img {
+                    display: inline-flex;
+                }
+            </style>
+            <div class="cart-moneyback">
+                <img src="img/dhl.png" class="cart-moneyback-pic">
+                45 Days Money Back Guarantee
+            </div>
+            <div class="cart-moneyback">
+                <img src="img/dhl.png" class="cart-moneyback-pic">
+                360 Days Free Repair Warranty
+            </div>
+        </div>
+    </div>
+    <!--end of right-->
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+<script>
+
+    function subtraction(pid, norms) {
+        //获取-号按钮
+        var input = $("#pro" + pid);
+        //获取文本框
+        if (input.value <= 0) {
+            //如果文本框的值小于0,则设置值为0
+            input.value = 0;
+        } else {
+            input.value -= 1;
+        }
+        // 刷新 cookie 和界面
+        setCartNum(pid, norms, -1, 1);// -1
+        flushPage();
+    }
+
+    function add(pid, norms) {
+        //获取-号按钮
+        var input = $("#pro" + pid);
+        //获取文本框
+        if (input.value <= 0) {
+            //如果文本框的值小于0,则设置值为0
+            input.value = 0;
+        } else {
+            input.value -= 1;
+        }
+        // 刷新 cookie 和界面
+        setCartNum(pid, norms, 1, 1);// +1
+        flushPage();
+
+    }
+
+    function selectAll(obj) {
+        if (obj.checked) {
+            var $Checks = $("input[name='cart']");
+            $Checks.prop("checked", true);
+        } else {
+            var $Checks = $("input[name='cart']");
+            $Checks.prop("checked", false);
+        }
+    }
+
+    function collect(obj) {
+        $(obj).html("collected");
+        $(obj).css("text-decoration", "none");
+        $(obj).css("color", "#969696");
+    }
+
+    function deleteCart(pid, norms) {
+        // 更新 cookie，刷新页面
+        deleteCartItem(pid, norms);
+        flushPage();
+    }
+    function couponCal() {
+        var coupon = $("#coupon").val();
+        if (coupon.length != 20 && coupon.length != 5 && coupon.length != 0) {
+            alert("This coupon key is useless. Please input a right code");
+            return;
+        }
+        setCoupon(coupon);
+        flushPage();
+    }
+
+    function flushPage() {
+        window.location.href = "/mycart?coin=" + $("#coin").val();
+    }
+
+    $(document).ready(function () {
+        $("input[name=selectcoupon]").each(function () {
+            $(this).click(function () {
+                var value = $(this).val();
+                if (value == "0") {
+                    $("#coupon").css("color", "#318EC3");
+                    $("#nocoupon").css("color", "#515151");
+                }
+                if (value == "1") {
+                    $("#coupon").css("color", "#515151");
+                    $("#nocoupon").css("color", "#318EC3");
+                }
+            });
+        });
+    });
+</script>
+<script>
+    function getIds() {
+        var ids = []
+        $("input[name=product_pid]").each(function (i) {
+            ids.push('\'' + $(this).val() + '\'')
+        })
+        return ids;
+    }
+
+    fbq('track', 'AddToCart', {
+        content_type: 'product', //  固定值：pruduct
+        content_ids: ids,  // 购买产品的 id或者Sku
+        value: $("#total_price").val(),     //购买产品的总价值
+        currency: $("#coin").val() //货币类型
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.support.dao.SupportMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.support.model.Support">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cateID" jdbcType="INTEGER" property="cateid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="img_href" jdbcType="VARCHAR" property="imgHref" />
+    <result column="src" jdbcType="VARCHAR" property="src" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+</mapper>

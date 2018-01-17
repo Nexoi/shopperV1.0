@@ -1,0 +1,86 @@
+.nav-left-wrapper{
+	height: 603px;
+	width: 253px;
+	min-width: 253px;
+	background: #FFFFFF;
+	border: 1px solid #C8CCD1;
+	display: inline;
+	float: left;
+}
+.content-wrapper{
+	margin-left: 14px;
+	display: inline;
+	float: left;
+	width: 873px;
+	min-width: 873px;
+}
+.user-info-wrapper{
+	margin: 22px 0 0 22px;
+	width: 233px;
+}
+.user-img{
+	display: inline;
+	float: left;
+}
+.user-detail-info{
+	display: inline;
+	float: left;
+	margin-left: 18px;
+}
+.user-name{
+	word-wrap: break-word;
+	width:180px;
+	padding: 0;
+	margin:0;
+	font-size: 20px;
+	line-height: 28px;
+}
+.sign-out{
+	color: #ACACAC;
+	font-size: 16px;
+	line-height: 28px;
+	margin: 0;
+	padding: 0;
+}
+.decorate-line{
+	height: 32px;
+	width: 234px;
+	border-radius: 12px;
+	background: #EFF2F6;
+	margin: 108px 0 0 10px;
+}
+.decorate-line-normal{
+	height: 32px;
+	width: 234px;
+	border-radius: 12px;
+	background: #EFF2F6;
+	margin: 14px 0 0 10px;
+}
+.decorate-text{
+	padding: 8px 0 0 0;
+	font-size: 16px;
+	line-height: 20px;
+	margin: 16px 0 0 0;
+	text-align: center;
+}
+.item-text{
+	padding: 0;
+	color: #000000;
+	font-size: 16px;
+	line-height: 20px;
+}
+.item-wrapper{
+	margin: 14px 0 0 22px;
+}
+.title-well{
+	width: 873px;
+	height: 47px;
+	background: #FFFFFF;
+	border: 1px solid #C8CCD1;
+}
+.content-well{
+	width: 873px;
+	background: #FFFFFF;
+	border: 1px solid #C8CCD1;
+	margin-top: 14px;
+}

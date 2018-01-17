@@ -1,0 +1,79 @@
+<div class="modal-content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title bk-fg-primary">账户信息</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal ">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="account_uid">用户ID</label>
+                <div class="col-sm-6">
+                    <input type="text" id="account_uid" name="input-small" class="form-control input-sm"
+                           readonly="readonly"
+                           th:value="${user.uid}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="account_email">登录邮箱</label>
+                <div class="col-sm-6">
+                    <input type="text" id="account_email" name="input-small" class="form-control input-sm"
+                           th:value="${user.email}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="account_password">密码</label>
+                <div class="col-sm-6">
+                    <input type="text" id="account_password" name="input-small" class="form-control input-sm"
+                           placeholder="password"
+                           th:value="${user.password}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="account_time">最近登录时间</label>
+                <div class="col-sm-6">
+                    <input type="text" id="account_time" name="input-small" class="form-control input-sm"
+                           readonly="readonly"
+                           th:value="${user.lastLoginTime}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="account_ip">最近登录IP</label>
+                <div class="col-sm-6">
+                    <input type="text" id="account_ip" name="input-small" class="form-control input-sm"
+                           readonly="readonly"
+                           th:value="${user.lastLoginIp}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateAccount(uid) {
+            $.ajax({
+                url: "/api/admin/v1/userlist/userlogin",
+                method: "PUT",
+                data: {
+                    uid: uid,
+                    password: $("#account_password").val(),
+                    email: $("#account_email").val()
+                },
+                success: function (data) {
+                    // alert
+                    if (data.code == 200) {
+                        alert("更新成功")
+                        $('#showAccount').modal('hide')
+                        location.reload();
+                    } else {
+                        alert("错误：" + data.code + "</br>错误信息：" + data.message)
+                    }
+                },
+                error: function (data) {
+                    alert("网络错误")
+                }
+            });
+        }
+    </script>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" th:onclick="'updateAccount('+ ${user.uid} +');'">保存修改</button>
+    </div>
+</div>

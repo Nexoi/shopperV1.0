@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <meta name="keywords" content="android tv box, tv box, kodi box, mxq, mxq tv box, smart tv box, kodi android box">
+    <meta name="description"
+          content="Shop the best Android TV boxes at lowest price at Leelbox. Android 6.0, Kodi 17.3, Support 3D 4K output, huge memory. You will get a wonderful experience with our tv box.">
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/product.css"/>
+    <link rel="stylesheet" href="/css/swiper.css"/>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+        fbq('track', 'PageView');
+        fbq('track', 'Search');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+<input id="wd" th:value="${wd}" type="hidden"/>
+<input id="coin_" th:value="${coin}" type="hidden"/>
+<input id="cate" th:value="${cate}" type="hidden"/>
+<input id="size" th:value="${size}" type="hidden"/>
+<div class="container container-width" style="width:1200px">
+    <!-- 广告牌 -->
+    <!--<img src="img/banner20178792423haier_robot_vacuum.png" class="banner-img"/>-->
+    <div style="height:20px;width: 100%;"></div>
+
+    <div class="product-left-wrapper">
+        <div class="all-product-wrapper">
+            <div class="all-product-well">
+                <span class="all-product-title">All Product</span>
+            </div>
+            <a href="#" class="all-product-text" th:each="c:${categories}" th:text="${c.name}"
+               th:onclick="${'researchByCate('+ c.id +')'}">TV-BOX</a>
+        </div>
+        <!--第一个well-->
+        <div class="best-sell-wrapper">
+            <div class="best-product-well" style="position: absolute;">
+                <span class="best-product-title">Products<span
+                        class="best-product-small-title">(The best ten)</span></span>
+                <div class="ad-flash-container" style="width: 258px;overflow: hidden;">
+                    <div class=" swiper-wrapper" style="height: 420px;">
+                        <div th:each="proc:${hotList}" class="ad-item-wrapper swiper-slide"
+                             onmouseenter="showAdItem(this)"
+                             onmouseleave="hiddenAdItem(this)">
+                            <img th:src="${proc.img}" class="ad-img"/>
+                            <div class="ad-product-info-wrapper">
+                                <a class="ad-name" th:href="${'/product/'+proc.pid+'?coin=' + coin}">
+                                    <p th:text="${proc.name}" style="height: 62px;overflow: hidden;margin: 0;">[Official
+                                        Global ROM ]26 5300…</p>
+                                </a>
+
+                                <span class="ad-price" th:text="${unit + ' ' + proc.current_price}">US$ 88.90</span>
+                                <span class="ad-price-before" th:unless="${proc.current_price == proc.origin_price}"
+                                      th:text="${unit + ' ' + proc.origin_price}">US$ 109.90</span>
+                                <img th:onclick="'addIntoCart('+${proc.pid}+',0)'" src="/image/@1xaddcart.png"
+                                     class="ad-add-cart"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--第二个well-->
+        </div>
+
+        <!--<img class="ad-left-img" src="img/广告4.png"/>-->
+    </div>
+    <!--以上是左边的wrapper-->
+    <!--右边的wrapper开始-->
+    <div class="product-right-wrapper">
+        <span class="path"><a style="color: black;cursor: pointer;">Home</a> > <a style="color: black;cursor: pointer;">Product</a></span>
+        <!--product wrapper begin-->
+        <div class="product-wrapper">
+            <!--top wrapper begin-->
+            <div class="product-top-wrapper">
+                <span class="top-sort-by" th:if="${wd}" th:text="${'result: ' + total + ' items for ['+ wd +']'}">result: 12 items for “TV Box”</span>
+                <div style="margin-right: 30px;float: right">
+                    <input id="price_min" type="number" class="top-input-1" th:placeholder="${unit}" th:value="${min}"/>
+                    <span class="top-dash">-</span>
+                    <input id="price_max" type="number" class="top-input-2" th:placeholder="${unit}" th:value="${max}"/>
+                    <div onclick="research(1)" class="top-ok-btn">OK</div>
+                </div>
+            </div>
+            <div class="product-top-wrapper2">
+                <span class="top-sort-by" style="margin-right: 16px;">Sort by:</span>
+                <style>
+                    #choose_span label {
+                        font-size: 12px;
+                        font-weight: 200;
+                        color: #3a3a3a;
+                    }
+                </style>
+                <div id="choose_span" style="padding-top: 13px;margin-left: 10px;">
+                    <input id="sale1" type="radio" onchange="research(1)" name="sort" value="4"
+                           th:checked="${sort==4}"/>
+                    <label for="sale1">Sales (from more to less)</label>
+                    <input id="sale2" type="radio" onchange="research(1)" name="sort" value="3"
+                           th:checked="${sort==3}"/>
+                    <label for="price2">Price Low to High</label>
+                    <input id="price2" type="radio" onchange="research(1)" name="sort" value="2"
+                           th:checked="${sort==2}"/>
+                    <label for="price2">Price High to Low</label>
+                </div>
+            </div>
+            <!--top wrapper end-->
+            <div class="row" style="margin: 10px">
+                <div th:each="pro:${list}" style="padding: 0px;width:23%" onmouseleave="hideItemBorder(this)"
+                     onmousemove="showItemBorder(this)"
+                     class="item-page items col-xs-3 col-md-3">
+                    <!--<img th:if="${pro.subname}" th:src="${pro.subname}" class="item-sale">-->
+                    <img th:onclick="${'window.location.href=''/product/' + #strings.replace(pro.name,' ','-') + '/' +pro.pid +'.html?coin=' + coin + ''''}"
+                         th:src="${pro.img}" class="item-pic">
+                    <div class="item-intro">
+                        <a class="item-intro-font"
+                           th:href="${'/product/' + #strings.replace(pro.name,' ','-') + '/' +pro.pid + '.html?coin=' + coin}"
+                           th:text="${pro.name}">[Official
+                            Global ROM]2 6.44 Inch 5300mAh 4GB 64GB
+                            Android</a>
+                    </div>
+                    <div class="item-bottom">
+                        <div class="item-price1" th:text="${unit + ' ' + pro.current_price}">US$ 1224.99</div>
+                        <div class="item-price2" th:unless="${pro.current_price == pro.origin_price}" th:text="${unit + ' ' + pro.origin_price}">US$ 23.69</div>
+                    </div>
+                    <img th:onclick="'addIntoCart(' + ${pro.pid} + ','+ 0 + ')'"
+                         src="/image/@1xaddcart.png" class="item-cart"/>
+                </div>
+            </div>
+
+            <!--item end-->
+
+            <div class="product-bottom-wrapper">
+                <span class="page-bottom">Page:</span>
+                <a class="previous-page" th:onclick="${'research(' + page.prePage + ')'}">previous page</a>
+                <span class="diagonal">/</span>
+                <a class="next-page" th:onclick="${'research(' + page.nextPage + ')'}">next page </a>
+
+            </div>
+        </div>
+        <!--product wrapper完-->
+    </div>
+    <!--右边的wrapper完-->
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+<!--Begin Comm100 Live Chat Code-->
+<div id="comm100-button-426"></div>
+<script type="text/javascript">
+    var Comm100API=Comm100API||{};(function(t){function e(e){var a=document.createElement("script"),c=document.getElementsByTagName("script")[0];a.type="text/javascript",a.async=!0,a.src=e+t.site_id,c.parentNode.insertBefore(a,c)}t.chat_buttons=t.chat_buttons||[],t.chat_buttons.push({code_plan:426,div_id:"comm100-button-426"}),t.site_id=226920,t.main_code_plan=426,e("https://chatserver.comm100.com/livechat.ashx?siteId="),setTimeout(function(){t.loaded||e("https://hostedmax.comm100.com/chatserver/livechat.ashx?siteId=")},5e3)})(Comm100API||{})
+</script>
+<!--End Comm100 Live Chat Code-->
+</body>
+<script type="text/javascript" src="/js/swiper.jquery.min.js"></script>
+<script>
+    function research(page) {
+        var wd = $("#wd").val();
+        var cate = $("#cate").val();
+        var size = $("#size").val();
+        var price_min = $("#price_min").val();
+        var price_max = $("#price_max").val();
+        var coin = $("#coin_").val();
+        var sort = -1;
+        $("input[name=sort]").each(function (i) {
+            if ($(this).prop('checked')) {
+                sort = $(this).val();
+            }
+        });
+        window.location.href = "/product?wd=" + wd
+                + "&cate=" + cate
+                + "&page=" + page
+                + "&size=" + size
+                + "&min=" + price_min
+                + "&max=" + price_max
+                + "&coin=" + coin
+                + "&sort=" + sort;
+
+    }
+    function researchByCate(cate) {
+        var wd = $("#wd").val();
+        var size = $("#size").val();
+        if (size.length != 0) {
+            size = "&size=" + size
+        }
+        var price_min = $("#price_min").val();
+        if (price_min.length != 0) {
+            price_min = "&min=" + price_min
+        }
+        var price_max = $("#price_max").val();
+        if (price_max.length != 0) {
+            price_max = "&max=" + price_max
+        }
+        var coin = $("#coin_").val();
+        if (coin.length != 0) {
+            coin = "&coin=" + coin
+        }
+        var sort = -1;
+        $("input[name=sort]").each(function (i) {
+            if ($(this).prop('checked')) {
+                sort = $(this).val();
+            }
+        });
+        window.location.href = "/product?wd=" + wd
+                + "&cate=" + cate
+                + "&page=1"
+                + size
+                + price_min
+                + price_max
+                + coin
+                + "&sort=" + sort;
+
+    }
+
+    function showItemBorder(txt) {
+        $(txt).css("border", "1px solid #318EC3");
+        $(txt).children("img:last-child").css("visibility", "visible");
+    }
+    function hideItemBorder(txt) {
+        $(txt).css("border", "hidden");
+        $(txt).children("img:last-child").css("visibility", "hidden");
+    }
+    var swiper1 = new Swiper('.ad-flash-container', {
+        direction: 'vertical',
+        centeredSlides: true,
+        autoplay: 3500,
+        slidesPerView: 3,
+        loop: true,
+        spaceBetween: 0,
+        autoplayDisableOnInteraction: false
+    });
+    $(".ad-flash-container").mouseenter(function () {//滑过悬停
+        swiper1.stopAutoplay();//mySwiper 为上面你swiper实例化的名称
+    }).mouseleave(function () {//离开开启
+        swiper1.startAutoplay();
+    });
+    function showAdItem(txt) {
+        $(txt).children("div:last-child").children("img:last-child").css("visibility", "visible");
+    }
+
+    function hiddenAdItem(txt) {
+        $(txt).children("div:last-child").children("img:last-child").css("visibility", "hidden");
+    }
+</script>
+
+</html>

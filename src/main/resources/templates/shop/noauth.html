@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Page 404</title>
+</head>
+<body>
+<header th:include="shop/frag/header :: header"></header>
+<!-- 提示页面，未登录无权访问页面 -->
+<div style="text-align: center;padding:160px;">
+    <div id="container" style="margin: auto 0">
+        <section>
+            <h2 style="font-size: 48px">401</h2>
+            <h3 style="font-size: 18px"><span style="margin-left: 10px">You are not logged in, Please <a href="/signin"> click here </a> to sign in.</span>
+            </h3>
+        </section>
+        <section>
+            <p><a href="javascript:history.go(-1)">&laquo; Go Back</a> / <a href="/">Go Home &raquo;</a></p>
+        </section>
+    </div>
+</div>
+<footer th:include="shop/frag/footer :: footer"></footer>
+</body>
+</html>

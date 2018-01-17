@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Check Out</title>
+    <meta name="keywords" content="android tv box, tv box, kodi box, mxq, mxq tv box, smart tv box, kodi android box">
+    <meta name="description" content="Shop the best Android TV boxes at lowest price at Leelbox. Android 6.0, Kodi 17.3, Support 3D 4K output, huge memory. You will get a wonderful experience with our tv box.">
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/payment.css"/>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+        fbq('track', 'PageView');
+        fbq('track', 'InitiateCheckout');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body class="background-col">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+
+<!--<input type="hidden" id="addressID" value="">-->
+<!--<input type="hidden" id="shipID" value="">-->
+<input type="hidden" id="oid" th:value="${oid}">
+
+<div class="paying-header">
+    <div class="container od-header-container">
+        <hr class="od-header-hr"/>
+        <div class="od-header-cart">Cart</div>
+        <div class="od-header-Finished">Finished</div>
+        <div class="od-header-PS">Payment & Shipping</div>
+    </div>
+</div>
+<div class="container paying-container">
+    <!--shipping address-->
+    <div class="paying-shipadd" style="margin-top: 30px">Shipping Address</div>
+    <div class="paying-overflow row" style="margin-bottom: 70px">
+        <!--left-->
+        <div class="col-md-10">
+            <div class="paying-content-wrapper">
+                <div class="paying-address-wrapper">
+
+                    <style>
+                        .pay_address > label {
+                            cursor: pointer;
+                            width: 279px;
+                            background: #FFFFFF;
+                            border: 1px solid #C8CCD1;
+                            margin-left: 22px;
+                            padding: 10px;
+                            font-size: 16px;
+                            color: #666666;
+                            line-height: 20px;
+                        }
+
+                        .input_address:checked + label {
+                            background: #EDF9FF;
+                            border: 1px solid #318EC3;
+                        }
+
+                        .paying-button {
+                            margin-left: 46px;
+                            width: 140px;
+                            height: 31px;
+                            background: #E9E9E9;
+                            border: 1px solid #979797;
+                        }
+
+                        .ship_item > td > span {
+                            font-size: 16px;
+                            color: #515151;
+                            line-height: 16px;
+                            margin: 20px;
+                        }
+
+                        .ship_item_span {
+                            padding: 2px 5px;
+                            background: #FFFFFF;
+                            border: 1px solid #C8CCD1;
+                            width: 54px;
+                            height: 21px;
+                            box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.24);
+                            font-size: 12px;
+                            color: #515151;
+                            text-align: center;
+                        }
+                    </style>
+                    <div id="address" class="row" style="margin-left: 10px;margin-right: 10px;">
+                        <div th:each="adrs:${address}" class="col-md-4 pay_address">
+                            <input th:id="${'adrs'+adrs.id}" th:value="${adrs.id}"
+                                   type="radio" name="address"
+                                   class="input_address"
+                                   style="display: none">
+                            <label th:for="${'adrs'+adrs.id}" class="">
+                                <div th:text="${adrs.name}">Bat dames</div>
+                                <div th:text="${adrs.postcode}">48915</div>
+                                <div th:text="${adrs.phone}">6263396261</div>
+                                <div th:text="${adrs.country}">1208 Hyland Street</div>
+                                <div th:text="${adrs.city}">Landsinq</div>
+                                <div th:text="${adrs.detail}">Landsinq. New York, United States</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paying-button-wrapper">
+                    <!-- 进入个人中心 -->
+                    <a href="/mycenter/address" target="_blank" class="btn paying-button">Add new address</a>
+                </div>
+
+                <!--shipping method-->
+                <div class="paying-shipping-method">
+                    <div class="paying-sm-header">Shipping Method</div>
+                    <img src="img/@2xQuestion Circle - FontAwesome.png" class="paying-shipping-method-pic"
+                         onmouseover="showRemind(this)" onmouseleave="hideRemind(this)">
+                    <div class="paying-remind" id="rem">
+                        <div class="paying-remind-wrapper">
+                            <div class="paying-remind-tri">
+                            </div>
+                            <div class="paying-remind2">
+                                <p class="paying-remind-p">Leelbox-tech offers two kinds of shipping methods.</p>
+                                <p class="paying-remind-p">1. Standard Shipping.Free.Avaiable for all countries.</p>
+                                <p class="paying-remind-p">2. Express Shipping.Only available for certain countries.</p>
+                            </div>
+                            <p class="paying-remind1">Check page Shipping Method (In the footer) to see detailed
+                                countries</p>
+                        </div>
+                    </div>
+
+                    <div class="paying-sm">
+                        <div class="paying-sm-inside">
+                            <div class="paying-sm-weight">
+                                <span>The weight of your cart : </span>
+                                <span>About</span>
+                                <strong th:text="${(model.weight/1000)+' KG'}"> 0.0 kg</strong>
+                            </div>
+                            <div style="font-size: 16px;color: #969696;margin: 10px 0">
+                                Select a shipping methods
+                            </div>
+                            <table>
+                                <tbody id="shipping">
+                                <tr th:each="ship:${ships}" class="ship_item">
+                                    <td><input type="radio" name="ship" th:value="${ship.shipId}"
+                                               th:onclick="${'setShip('+ship.shipId+','''+ unit + ''',' + (ship.basePrice + ship.addiPrice) +')'}">
+                                    </td>
+                                    <td><span th:text="${ship.name}">Standard Shipping</span></td>
+                                    <td th:if="${ship.basePrice == 0}"><span>Free</span></td>
+                                    <td th:unless="${ship.basePrice == 0}">
+                                        <span th:text="${unit + ' ' + (ship.basePrice + ship.addiPrice)}">USD $14.00 + </span>
+                                        <!--<span th:unless="${ship.addiPrice == 0}"-->
+                                              <!--th:text="${unit + ' ' + ship.addiPrice}"-->
+                                              <!--class="ship_item_span">$ 8.00</span>-->
+                                    </td>
+                                    <td><span th:text="${ship.note}">15-20 business days</span></td>
+                                </tr>
+                                <!--<tr class="ship_item">-->
+                                <!--<td><input type="radio" name="ship" value="2" checked/></td>-->
+                                <!--<td><span class="">Express Shipping</span></td>-->
+                                <!--<td>-->
+                                <!--<span class="">USD $14.00 + </span>-->
+                                <!--<span class="ship_item_span">$ 8.00</span>-->
+                                <!--</td>-->
+                                <!--<td><span class="">3-7 business days</span></td>-->
+                                <!--</tr>-->
+                                </tbody>
+                            </table>
+
+                            <div class="paying-sm-bottom-wrapper" style="margin-right: 30px">
+                                You will add <span id="ship_price" class="paying-sm-bottom"> 0.00</span> for express
+                                in
+                                your order!
+                            </div>
+
+                            <script>
+                                // 设定第一个为默认选项
+                                //                                $("#shipping>tr>td>input").eq(0).attr("checked", "checked");
+                                // 设定物流
+                                function setShip(shipId, unit, price) {
+                                    $("#ship_price").html(unit + " " + price);
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end of shipping method-->
+
+                <!--payment method-->
+                <div class="payment-method">
+                    <div class="payment-method-header">Payment Method</div>
+
+                    <div class="pm-select">
+                        <div class="pm-inside">
+                            <div class="pm-weight">
+                                Select Payment Method
+                            </div>
+                            <div style="margin-left:10px ">
+                                <div>
+                                    <input id="paypal" type="radio" name="payment" value="1"
+                                           checked>
+                                    <label for="paypal">
+                                        <span class="pm-form-font">Paypal</span>
+                                        <img src="img/paypal.png" class="pm-form-paypal" style="display: inline-flex;">
+                                        <span style="font-size: 12px;margin-left: 6px;color: #ACACAC;">( You can also use your Credit Card in this way )</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input id="banktransfer" type="radio" name="payment"
+                                               value="2">
+                                        <span class="pm-form-font">Bank transfer</span>
+                                        <span class="pm-form-third">( A new page will be provided to finish payment )</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end of payment method-->
+
+                <!--product information-->
+                <div class="pi-header">
+                    <div class="pi-header-font">Product Information</div>
+                </div>
+                <div class="pi-wrapper">
+                    <div class="pi-inside-wrapper">
+                        <div th:each="pro:${model.products}" class="pi-items">
+                            <img th:src="${pro.product.img}" class="pi-pic">
+                            <div class="pi-item-2">
+                                <div th:text="${pro.product.name}" class="pi-item-2-1">[Spain Stock]Haier XShuai
+                                    ShuaiXiaoBao Robot Vacuum Cleaner
+                                    3-cleaning…
+                                </div>
+                                <div class="pi-item-2-2">
+                                    <span th:each="norm:${pro.norms}" th:text="${norm.value}" class="pi-item-2-3">ES Stock</span>
+                                    <!--<span>White</span>-->
+                                </div>
+                            </div>
+                            <div th:text="${pro.quantity}" class="pi-item-3">
+                                1
+                            </div>
+                            <div th:text="${unit + ' ' + pro.price}" class="pi-item-4">
+                                $199.99
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end of product information-->
+
+                <div class="pi-mymessage">
+                    <div class="pi-mymessage-1">
+                        Your Message
+                    </div>
+                    <div>
+                        <textarea id="message" style="margin: 0;height: 111px;width: 100%;border: #eee 1px solid;">Empty</textarea>
+                    </div>
+                </div>
+                <p onclick="javascript:window.location.href='/mycart'" class="pi-edit"><< Edit my cart</p>
+
+            </div>
+        </div>
+
+        <!--right-->
+        <div class="col-md-2">
+            <div class="paying-ad-wrapper">
+                <div class="cart-ad-whole">
+                    <div class="cart-ad-first">Order Summary</div>
+
+                    <div class="cart-ad-second">
+                        <div class="cart-ad-second-font">
+                            <span>QTY</span>
+                            <span class="cart-ad-right" th:text="${model.quantity}">3</span>
+                        </div>
+                        <div class="cart-ad-second-font">
+                            <span>Subtotal</span><span class="cart-ad-right"
+                                                       th:text="${unit+' '+model.originPrice}">$659.95</span>
+                        </div>
+                        <div class="cart-ad-second-font">
+                            <span>Discount</span><span class="cart-ad-right"
+                                                       th:text="${unit+' '+(model.originPrice-model.price)}">$269.97</span>
+                        </div>
+                    </div>
+                    <div class="cart-ad-third">
+                        <div class="cart-ad-third-1">
+                            <span>Total</span><span style="float: right;font-size: 16px;color: #FF4500;"
+                                                    th:text="${unit+' '+model.price}">$269.97</span>
+                        </div>
+                        <div style="margin-top: 22px;margin-top: 22px">
+                            <div onclick="placeOrder()"
+                                 style="cursor: pointer; color:white;margin: 29px 0px;width:177px;height:42px;line-height:42px;background: linear-gradient(to bottom, #318EC3, #17648F);box-shadow: 0px 2px 4px #00384E;text-align: center">
+                                Place Order
+                            </div>
+                        </div>
+                        <!--<div class="cart-ad-third-3">-->
+                            <!--<div class="cart-ad-third-6">we accept</div>-->
+                            <!--<div class="row col-md-12">-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 cart-pic-mid">-->
+                                    <!--<img src="img/paypal.png">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+
+                <style>
+                    .cart-moneyback > img {
+                        display: inline-flex;
+                    }
+                </style>
+                <div class="cart-moneyback">
+                    <img src="img/dhl.png" class="cart-moneyback-pic">
+                    45 Days Money Back Guarantee
+                </div>
+                <div class="cart-moneyback">
+                    <img src="img/dhl.png" class="cart-moneyback-pic">
+                    360 Days Free Repair Warranty
+                </div>
+            </div>
+        </div>
+        <!--end of right-->
+    </div>
+    <!--end of shipping address-->
+
+</div>
+
+<footer th:include="shop/frag/footer :: footer"></footer>
+<script>
+    fbq('track', 'InitiateCheckout');
+</script>
+
+</body>
+<script>
+
+    function showRemind(txt) {
+        $(txt).next().css("display", "inline-block");
+    }
+    function hideRemind(txt) {
+        $(txt).next().css("display", "none");
+    }
+
+    /**
+     * 确认订单并准备进行付款
+     */
+    function placeOrder() {
+        var addressID = -1;
+        var shipid = -1;
+        var paymentID = -1;
+        var message = $("#message").val();
+
+        // 获取信息
+        $("input[name=address]").each(function (i) {
+            if ($(this).prop('checked')) {
+                addressID = $(this).val();
+            }
+        });
+        $("input[name=ship]").each(function (i) {
+            if ($(this).prop('checked')) {
+                shipid = $(this).val();
+            }
+        });
+        if ($("#paypal").prop('checked')) {
+            paymentID = 1;
+        } else if ($("#banktransfer").prop('checked')) {
+            paymentID = 2;
+        } else {
+            alert("Please choose a payment method.");
+            return;
+        }
+        if (addressID == -1) {
+            alert("Please choose an address.");
+            return;
+        }
+        if (shipid == -1) {
+            alert("Please choose an ship method.");
+            return;
+        }
+        if (message == "") {
+            alert("Please input your message.");
+            return;
+        }
+        // 跳转请求
+        var url = "oid=" + $("#oid").val()
+                + "&address=" + addressID
+                + "&shipid=" + shipid
+                + "&payment=" + paymentID
+                + "&note=" + encodeURIComponent(message);
+        window.location.href = "/placeorder?" + url;
+    }
+</script>
+</html>

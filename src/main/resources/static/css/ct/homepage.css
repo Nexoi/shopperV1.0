@@ -1,0 +1,251 @@
+.background-col{
+	background: #F4F3F3;
+}
+
+.container-width{
+	width: 1200px;
+}
+
+.content-wrapper{
+	margin-left: 0;
+	margin-top: 15px;
+	display: inline;
+	float: left;
+}
+
+.sli-wrapper{
+	/*margin-left: 220px;*/
+	width:945px;
+	min-width: 945px;
+	height: 350px;
+	margin-bottom: 14px;
+}
+.carousel_img>div>img{
+	width:720px;
+	height:340px;
+}
+.item-page{
+	width:200px;height:290px;position: relative;
+}
+
+.item-sale{
+	position: absolute;top: 0px;right: 0px;width: 70px;height:70px;
+}
+
+.item-pic{
+	margin-top:26px;margin-bottom:25px;margin-left: 32px;margin-right: 31px;width: 137px;height:136px;
+}
+
+.item-intro{
+	margin-left: 9px;margin-right: 8px;height:32px;width:183px;
+}
+
+.item-intro-font{
+	font-size:12px;color: #3E3E3E;line-height: 16px;display:block;overflow: hidden;
+}
+
+.item-bottom{
+	display: inline;float: left;
+}
+
+.item-price1{
+	margin-top:10px;font-size: 28px;color: #FC0016;line-height: 30px;height:30px;margin-left:9px;width:89px;
+}
+
+.item-price2{
+	margin-top:4px;margin-bottom:9px;font-size: 16px;color: #787878;line-height: 18px;text-decoration: line-through;margin-left:9px;height:18px;width:62px;
+}
+
+.item-cart{
+	text-align: center;display: inline;float:right;color: #318EC3;position: absolute;visibility:hidden;bottom: 9px;right: 6px;
+}
+
+.items-first{
+	margin-left: 31px;
+	margin-right:31px;
+	display: inline;
+	float:left;
+}
+
+.items-middle{
+	margin-right:31px;
+	display: inline;
+	float:left;
+}
+
+.items-last{
+	margin-right:26px;
+	display: inline;
+	float:left;
+}
+
+.items-wrapper{
+	width:950px;
+}
+
+.items-top{
+	margin-bottom: 26px;
+	height: 290px;
+}
+
+.items-bottom{
+	margin-bottom: 30px;
+	height: 290px;
+}
+
+.navsize{
+	width:950px !important;
+}
+
+.nav1-color{
+	background: #F4F3F3;
+}
+
+.nav1-a-color{
+	color:#707473;
+}
+
+.colwhite{
+	background: white;
+}
+
+.nav-gap{
+	background: white;
+	height: 21px;
+	width: 950px;
+}
+
+.items-panel{
+	background: white;
+	width: 950px;
+}
+
+.items-recommanded{
+	position: absolute;width:47px;height: 47px;top:-23.5px;left: -23.5px;	
+}
+
+.items2-panel{
+	height: 360px;width: 950px;background: white;
+}
+
+.items2-pic{
+	width: 164px;height: 342px;margin-bottom: 18px;margin-left: 18px;display: inline;float:left;
+}
+
+.items2-wrapper{
+	width:707px;height: 342px;margin-left:30px;display: inline;float: left;
+}
+
+.items2-words{
+	display: inline;float: left;
+}
+
+.items2-more{
+	display: inline;float: right;
+}
+
+.items2-hr{
+	border: solid 1px black;
+}
+
+.items2-item{
+	display: inline;float:left;
+}
+
+.items2-item-middle{
+	display: inline;float:left;margin-left: 44px;margin-right: 44px;
+}
+
+.subsribe{
+	width:953px;
+	height: 111px;
+	background: white;
+	margin-top: 14px;
+	margin-bottom: 26px;
+}
+
+.sub-envelope{
+	margin-top: 14px;
+	margin-left:16px;
+	height: 20px;
+}
+
+.sub-words{
+	display:inline;float: right;text-decoration: underline; margin-right: 25px; margin-top:15px;
+}
+
+.sub-bottom{
+	margin-top:17px;
+}
+
+.sub-input{
+	display: inline;float: left;
+}
+
+.sub-in-box{
+	width: 396px;height: 38px;margin-left: 26px;
+}
+
+.sub-in-input{
+	height: 38px !important;
+}
+
+.adv-wrapper{
+	width:199px;display: inline;float: left;margin-left: 14px;
+}
+
+.adv-first{
+	border: 1px solid #C8CCD1;
+	height: 310px;
+	margin-top:14px ;
+	background-color: white;
+}
+
+.adv-first-name{
+	font: 16px;width:91px;height: 36px;padding-top:10px ;padding-left:5px;
+}
+
+.adv-first-hr{
+	border: solid 2px black; margin: 0;
+}
+
+.adv-first-remain{
+	font: 10px;
+}
+
+.adv-first-pic{
+	width: 100px;height: 100px; margin-left:49px ;margin-right: 48px;margin-bottom: 8px;margin-top:20px;
+}
+
+.adv-first-grey{
+	margin-top:9px;height: 31px;background: #ACACAC;color: #FFFFFF;font-size: 16px;text-align: center;line-height: 31px;
+}
+
+.adv-second{
+	width:199px;
+	margin-top:14px;
+	/*height:130px;*/
+}
+
+.adv-third-wrapper{
+	height: 313px;margin-top: 14px;
+}
+
+.adv-third-head{
+	height: 34px;background: #EEEEEE;border: 1px solid #C8CCD1;line-height: 34px;text-align: center;
+}
+
+.adv-third-amazon-wrapper{
+	height: 259px;background: white;
+}
+
+.adv-third-amazon-url{
+	display: inline-block;margin-left:14px;text-decoration: underline;color: #3E3E3E;height: 16px;line-height: 16px;margin-top:10px;
+}
+.adv-third-amazon-url>span{
+	float: left;
+}
+.adv-third-amazon-pic{
+	margin-right:13px ;
+	float: left;
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pay Success!</title>
+    <link rel="icon" href="/image/@1xicon.png">
+    <link rel="stylesheet" href="/css/payment.css"/>
+    <!-- Facebook Pixel Code -->
+    <script th:inline="javascript">
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1146451278790141');
+        fbq('track', 'PageView');
+        //        fbq('track', 'Purchase', {value:'0.00', currency:'USD'});
+        fbq('track', 'Purchase', {value: [[${price}]], currency: [[${coin}]]});
+    </script>
+    <noscript>
+        <img height="1" width="1"
+             src="https://www.facebook.com/tr?id=1146451278790141&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google -->
+    <script th:inline="javascript">
+        window.dataLayer = window.dataLayer || []
+        var products = [[${products}]]
+        var gooProducts = []
+        for (var i = 0; i < products.length; i++) {
+            gooProducts.push({
+                sku: products[i].norms,
+                name: products[i].name,
+                category: "",
+                price: products[i].currentPrice,
+                quantity: products[i].amount
+            })
+        }
+        dataLayer.push({
+            'transactionId': [[${oid}]],
+            'transactionAffiliation': 'Leelbox-tech',
+            'transactionTotal': [[${price}]],
+            'transactionShipping': [[${basic.shipPrice}]],
+            'transactionProducts': gooProducts
+        });
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KRCCCTG');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRCCCTG"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header th:include="shop/frag/header :: header"></header>
+<div class="paying-header">
+    <div class="container od-header-container">
+        <hr class="od-header-hr"/>
+        <div class="fin-header-cart">Cart</div>
+        <div class="fin-header-Finished">Finished</div>
+        <div class="fin-header-PS">Payment & Shipping</div>
+    </div>
+</div>
+<input th:each="pro:${products}" type="hidden" name="product_pid" th:value="${pro.pid}">
+<div class="container fin-container" style="margin-bottom: 70px">
+    <div class="fin-pic">You have paid successfully！</div>
+    <input type="hidden" id="price_" th:value="${price}"/>
+    <input type="hidden" id="coin_" th:value="${unit}"/>
+    <div class="fin-wrapper">
+        <div class="fin-word" th:text="${'Order number：' + oid}">Order number：58786558</div>
+        <div class="fin-word-1" th:text="${'Online payment：' + unit + ' ' + price}">Online payment：US $ 591.89</div>
+        <br>
+        <hr class="fin-line"/>
+        <a class="fin-enter" href="/mycenter/order">Enter the personal center to check the detail information >></a>
+    </div>
+    <div class="backtomail" onclick="javascript:window.location.href='/'">Back to the homepage</div>
+</div>
+<!-- Google Code for test Conversion Page -->
+<!--<script type="text/javascript" th:inline="javascript">-->
+<!--/* <![CDATA[ */-->
+<!--var google_conversion_id = 851443824;-->
+<!--var google_conversion_language = "en";-->
+<!--var google_conversion_format = "3";-->
+<!--var google_conversion_color = "ffffff";-->
+<!--var google_conversion_label = "_89DCOWgw3UQ8ICAlgM";-->
+<!--var google_conversion_value = [[${price}]];-->
+<!--var google_conversion_currency = [[${coin]}];-->
+<!--var google_remarketing_only = false;-->
+<!--/* ]]> */-->
+<!--</script>-->
+<!--<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">-->
+<!--</script>-->
+<!--<noscript>-->
+<!--<div style="display:inline;">-->
+<!--<img height="1" width="1" style="border-style:none;" alt=""-->
+<!--th:src="'//www.googleadservices.com/pagead/conversion/851443824/?value=' + ${price} + '&currency_code=' + ${coin} + '&label=_89DCOWgw3UQ8ICAlgM&guid=ON&script=0'"/>-->
+<!--</div>-->
+<!--</noscript>-->
+<!-- 联盟代码 -->
+<img th:src="'https://www.shareasale.com/sale.cfm?tracking=' + ${oid} + '&amount=' + ${price} + '&merchantID=72028&transtype=sale'"
+     width=”1” height=”1”>
+<!-- 联盟代码 End -->
+<footer th:include="shop/frag/footer :: footer"></footer>
+<script>
+    function getIds() {
+        var ids = []
+        $("input[name=product_pid]").each(function (i) {
+            ids.push('\'' + $(this).val() + '\'')
+        })
+        return ids;
+    }
+
+    fbq('track', 'Purchase', {
+        content_type: 'product', //  固定值：pruduct
+        content_ids: getIds(),  // 购买产品的 id或者Sku
+        value: $("#price_").val(),     //购买产品的总价值
+        currency: $("#coin_").val() //货币类型
+    });
+</script>
+
+</body>
+</html>

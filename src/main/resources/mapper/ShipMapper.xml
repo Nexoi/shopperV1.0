@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seeu.shopper.ship.dao.ShipMapper">
+  <resultMap id="BaseResultMap" type="com.seeu.shopper.ship.model.Ship">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ship_id" jdbcType="INTEGER" property="shipId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="addi_price" jdbcType="DECIMAL" property="addiPrice" />
+    <result column="base_price" jdbcType="DECIMAL" property="basePrice" />
+  </resultMap>
+</mapper>

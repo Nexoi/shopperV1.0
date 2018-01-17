@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8"/>
+
+    <title>管理员控制台</title>
+    <link rel="icon" href="/image/@1xicon.png">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- Import google fonts -->
+    <!--  <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
+
+    <!-- Favicon and touch icons -->
+    <!--<link rel="shortcut icon" href="assets/ico/favicon.ico" type="image/x-icon"/>-->
+    <!--<link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png"/>-->
+    <!--<link rel="apple-touch-icon" sizes="57x57" href="assets/ico/apple-touch-icon-57x57.png"/>-->
+    <!--<link rel="apple-touch-icon" sizes="72x72" href="assets/ico/apple-touch-icon-72x72.png"/>-->
+    <!--<link rel="apple-touch-icon" sizes="76x76" href="assets/ico/apple-touch-icon-76x76.png"/>-->
+    <!--<link rel="apple-touch-icon" sizes="114x114" href="assets/ico/apple-touch-icon-114x114.png"/>-->
+    <!--<link rel="apple-touch-icon" sizes="120x120" href="assets/ico/apple-touch-icon-120x120.png"/>-->
+    <!--<link rel="apple-touch-icon" sizes="144x144" href="assets/ico/apple-touch-icon-144x144.png"/>-->
+    <!--<link rel="apple-touch-icon" sizes="152x152" href="assets/ico/apple-touch-icon-152x152.png"/>-->
+
+    <!-- start: CSS file-->
+
+    <!-- Vendor CSS-->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Plugins CSS-->
+    <link href="assets/plugins/scrollbar/css/mCustomScrollbar.css" rel="stylesheet"/>
+    <link href="assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet"/>
+
+    <!-- Theme CSS -->
+    <link href="assets/css/jquery.mmenu.css" rel="stylesheet"/>
+
+    <!-- Page CSS -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <!-- end: CSS file-->
+
+</head>
+
+<body>
+
+<!-- Start: Header -->
+<div class="navbar" role="navigation">
+    <div class="container-fluid container-nav">
+        <!-- Navbar Action -->
+        <ul class="nav navbar-nav navbar-actions navbar-left">
+            <li class="visible-md visible-lg" onclick="iframeZoom()"><a href="index.html#" id="main-menu-toggle"><i
+                    class="fa fa-th-large"></i></a>
+            </li>
+            <li class="visible-xs visible-sm"><a href="index.html#" id="sidebar-menu"><i class="fa fa-navicon"></i></a>
+            </li>
+        </ul>
+        <!-- Navbar Left -->
+        <!--<div class="navbar-left">-->
+        <!--&lt;!&ndash; Search Form &ndash;&gt;-->
+        <!--<form class="search navbar-form">-->
+        <!--<div class="input-group input-search">-->
+        <!--<input type="text" class="form-control" name="q" id="q" placeholder="Search...">-->
+        <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--</form>-->
+        <!--</div>-->
+        <!-- Navbar Right -->
+        <div class="navbar-right">
+            <!-- Userbox -->
+            <div class="userbox">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <div class="profile-info">
+                        <span class="name">Admin</span>
+                        <span class="role">
+                            <script>
+                                document.write(new Date());
+                            </script>
+                        </span>
+
+                    </div>
+                    <i class="fa custom-caret"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <ul class="list-unstyled" style="margin-top: 25px">
+                        <li>
+                            <a href="#"><i class="fa fa-file"></i> 修改密码</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="logout()"><i class="fa fa-power-off"></i> 注销登录</a>
+                            <script>
+                                function logout() {
+                                    var d = new Date();
+                                    d.setTime(d.getTime() - 1000);
+                                    var expires = "expires=" + d.toGMTString();
+                                    var path = "path=/";
+                                    document.cookie = "stoken=''; " + expires + "; " + path;
+                                    window.location.reload();
+                                }
+                            </script>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End Userbox -->
+        </div>
+        <!-- End Navbar Right -->
+    </div>
+</div>
+<!-- End: Header -->
+<!-- Start: Content -->
+<div class="container-fluid content">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-collapse">
+                <!-- Sidebar Header Logo-->
+                <div class="sidebar-header">
+                    <img src="assets/img/logo.png" class="img-responsive" alt=""/>
+                </div>
+                <!-- Sidebar Menu-->
+                <div class="sidebar-menu">
+                    <nav id="menu" class="nav-main" role="navigation">
+                        <ul class="nav nav-sidebar">
+                            <!--<li class="active">-->
+                            <!--<a href="index.html">-->
+                            <!--<i class="fa fa-laptop" aria-hidden="true"></i><span>主控台</span>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <li>
+                                <a href="mail.html" target="iframe">
+                                    <!--<span class="pull-right label label-primary">165</span>-->
+                                    <i class="fa fa-envelope" aria-hidden="true"></i><span>邮件</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="userlist.html?page=1&size=20" target="iframe">
+                                    <i class="fa fa-user" aria-hidden="true"></i><span>用户</span>
+                                </a>
+                            </li>
+                            <li class="nav-parent">
+                                <a>
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i><span>商品</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li><a href="product-list.html?page=1&size=20" target="iframe"><span class="text"> 管理商品</span></a>
+                                    </li>
+                                    <li><a href="product-add.html" target="iframe"><span class="text"> 增添新品</span></a>
+                                    </li>
+                                    <li><a href="product-stock.html?page=1&size=20" target="iframe"><span class="text"> 管理库存</span></a>
+                                    </li>
+                                    <li><a href="product-category.html" target="iframe"><span class="text"> 商品分类</span></a>
+                                    </li>
+                                    <li><a href="product-comment.html?page=1&size=20" target="iframe"><span
+                                            class="text"> 商品评论</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="order-list.html" target="iframe">
+                                    <i class="fa fa-list-alt" aria-hidden="true"></i><span>订单管理</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ship.html" target="iframe">
+                                    <i class="fa fa-list-alt" aria-hidden="true"></i><span>物流管理</span>
+                                </a>
+                            </li>
+                            <!--<li class="nav-parent">-->
+                            <!--<a>-->
+                            <!--<i class="fa fa-play" aria-hidden="true"></i><span>活动</span>-->
+                            <!--</a>-->
+                            <!--<ul class="nav nav-children">-->
+                            <!--<li><a href="ui-progress-bars.html" target="iframe"><span class="text"> 增添活动</span></a>-->
+                            <!--</li>-->
+                            <!--<li><a href="ui-nestable-list.html" target="iframe"><span class="text"> 查看活动</span></a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a href="widgets.html" target="iframe">-->
+                            <!--<i class="fa fa-life-bouy" aria-hidden="true"></i><span>闪购管理</span>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <li class="nav-parent">
+                                <a>
+                                    <i class="fa fa-file" aria-hidden="true"></i><span>优惠券</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li><a href="coupons.html" target="iframe"><span
+                                            class="text"> 优惠券模版</span></a></li>
+                                    <li><a href="coupons-add.html" target="iframe"><span
+                                            class="text"> 添加优惠券</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-parent">
+                                <a>
+                                    <i class="fa fa-lightbulb-o" aria-hidden="true"></i><span>工具箱</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a href="websitelist.html" target="iframe">
+                                            <span class="text"> 自定义网页列表 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="websitecreate.html" target="iframe">
+                                            <span class="text"> 创建新页面 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="resources.html" target="iframe">
+                                            <span class="text"> 资源上传 </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-parent">
+                                <a>
+                                    <i class="fa fa-file" aria-hidden="true"></i><span>网页内容管理</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a href="cate-config.html" target="iframe">
+                                            <span class="text"> 商品分类 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="home-config.html" target="iframe">
+                                            <span class="text"> 首页轮播广告 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="product-config.html" target="iframe">
+                                            <span class="text"> 首页商品管理 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="footer-config.html" target="iframe">
+                                            <span class="text"> 底部信息 </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="config.html" target="iframe">
+                                    <i class="fa fa-code" aria-hidden="true"></i><span>基础配置</span>
+                                    <!-- 企业邮件账户、邮件发送规则... -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="third1.html" target="iframe">
+                                    <i class="fa fa-code" aria-hidden="true"></i><span>外部接口配置</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- End Sidebar Menu-->
+            </div>
+            <!-- Sidebar Footer-->
+            <div class="sidebar-footer">
+                <!--<ul class="sidebar-terms">-->
+                <!--<li><a href="index.html#">协议条款</a></li>-->
+                <!--<li><a href="index.html#">说明文档</a></li>-->
+                <!--<li><a href="index.html#">关于西柚</a></li>-->
+                <!--</ul>-->
+                <div class="copyright text-center">
+                    <small> Powered by <i class="fa fa-coffee"></i> <a href="http://seeu.studio/" title="西柚科技"
+                                                                       target="_blank">西柚科技</a></small>
+                </div>
+            </div>
+            <!-- End Sidebar Footer-->
+        </div>
+        <!-- End Sidebar -->
+
+        <style>
+            .iframe_content {
+                padding: 62px 0px 10px 255px;
+            }
+
+            @media (max-width: 991px) {
+                .iframe_content {
+                    padding: 62px 0px 10px 6px;
+                }
+            }
+        </style>
+        <!-- Main Page -->
+        <div class="iframe_content" style="min-height:800px">
+            <script>
+                function resizeIframe(obj) {
+//                    obj.style.height = (document.getElementsByClassName("sidebar-collapse")[0].offsetHeight + 100) + 'px';
+                    obj.style.height = (parseInt(document.body.scrollHeight) - 62) + 'px';
+//                    obj.style.height = parseInt(obj.contentWindow.document.body.scrollHeight) + 'px';
+                }
+            </script>
+            <div class="row" style="height: 100%;">
+                <iframe id="iframe" name="iframe" onload="resizeIframe(this)"
+                        src="mail.html"
+                        style="border-style: none;width: 100%;display: inline;min-height: 1000px"></iframe>
+            </div>
+
+        </div>
+        <!-- End Main Page -->
+    </div>
+</div><!--/container-->
+
+
+<!-- Modal Dialog -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title bk-fg-primary">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p class="bk-fg-danger">Here settings can be configured...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Modal Dialog -->
+
+<div class="clearfix"></div>
+
+
+<!-- start: JavaScript-->
+
+<!-- Vendor JS-->
+<script src="assets/vendor/js/jquery.min.js"></script>
+<script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugins JS-->
+<script src="assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+<script src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- Theme JS -->
+<script src="assets/js/jquery.mmenu.min.js"></script>
+<script src="assets/js/core.min.js"></script>
+
+<!-- Pages JS -->
+<script>
+    function iframeZoom() {
+        var ishide = $("body").hasClass("sidebar-hide");
+        if (ishide) {
+            $(".iframe_content").eq(0).css("padding", "62px 0px 10px 0px");
+        } else {
+            $(".iframe_content").eq(0).css("padding", "62px 0px 10px 255px");
+        }
+    }
+</script>
+<!-- end: JavaScript-->
+
+</body>
+
+</html>
